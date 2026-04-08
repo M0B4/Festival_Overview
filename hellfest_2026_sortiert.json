@@ -1,0 +1,917 @@
+[
+    {
+        "name": "1914",
+        "country": "Ukraine",
+        "genre": "Black Metal"
+    },
+    {
+        "name": "A Perfect Circle",
+        "country": "United States",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "Accept",
+        "country": "Germany",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Acid Bath",
+        "country": "United States",
+        "genre": "Sludge Metal"
+    },
+    {
+        "name": "Agnostic Front",
+        "country": "United States",
+        "genre": "Hardcore Punk"
+    },
+    {
+        "name": "Alestorm",
+        "country": "United Kingdom",
+        "genre": "Folk Metal"
+    },
+    {
+        "name": "Alice Cooper",
+        "country": "United States",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "All Time Low",
+        "country": "United States",
+        "genre": "Pop Punk"
+    },
+    {
+        "name": "Alta Rossa",
+        "country": "France",
+        "genre": "Atmospheric Sludge Metal"
+    },
+    {
+        "name": "Amenra",
+        "country": "Belgium",
+        "genre": "Atmospheric Sludge Metal"
+    },
+    {
+        "name": "Anthrax",
+        "country": "United States",
+        "genre": "Thrash Metal"
+    },
+    {
+        "name": "Architects",
+        "country": "United Kingdom",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Aura Noir",
+        "country": "Norway",
+        "genre": "Blackened Thrash Metal"
+    },
+    {
+        "name": "Bad Omens",
+        "country": "United States",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Behemoth",
+        "country": "Poland",
+        "genre": "Blackened Death Metal"
+    },
+    {
+        "name": "Black Tusk",
+        "country": "United States",
+        "genre": "Sludge Metal"
+    },
+    {
+        "name": "Black Veil Brides",
+        "country": "United States",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "BlackRain",
+        "country": "France",
+        "genre": "Heavy Rock"
+    },
+    {
+        "name": "Blood Incantation",
+        "country": "United States",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "Blood Red Throne",
+        "country": "Norway",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "Bloodstain",
+        "country": "Sweden",
+        "genre": "Thrash Metal"
+    },
+    {
+        "name": "Bloodywood",
+        "country": "India",
+        "genre": "Nu Metal"
+    },
+    {
+        "name": "Borknagar",
+        "country": "Norway",
+        "genre": "Progressive Black Metal"
+    },
+    {
+        "name": "Breaking Benjamin",
+        "country": "United States",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Bring Me The Horizon",
+        "country": "United Kingdom",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Brothers Of Metal",
+        "country": "Sweden",
+        "genre": "Power Metal"
+    },
+    {
+        "name": "BRUIT ≤",
+        "country": "France",
+        "genre": "Post-Rock"
+    },
+    {
+        "name": "Buzzcocks",
+        "country": "United Kingdom",
+        "genre": "Punk Rock"
+    },
+    {
+        "name": "Cabal",
+        "country": "Denmark",
+        "genre": "Deathcore"
+    },
+    {
+        "name": "Cancer Bats",
+        "country": "Canada",
+        "genre": "Hardcore Punk"
+    },
+    {
+        "name": "Carach Angren",
+        "country": "Netherlands",
+        "genre": "Symphonic Black Metal"
+    },
+    {
+        "name": "Carcass",
+        "country": "United Kingdom",
+        "genre": "Melodic Death Metal"
+    },
+    {
+        "name": "Cavalera Conspiracy",
+        "country": "United States",
+        "genre": "Groove / Thrash / Death Metal"
+    },
+    {
+        "name": "Ceremony",
+        "country": "United States",
+        "genre": "Post Punk / Punk Rock"
+    },
+    {
+        "name": "Circle Jerks",
+        "country": "United States",
+        "genre": "Hardcore Punk"
+    },
+    {
+        "name": "Cold Capsule",
+        "country": "France",
+        "genre": "Post-Hardcore / Post-Rock"
+    },
+    {
+        "name": "Combust",
+        "country": "United States",
+        "genre": "Hardcore"
+    },
+    {
+        "name": "Conjurer",
+        "country": "United Kingdom",
+        "genre": "Sludge Metal"
+    },
+    {
+        "name": "Corrosion Of Conformity",
+        "country": "United States",
+        "genre": "Stoner Metal"
+    },
+    {
+        "name": "Crisix",
+        "country": "Spain",
+        "genre": "Thrash Metal"
+    },
+    {
+        "name": "Cro-Mags",
+        "country": "United States",
+        "genre": "Hardcore Punk"
+    },
+    {
+        "name": "Crypta",
+        "country": "Brazil",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "Cult Of Luna",
+        "country": "Sweden",
+        "genre": "Atmospheric Sludge Metal"
+    },
+    {
+        "name": "Decapitated",
+        "country": "Poland",
+        "genre": "Technical Death Metal"
+    },
+    {
+        "name": "Deep Purple",
+        "country": "United Kingdom",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Defeated Sanity",
+        "country": "Germany",
+        "genre": "Brutal Death Metal"
+    },
+    {
+        "name": "Deicide",
+        "country": "United States",
+        "genre": "Black Metal"
+    },
+    {
+        "name": "Devangelic",
+        "country": "Italy",
+        "genre": "Brutal Death Metal"
+    },
+    {
+        "name": "Die Spitz",
+        "country": "United States",
+        "genre": "Punk Rock"
+    },
+    {
+        "name": "Down",
+        "country": "United States",
+        "genre": "Southern Metal"
+    },
+    {
+        "name": "Dragunov",
+        "country": "France",
+        "genre": "Post-Metal"
+    },
+    {
+        "name": "Drain",
+        "country": "United States",
+        "genre": "Hardcore Punk"
+    },
+    {
+        "name": "Dvrk",
+        "country": "France",
+        "genre": "Deathcore"
+    },
+    {
+        "name": "Dying Wish",
+        "country": "United States",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Einherjer",
+        "country": "Norway",
+        "genre": "Viking Metal"
+    },
+    {
+        "name": "Elder",
+        "country": "United States",
+        "genre": "Stoner Metal"
+    },
+    {
+        "name": "End It",
+        "country": "United States",
+        "genre": "Hardcore Punk"
+    },
+    {
+        "name": "Enhancer",
+        "country": "France",
+        "genre": "Nu Metal"
+    },
+    {
+        "name": "Escuela Grind",
+        "country": "United States",
+        "genre": "Grindcore / Death Metal"
+    },
+    {
+        "name": "Esodic",
+        "country": "Jordan",
+        "genre": "Thrash / Death Metal"
+    },
+    {
+        "name": "Eyehategod",
+        "country": "United States",
+        "genre": "Sludge Metal"
+    },
+    {
+        "name": "False Reality",
+        "country": "United Kingdom",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Fange",
+        "country": "France",
+        "genre": "Sludge Metal"
+    },
+    {
+        "name": "Feuerschwanz",
+        "country": "Germany",
+        "genre": "Medieval Metal"
+    },
+    {
+        "name": "Forbidden",
+        "country": "United States",
+        "genre": "Thrash Metal"
+    },
+    {
+        "name": "Fulci",
+        "country": "Italy",
+        "genre": "Brutal Death Metal"
+    },
+    {
+        "name": "Gaerea",
+        "country": "Portugal",
+        "genre": "Black Metal"
+    },
+    {
+        "name": "Gatecreeper",
+        "country": "United States",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "Gehenna",
+        "country": "Norway",
+        "genre": "Black Metal"
+    },
+    {
+        "name": "Gnome",
+        "country": "Belgium",
+        "genre": "Stoner Rock"
+    },
+    {
+        "name": "God Is An Astronaut",
+        "country": "Ireland",
+        "genre": "Post-Rock"
+    },
+    {
+        "name": "Gridiron",
+        "country": "United States",
+        "genre": "Rap Metal"
+    },
+    {
+        "name": "Hatebreed",
+        "country": "United States",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Helloween",
+        "country": "Germany",
+        "genre": "Power Metal"
+    },
+    {
+        "name": "House Of Protection",
+        "country": "United States",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Hulder",
+        "country": "United States",
+        "genre": "Black Metal"
+    },
+    {
+        "name": "Igorrr",
+        "country": "France",
+        "genre": "Avant-Garde Electronic Metal"
+    },
+    {
+        "name": "Impureza",
+        "country": "France",
+        "genre": "Technical Death Metal"
+    },
+    {
+        "name": "Insanity Alert",
+        "country": "Austria",
+        "genre": "Crossover Thrash"
+    },
+    {
+        "name": "Iron Maiden",
+        "country": "United Kingdom",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Kadavar",
+        "country": "Germany",
+        "genre": "Stoner Rock"
+    },
+    {
+        "name": "Karen Dió",
+        "country": "Brazil",
+        "genre": "Punk Rock"
+    },
+    {
+        "name": "Killus",
+        "country": "Spain",
+        "genre": "Industrial Metal"
+    },
+    {
+        "name": "King 810",
+        "country": "United States",
+        "genre": "Nu Metal / Metalcore"
+    },
+    {
+        "name": "Kublai Khan TX",
+        "country": "United States",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "La Dispute",
+        "country": "United States",
+        "genre": "Post-Hardcore"
+    },
+    {
+        "name": "Lagwagon",
+        "country": "United States",
+        "genre": "Skate Punk"
+    },
+    {
+        "name": "Limp Bizkit",
+        "country": "United States",
+        "genre": "Nu Metal"
+    },
+    {
+        "name": "Lionheart",
+        "country": "United States",
+        "genre": "Hardcore"
+    },
+    {
+        "name": "Loathe",
+        "country": "United Kingdom",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "LocoMuerte",
+        "country": "France",
+        "genre": "Crossover Thrash"
+    },
+    {
+        "name": "Maid Of Ace",
+        "country": "United Kingdom",
+        "genre": "Punk Rock"
+    },
+    {
+        "name": "Malevolence",
+        "country": "United Kingdom",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Marduk",
+        "country": "Sweden",
+        "genre": "Black Metal"
+    },
+    {
+        "name": "Mastodon",
+        "country": "United States",
+        "genre": "Progressive Sludge Metal"
+    },
+    {
+        "name": "Mayhem",
+        "country": "Norway",
+        "genre": "Black Metal"
+    },
+    {
+        "name": "Megadeth",
+        "country": "United States",
+        "genre": "Thrash Metal"
+    },
+    {
+        "name": "Midnight Odyssey",
+        "country": "Australia",
+        "genre": "Atmospheric Black Metal"
+    },
+    {
+        "name": "Mikkey Dee with Friends",
+        "country": "Sweden",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Mourir",
+        "country": "France",
+        "genre": "Black Metal"
+    },
+    {
+        "name": "My Dying Bride",
+        "country": "United Kingdom",
+        "genre": "Death Doom Metal"
+    },
+    {
+        "name": "Napalm Death",
+        "country": "United Kingdom",
+        "genre": "Grindcore"
+    },
+    {
+        "name": "Non Est Deus",
+        "country": "Germany",
+        "genre": "Melodic Black Metal"
+    },
+    {
+        "name": "Not Scientists",
+        "country": "France",
+        "genre": "Punk Rock"
+    },
+    {
+        "name": "Obscura",
+        "country": "Germany",
+        "genre": "Technical Death Metal"
+    },
+    {
+        "name": "Old Man's Child",
+        "country": "Norway",
+        "genre": "Symphonic Black Metal"
+    },
+    {
+        "name": "Opeth",
+        "country": "Sweden",
+        "genre": "Progressive Death Metal"
+    },
+    {
+        "name": "Oranssi Pazuzu",
+        "country": "Finland",
+        "genre": "Psychedelic Black Metal"
+    },
+    {
+        "name": "Papa Roach",
+        "country": "United States",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Pennywise",
+        "country": "United States",
+        "genre": "Skate Punk"
+    },
+    {
+        "name": "Perchta",
+        "country": "Austria",
+        "genre": "Atmospheric Black Metal"
+    },
+    {
+        "name": "Periphery",
+        "country": "United States",
+        "genre": "Djent"
+    },
+    {
+        "name": "Pigs Pigs Pigs Pigs Pigs Pigs Pigs",
+        "country": "United Kingdom",
+        "genre": "Stoner Metal"
+    },
+    {
+        "name": "Point Mort",
+        "country": "France",
+        "genre": "Post-Hardcore"
+    },
+    {
+        "name": "Ponte Del Diavolo",
+        "country": "Italy",
+        "genre": "Doom Metal"
+    },
+    {
+        "name": "Possessed",
+        "country": "United States",
+        "genre": "Thrash Metal"
+    },
+    {
+        "name": "President",
+        "country": "United Kingdom",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Profanation",
+        "country": "France",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "Psychonaut",
+        "country": "Belgium",
+        "genre": "Progressive Post-Metal"
+    },
+    {
+        "name": "Queensrÿche",
+        "country": "United States",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Resolve",
+        "country": "France",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Return To Dust",
+        "country": "United States",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "Revnoir",
+        "country": "France",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Rezn",
+        "country": "United States",
+        "genre": "Heavy Psych"
+    },
+    {
+        "name": "Rise Against",
+        "country": "United States",
+        "genre": "Melodic Hardcore"
+    },
+    {
+        "name": "Rivers Of Nihil",
+        "country": "United States",
+        "genre": "Technical Death Metal"
+    },
+    {
+        "name": "Rotting Christ",
+        "country": "Greece",
+        "genre": "Melodic Black Metal"
+    },
+    {
+        "name": "Sabaton",
+        "country": "Sweden",
+        "genre": "Power Metal"
+    },
+    {
+        "name": "Satanic Surfers",
+        "country": "Sweden",
+        "genre": "Punk Rock"
+    },
+    {
+        "name": "Scour",
+        "country": "United States",
+        "genre": "Black Metal"
+    },
+    {
+        "name": "Septicflesh",
+        "country": "Greece",
+        "genre": "Symphonic Death Metal"
+    },
+    {
+        "name": "Sepultura",
+        "country": "Brazil",
+        "genre": "Groove Metal"
+    },
+    {
+        "name": "Severe Torture",
+        "country": "Netherlands",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "Shelter",
+        "country": "United States",
+        "genre": "Melodic Hardcore"
+    },
+    {
+        "name": "Silhouette",
+        "country": "France",
+        "genre": "Atmospheric Black Metal"
+    },
+    {
+        "name": "Sinsaenum",
+        "country": "World",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "Six Feet Under",
+        "country": "United States",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "Skaphos",
+        "country": "France",
+        "genre": "Abyssal Death Metal"
+    },
+    {
+        "name": "SKÁLD",
+        "country": "France",
+        "genre": "Nordic Folk Music"
+    },
+    {
+        "name": "Slay Squad",
+        "country": "United States",
+        "genre": "Rap Metal"
+    },
+    {
+        "name": "SLIFT",
+        "country": "France",
+        "genre": "Heavy Psych"
+    },
+    {
+        "name": "Social Distortion",
+        "country": "United States",
+        "genre": "Punk Rock"
+    },
+    {
+        "name": "Soilent Green",
+        "country": "United States",
+        "genre": "Sludge/Death Metal/Grindcore"
+    },
+    {
+        "name": "Sortilège",
+        "country": "France",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Static-X",
+        "country": "United States",
+        "genre": "Industrial Metal"
+    },
+    {
+        "name": "Stoned Jesus",
+        "country": "Ukraine",
+        "genre": "Stoner Metal"
+    },
+    {
+        "name": "Sublime Cadaveric Decomposition",
+        "country": "France",
+        "genre": "Goregrind / pornogrind"
+    },
+    {
+        "name": "Sylosis",
+        "country": "United Kingdom",
+        "genre": "Melodic Death Metal"
+    },
+    {
+        "name": "Tempt Fate",
+        "country": "France",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "TesseracT",
+        "country": "United Kingdom",
+        "genre": "Progressive Metal"
+    },
+    {
+        "name": "The Adicts",
+        "country": "United Kingdom",
+        "genre": "Punk Power Rock"
+    },
+    {
+        "name": "The Ataris",
+        "country": "United States",
+        "genre": "Pop Punk"
+    },
+    {
+        "name": "The Bones",
+        "country": "Sweden",
+        "genre": "Punk Rock"
+    },
+    {
+        "name": "The Dillinger Escape Plan",
+        "country": "United States",
+        "genre": "Mathcore"
+    },
+    {
+        "name": "The Dwarves",
+        "country": "United States",
+        "genre": "Garage Punk"
+    },
+    {
+        "name": "The Funeral Portrait",
+        "country": "United States",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "The Gathering",
+        "country": "Netherlands",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "The Halo Effect",
+        "country": "Sweden",
+        "genre": "Melodic Death Metal"
+    },
+    {
+        "name": "The Hives",
+        "country": "Sweden",
+        "genre": "Garage Rock"
+    },
+    {
+        "name": "The Inspector Cluzo",
+        "country": "France",
+        "genre": "Funk Rock"
+    },
+    {
+        "name": "The Offspring",
+        "country": "United States",
+        "genre": "Pop Punk"
+    },
+    {
+        "name": "The Plot In You",
+        "country": "United States",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "The Pretty Reckless",
+        "country": "United States",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "The Young Gods",
+        "country": "Switzerland",
+        "genre": "Industrial Rock"
+    },
+    {
+        "name": "Thornhill",
+        "country": "Australia",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Three Days Grace",
+        "country": "Canada",
+        "genre": "Post-grunge"
+    },
+    {
+        "name": "Thy Light",
+        "country": "Brazil",
+        "genre": "Depressive Black Metal"
+    },
+    {
+        "name": "Tom Morello",
+        "country": "United States",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "Torche",
+        "country": "United States",
+        "genre": "Stoner Rock"
+    },
+    {
+        "name": "Trash Talk",
+        "country": "United States",
+        "genre": "Hardcore Punk"
+    },
+    {
+        "name": "Trelldom",
+        "country": "Norway",
+        "genre": "Pagan / Black Metal"
+    },
+    {
+        "name": "Truckfighters",
+        "country": "Sweden",
+        "genre": "Stoner Rock"
+    },
+    {
+        "name": "Ultra Vomit",
+        "country": "France",
+        "genre": "Parody Metal"
+    },
+    {
+        "name": "Uncle Acid & The Deadbeats",
+        "country": "United Kingdom",
+        "genre": "Heavy Psych"
+    },
+    {
+        "name": "Uravena",
+        "country": "French Polynesia",
+        "genre": "Hardcore/Thrash/Power Metal"
+    },
+    {
+        "name": "Volbeat",
+        "country": "Denmark",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Vígljós",
+        "country": "Switzerland",
+        "genre": "Black Metal"
+    },
+    {
+        "name": "Wake The Dead",
+        "country": "France",
+        "genre": "Emocore"
+    },
+    {
+        "name": "We Came As Romans",
+        "country": "United States",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Wings of Steel",
+        "country": "United States",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Winterfylleth",
+        "country": "United Kingdom",
+        "genre": "Black Metal"
+    },
+    {
+        "name": "Wolves In The Throne Room",
+        "country": "United States",
+        "genre": "Atmospheric Black Metal"
+    },
+    {
+        "name": "Yarostan",
+        "country": "France",
+        "genre": "Screamo/Post-Hardcore"
+    }
+]
