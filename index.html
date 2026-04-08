@@ -7,7 +7,7 @@
     <title>Metal Festival Comparison 2026</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             background-color: #121212;
             color: #e0e0e0;
             margin: 0;
@@ -25,22 +25,42 @@
             color: #f39c12;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin: 0;
         }
         
         .controls {
             text-align: center;
             margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
         
         select {
             background-color: #252525;
             color: #f39c12;
             border: 1px solid #f39c12;
-            padding: 10px 20px;
+            padding: 10px;
             font-size: 16px;
             border-radius: 4px;
             cursor: pointer;
+        }
+        /* Checkbox Styling */
+        
+        .compare-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            background: #252525;
+            padding: 10px 15px;
+            border-radius: 4px;
+            border: 1px solid #444;
+        }
+        
+        .compare-box:hover {
+            border-color: #f39c12;
         }
         
         main {
@@ -69,6 +89,26 @@
             color: #f39c12;
             text-transform: uppercase;
         }
+        /* Highlight für Überschneidungen */
+        
+        .shared-band {
+            background-color: rgba(46, 204, 113, 0.15) !important;
+        }
+        
+        .shared-band td {
+            border-bottom-color: #2ecc71;
+        }
+        
+        .badge {
+            background: #2ecc71;
+            color: #000;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: bold;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
         
         tr:hover {
             background-color: #282828;
@@ -84,17 +124,26 @@
 <body>
 
     <header>
-        <h1>Festival Lineup Tracker</h1>
+        <h1>Festival Comparison 2026</h1>
     </header>
 
     <div class="controls">
-        <select id="festival-select">
-        <option value="wacken_2026_sortiert.json">Wacken Open Air 2026</option>
-        <option value="hellfest_2026_sortiert.json">Hellfest 2026</option>
-    </select>
+        <div>
+            <label>Festival: </label>
+            <select id="festival-select">
+            <option value="wacken_2026_sortiert.json">Wacken 2026</option>
+            <option value="hellfest_2026_sortiert.json">Hellfest 2026</option>
+        </select>
+        </div>
+
+        <label class="compare-box">
+        <input type="checkbox" id="compare-toggle"> 
+        <span>Mit anderem Festival vergleichen</span>
+    </label>
     </div>
 
     <main>
+        <div id="stats" style="margin-bottom: 10px; font-size: 14px; color: #aaa;"></div>
         <table>
             <thead>
                 <tr>
@@ -103,47 +152,72 @@
                     <th>Genre</th>
                 </tr>
             </thead>
-            <tbody id="band-table-body">
-            </tbody>
+            <tbody id="band-table-body"></tbody>
         </table>
     </main>
 
     <script>
         const select = document.getElementById('festival-select');
+        const toggle = document.getElementById('compare-toggle');
         const tableBody = document.getElementById('band-table-body');
+        const stats = document.getElementById('stats');
 
-        async function loadLineup(filename) {
+        async function loadAndCompare() {
             tableBody.innerHTML = '<tr><td colspan="3" style="text-align:center;">Lade Daten...</td></tr>';
 
             try {
-                const response = await fetch(filename);
-                if (!response.ok) throw new Error('Datei nicht gefunden');
+                // 1. Primäres Festival laden
+                const primaryFile = select.value;
+                const res1 = await fetch(primaryFile);
+                const bands1 = await res1.json();
 
-                const bands = await response.json();
-                tableBody.innerHTML = ''; // Lade-Text entfernen
+                let sharedNames = new Set();
 
-                bands.forEach(band => {
+                // 2. Optional: Das andere Festival laden, wenn Checkbox aktiv ist
+                if (toggle.checked) {
+                    // Finde heraus, welches das "andere" Festival ist
+                    const secondaryFile = (primaryFile === 'wacken_2026_sortiert.json') ?
+                        'hellfest_2026_sortiert.json' :
+                        'wacken_2026_sortiert.json';
+
+                    const res2 = await fetch(secondaryFile);
+                    const bands2 = await res2.json();
+
+                    // Erstelle ein Set mit Namen für schnellen Abgleich
+                    const names2 = new Set(bands2.map(b => b.name.toLowerCase()));
+                    sharedNames = new Set(bands1.filter(b => names2.has(b.name.toLowerCase())).map(b => b.name.toLowerCase()));
+
+                    stats.innerText = `${sharedNames.size} Überschneidungen gefunden.`;
+                } else {
+                    stats.innerText = `${bands1.length} Bands insgesamt.`;
+                }
+
+                // 3. Tabelle rendern
+                tableBody.innerHTML = '';
+                bands1.forEach(band => {
+                    const isShared = sharedNames.has(band.name.toLowerCase());
                     const row = document.createElement('tr');
+                    if (isShared) row.classList.add('shared-band');
+
                     row.innerHTML = `
-                    <td class="band-name">${band.name}</td>
+                    <td class="band-name">
+                        ${band.name} 
+                        ${isShared ? '<span class="badge">AUCH BEIM ANDEREN</span>' : ''}
+                    </td>
                     <td>${band.country}</td>
                     <td>${band.genre}</td>
                 `;
                     tableBody.appendChild(row);
                 });
+
             } catch (error) {
-                console.error('Fehler:', error);
-                tableBody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:red;">Daten konnten nicht geladen werden. Prüfe, ob die Datei online ist.</td></tr>';
+                tableBody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:red;">Fehler beim Laden.</td></tr>';
             }
         }
 
-        // Event Listener für den Wechsel im Dropdown
-        select.addEventListener('change', (e) => {
-            loadLineup(e.target.value);
-        });
-
-        // Initiales Laden beim ersten Aufruf
-        loadLineup(select.value);
+        select.addEventListener('change', loadAndCompare);
+        toggle.addEventListener('change', loadAndCompare);
+        loadAndCompare();
     </script>
 
 </body>
