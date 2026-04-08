@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metal Festival Lineup 2026</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        header {
+            border-bottom: 3px solid #f39c12;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #f39c12;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+        
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        th,
+        td {
+            text-align: left;
+            padding: 15px;
+            border-bottom: 1px solid #333;
+        }
+        
+        th {
+            background-color: #252525;
+            color: #f39c12;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        tr:hover {
+            background-color: #282828;
+        }
+        
+        .band-name {
+            color: #ffffff;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Wacken Open Air 2026 Lineup</h1>
+    </header>
+
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>Band</th>
+                    <th>Country</th>
+                    <th>Genre</th>
+                </tr>
+            </thead>
+            <tbody id="band-table-body">
+            </tbody>
+        </table>
+    </main>
+
+    <script>
+        async function loadLineup() {
+            const tableBody = document.getElementById('band-table-body');
+
+            try {
+                // Lädt deine sortierte JSON-Datei
+                const response = await fetch('wacken_2026_sortiert.json');
+                const bands = await response.json();
+
+                // Erstellt für jede Band eine Zeile
+                bands.forEach(band => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                    <td class="band-name">${band.name}</td>
+                    <td>${band.country}</td>
+                    <td>${band.genre}</td>
+                `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Fehler:', error);
+                tableBody.innerHTML = '<tr><td colspan="3" style="text-align:center;">Daten konnten nicht geladen werden.</td></tr>';
+            }
+        }
+
+        loadLineup();
+    </script>
+
+</body>
+
+</html>
