@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metal Festival Lineup 2026</title>
+    <title>Metal Festival Comparison 2026</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -28,6 +28,21 @@
             margin: 0;
         }
         
+        .controls {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        select {
+            background-color: #252525;
+            color: #f39c12;
+            border: 1px solid #f39c12;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
         main {
             max-width: 1000px;
             margin: 0 auto;
@@ -40,7 +55,6 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
         }
         
         th,
@@ -53,7 +67,6 @@
         th {
             background-color: #252525;
             color: #f39c12;
-            font-weight: bold;
             text-transform: uppercase;
         }
         
@@ -71,8 +84,15 @@
 <body>
 
     <header>
-        <h1>Wacken Open Air 2026 Lineup</h1>
+        <h1>Festival Lineup Tracker</h1>
     </header>
+
+    <div class="controls">
+        <select id="festival-select">
+        <option value="wacken_2026_sortiert.json">Wacken Open Air 2026</option>
+        <option value="hellfest_2026_sortiert.json">Hellfest 2026</option>
+    </select>
+    </div>
 
     <main>
         <table>
@@ -89,15 +109,19 @@
     </main>
 
     <script>
-        async function loadLineup() {
-            const tableBody = document.getElementById('band-table-body');
+        const select = document.getElementById('festival-select');
+        const tableBody = document.getElementById('band-table-body');
+
+        async function loadLineup(filename) {
+            tableBody.innerHTML = '<tr><td colspan="3" style="text-align:center;">Lade Daten...</td></tr>';
 
             try {
-                // Lädt deine sortierte JSON-Datei
-                const response = await fetch('wacken_2026_sortiert.json');
-                const bands = await response.json();
+                const response = await fetch(filename);
+                if (!response.ok) throw new Error('Datei nicht gefunden');
 
-                // Erstellt für jede Band eine Zeile
+                const bands = await response.json();
+                tableBody.innerHTML = ''; // Lade-Text entfernen
+
                 bands.forEach(band => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
@@ -109,11 +133,17 @@
                 });
             } catch (error) {
                 console.error('Fehler:', error);
-                tableBody.innerHTML = '<tr><td colspan="3" style="text-align:center;">Daten konnten nicht geladen werden.</td></tr>';
+                tableBody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:red;">Daten konnten nicht geladen werden. Prüfe, ob die Datei online ist.</td></tr>';
             }
         }
 
-        loadLineup();
+        // Event Listener für den Wechsel im Dropdown
+        select.addEventListener('change', (e) => {
+            loadLineup(e.target.value);
+        });
+
+        // Initiales Laden beim ersten Aufruf
+        loadLineup(select.value);
     </script>
 
 </body>
