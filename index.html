@@ -38,7 +38,6 @@
             max-width: 1100px;
             margin: 0 auto;
         }
-        /* Controls Area */
         
         .controls-grid {
             display: grid;
@@ -58,7 +57,7 @@
         }
         
         label {
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
             color: var(--metal-orange);
             font-weight: bold;
@@ -71,14 +70,14 @@
             border: 1px solid #444;
             padding: 12px;
             border-radius: 4px;
-            font-size: 16px;
+            font-size: 15px;
         }
         
-        input[type="text"]:focus {
+        input[type="text"]:focus,
+        select:focus {
             border-color: var(--metal-orange);
             outline: none;
         }
-        /* Multi-Compare Checkboxes */
         
         .compare-list {
             display: flex;
@@ -87,7 +86,7 @@
             padding: 10px;
             background: #181818;
             border-radius: 4px;
-            max-height: 120px;
+            max-height: 150px;
             overflow-y: auto;
             border: 1px solid #333;
         }
@@ -96,22 +95,13 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            font-size: 13px;
+            font-size: 12px;
             background: #252525;
             padding: 5px 10px;
             border-radius: 20px;
             border: 1px solid #444;
             cursor: pointer;
         }
-        
-        .compare-item input {
-            cursor: pointer;
-        }
-        
-        .compare-item:hover {
-            border-color: var(--metal-orange);
-        }
-        /* Table */
         
         main {
             background: var(--card-bg);
@@ -149,7 +139,6 @@
         .shared-band {
             background-color: rgba(46, 204, 113, 0.05);
         }
-        /* Badges Styling */
         
         .badge-container {
             display: inline-flex;
@@ -166,9 +155,8 @@
             font-size: 10px;
             font-weight: bold;
             white-space: nowrap;
-            border: 1px solid rgba(0, 0, 0, 0.2);
         }
-        /* Farbpalette für die Badges */
+        /* Badge Farben */
         
         .badge.metal-orange {
             background: #f39c12;
@@ -203,6 +191,8 @@
             margin-bottom: 15px;
             font-size: 14px;
             color: #888;
+            border-left: 3px solid var(--metal-orange);
+            padding-left: 10px;
         }
         
         @media (max-width: 768px) {
@@ -222,17 +212,22 @@
 
         <div class="controls-grid">
             <div class="control-group">
-                <label>1. Haupt-Festival wählen</label>
+                <label>Haupt-Festival & Suche</label>
                 <select id="primary-select"><option>Lade...</option></select>
+                <input type="text" id="search-input" placeholder="Band oder Genre suchen...">
 
-                <label style="margin-top:10px;">2. Suchen (Band oder Genre)</label>
-                <input type="text" id="search-input" placeholder="z.B. Gojira oder Death Metal...">
+                <label style="margin-top:5px;">Anzeige-Filter</label>
+                <select id="display-filter">
+                <option value="all">Alle Bands anzeigen</option>
+                <option value="exclusive">Nur exklusive Bands (Einzigartig)</option>
+                <option value="shared">Nur Überschneidungen (Duplicates)</option>
+            </select>
             </div>
 
             <div class="control-group">
-                <label>3. Vergleichen mit...</label>
-                <div id="compare-container" class="compare-list">
-                </div>
+                <label>Vergleichen mit...</label>
+                <div id="compare-container" class="compare-list"></div>
+                <p style="font-size: 10px; color: #666; margin: 0;">* Wähle Festivals aus, um Exklusivität zu berechnen.</p>
             </div>
         </div>
 
@@ -252,7 +247,7 @@
     </div>
 
     <script>
-        // --- CONFIG ---
+        // --- KONFIGURATION (Bitte anpassen!) ---
         const GITHUB_USER = 'm0b4'; // Ändern!
         const GITHUB_REPO = 'Festival_Overview'; // Ändern!
         const DATA_FOLDER = 'data'; // Ordnername, in dem die JSONs liegen
@@ -260,16 +255,15 @@
         const primarySelect = document.getElementById('primary-select');
         const compareContainer = document.getElementById('compare-container');
         const searchInput = document.getElementById('search-input');
+        const displayFilter = document.getElementById('display-filter');
         const tableBody = document.getElementById('band-table-body');
         const stats = document.getElementById('stats');
 
         let allFestivalFiles = [];
         let primaryBands = [];
         let cachedComparisons = {};
-
-        // Farbpalette und Zuweisungsmap
         const colorPallet = ["metal-orange", "metal-red", "metal-blue", "metal-purple", "metal-grey"];
-        let festivalColors = {}; // { "path": "color-class" }
+        let festivalColors = {};
 
         // Vollständige Länderliste (hier gekürzt für Platz, nimm deine 190er Liste)
         const countryCodes = {
@@ -506,52 +500,40 @@
         }
 
         function prettyName(filename) {
-            return filename.replace('.json', '').replace(/_/g, ' ')
-                .split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+            return filename.replace('.json', '').replace(/_/g, ' ').split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
         }
 
-        // Funktion, um jedem Festival eine konsistente Farbe zuzuweisen
         function getFestivalColor(festivalPath) {
             if (!festivalColors[festivalPath]) {
-                // Konsistente Zuweisung basierend auf dem Index im allFestivalFiles Array
                 const index = allFestivalFiles.findIndex(f => f.path === festivalPath);
-                const colorClass = colorPallet[index % colorPallet.length];
-                festivalColors[festivalPath] = colorClass;
+                festivalColors[festivalPath] = colorPallet[index % colorPallet.length];
             }
             return festivalColors[festivalPath];
         }
 
-        // 1. Dateien von GitHub holen
         async function init() {
             try {
                 const res = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${DATA_FOLDER}`);
                 const files = await res.json();
                 allFestivalFiles = files.filter(f => f.name.endsWith('.json'));
-
                 primarySelect.innerHTML = '';
-                compareContainer.innerHTML = '';
-
                 allFestivalFiles.forEach(file => {
                     const opt = document.createElement('option');
                     opt.value = file.path;
                     opt.textContent = prettyName(file.name);
                     primarySelect.appendChild(opt);
                 });
-
                 updateCompareCheckboxes();
                 loadPrimaryData();
-
             } catch (e) {
-                stats.innerText = "Fehler beim Laden der GitHub-Daten.";
+                stats.innerText = "Fehler beim Laden.";
             }
         }
 
-        // 2. Vergleichs-Checkboxen generieren
         function updateCompareCheckboxes() {
             compareContainer.innerHTML = '';
             allFestivalFiles.forEach(file => {
                 if (file.path === primarySelect.value) return;
-
                 const label = document.createElement('label');
                 label.className = 'compare-item';
                 label.innerHTML = `<input type="checkbox" value="${file.path}"> ${prettyName(file.name)}`;
@@ -560,86 +542,72 @@
             });
         }
 
-        // 3. Hauptdaten laden
         async function loadPrimaryData() {
             const res = await fetch(primarySelect.value);
             primaryBands = await res.json();
             renderTable();
         }
 
-        // 4. Kern-Logik: Filtern, Vergleichen und Anzeigen
         async function renderTable() {
             const searchTerm = searchInput.value.toLowerCase();
+            const filterMode = displayFilter.value;
             const checkedCheckboxes = Array.from(compareContainer.querySelectorAll('input:checked'));
 
-            // matchMap speichert: { "bandname": [{name: "Festival A", color: "metal-orange"}, {name: "Festival B", color: "metal-red"}] }
             let matchMap = {};
 
             for (let cb of checkedCheckboxes) {
-                const festivalPath = cb.value;
-                const festivalName = cb.parentNode.textContent.trim();
-                const festivalColorClass = getFestivalColor(festivalPath);
-
-                if (!cachedComparisons[festivalPath]) {
-                    try {
-                        const res = await fetch(festivalPath);
-                        const data = await res.json();
-                        cachedComparisons[festivalPath] = new Set(data.map(b => b.name.toLowerCase().trim()));
-                    } catch (e) {
-                        console.error("Fehler beim Laden von " + festivalName);
-                        continue;
-                    }
+                const path = cb.value;
+                if (!cachedComparisons[path]) {
+                    const res = await fetch(path);
+                    const data = await res.json();
+                    cachedComparisons[path] = new Set(data.map(b => b.name.toLowerCase().trim()));
                 }
-
-                // Abgleich: Jeden Namen in der matchMap registrieren
-                cachedComparisons[festivalPath].forEach(name => {
+                cachedComparisons[path].forEach(name => {
                     if (!matchMap[name]) matchMap[name] = [];
                     matchMap[name].push({
-                        name: festivalName,
-                        color: festivalColorClass
+                        name: prettyName(path.split('/').pop()),
+                        color: getFestivalColor(path)
                     });
                 });
             }
 
-            const filtered = primaryBands.filter(band => {
-                const matchesSearch = (band.name || "").toLowerCase().includes(searchTerm) ||
-                    (band.genre || "").toLowerCase().includes(searchTerm);
-                return matchesSearch;
-            });
-
             tableBody.innerHTML = '';
+            let displayedCount = 0;
             let overlapCount = 0;
 
-            filtered.forEach(band => {
+            primaryBands.forEach(band => {
                 const lowName = (band.name || "").toLowerCase().trim();
                 const matches = matchMap[lowName] || [];
                 const isShared = matches.length > 0;
 
+                // --- FILTER LOGIK ---
+                if (filterMode === 'exclusive' && isShared) return;
+                if (filterMode === 'shared' && !isShared) return;
+
+                // Suche
+                if (!band.name.toLowerCase().includes(searchTerm) && !band.genre.toLowerCase().includes(searchTerm)) return;
+
+                displayedCount++;
                 if (isShared) overlapCount++;
 
                 const row = document.createElement('tr');
                 if (isShared) row.classList.add('shared-band');
 
-                // Erstelle Badges für jedes gefundene Festival mit seiner Farbe
                 let badgesHtml = '<div class="badge-container">';
-                matches.forEach(matchInfo => {
-                    badgesHtml += `<span class="badge ${matchInfo.color}">${matchInfo.name}</span>`;
+                matches.forEach(m => {
+                    badgesHtml += `<span class="badge ${m.color}">${m.name}</span>`;
                 });
                 badgesHtml += '</div>';
 
                 row.innerHTML = `
                 <td>${getFlagImg(band.country)}</td>
-                <td class="band-name">
-                    ${band.name}
-                    ${isShared ? badgesHtml : ''}
-                </td>
+                <td class="band-name">${band.name}${isShared ? badgesHtml : ''}</td>
                 <td>${band.genre}</td>
             `;
                 tableBody.appendChild(row);
             });
 
-            stats.innerText = `${filtered.length} Bands angezeigt. ` +
-                (checkedCheckboxes.length > 0 ? `| ${overlapCount} Überschneidungen gefunden.` : '');
+            stats.innerText = `${displayedCount} Bands angezeigt (${overlapCount} Überschneidungen).`;
         }
 
         primarySelect.addEventListener('change', () => {
@@ -647,6 +615,7 @@
             loadPrimaryData();
         });
         searchInput.addEventListener('input', renderTable);
+        displayFilter.addEventListener('change', renderTable);
         init();
     </script>
 </body>
