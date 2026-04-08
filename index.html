@@ -4,68 +4,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metal Festival Comparison 2026</title>
+    <title>Metal Festival Hub 2026</title>
     <style>
+         :root {
+            --metal-orange: #f39c12;
+            --bg-dark: #121212;
+            --card-bg: #1e1e1e;
+        }
+        
         body {
             font-family: 'Segoe UI', sans-serif;
-            background-color: #121212;
+            background-color: var(--bg-dark);
             color: #e0e0e0;
             margin: 0;
             padding: 20px;
         }
         
         header {
-            border-bottom: 3px solid #f39c12;
+            border-bottom: 3px solid var(--metal-orange);
             padding: 20px 0;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             text-align: center;
         }
         
         h1 {
-            color: #f39c12;
+            color: var(--metal-orange);
             text-transform: uppercase;
             letter-spacing: 2px;
+            margin: 0;
         }
         
-        .controls {
-            text-align: center;
-            margin-bottom: 25px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        /* Controls Area */
+        
+        .controls-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 20px;
-            flex-wrap: wrap;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
         }
         
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        label {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--metal-orange);
+            font-weight: bold;
+        }
+        
+        input[type="text"],
         select {
-            background-color: #252525;
-            color: #f39c12;
-            border: 1px solid #f39c12;
-            padding: 10px;
-            font-size: 16px;
+            background: #252525;
+            color: white;
+            border: 1px solid #444;
+            padding: 12px;
             border-radius: 4px;
-            cursor: pointer;
-            min-width: 200px;
+            font-size: 16px;
         }
         
-        .compare-box {
+        input[type="text"]:focus {
+            border-color: var(--metal-orange);
+            outline: none;
+        }
+        /* Multi-Compare Checkboxes */
+        
+        .compare-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 10px;
+            background: #181818;
+            border-radius: 4px;
+            max-height: 120px;
+            overflow-y: auto;
+            border: 1px solid #333;
+        }
+        
+        .compare-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            cursor: pointer;
+            gap: 5px;
+            font-size: 13px;
             background: #252525;
-            padding: 10px 15px;
-            border-radius: 4px;
+            padding: 5px 10px;
+            border-radius: 20px;
             border: 1px solid #444;
+            cursor: pointer;
         }
+        
+        .compare-item input {
+            cursor: pointer;
+        }
+        
+        .compare-item:hover {
+            border-color: var(--metal-orange);
+        }
+        /* Table */
         
         main {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: #1e1e1e;
-            padding: 30px;
-            border-radius: 4px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
         
         table {
@@ -82,8 +134,11 @@
         
         th {
             background-color: #252525;
-            color: #f39c12;
+            color: var(--metal-orange);
             text-transform: uppercase;
+            font-size: 13px;
+            position: sticky;
+            top: 0;
         }
         
         .flag-icon {
@@ -92,7 +147,7 @@
         }
         
         .shared-band {
-            background-color: rgba(46, 204, 113, 0.1) !important;
+            background-color: rgba(46, 204, 113, 0.08);
         }
         
         .badge {
@@ -102,58 +157,83 @@
             border-radius: 3px;
             font-size: 10px;
             font-weight: bold;
-            margin-left: 10px;
+            margin-left: 8px;
         }
         
         .band-name {
             color: #ffffff;
             font-weight: 600;
         }
+        
+        #stats {
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #888;
+        }
+        
+        @media (max-width: 768px) {
+            .controls-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 
 <body>
 
-    <header>
-        <h1>Festival Tracker 2026</h1>
-    </header>
+    <div class="container">
+        <header>
+            <h1>Festival Hub 2026</h1>
+        </header>
 
-    <div class="controls">
-        <select id="festival-select">
-        <option value="">Lade Festivals...</option>
-    </select>
+        <div class="controls-grid">
+            <div class="control-group">
+                <label>1. Haupt-Festival wählen</label>
+                <select id="primary-select"><option>Lade...</option></select>
 
-        <label class="compare-box">
-        <input type="checkbox" id="compare-toggle"> 
-        <span>Vergleichs-Modus</span>
-    </label>
+                <label style="margin-top:10px;">2. Suchen (Band oder Genre)</label>
+                <input type="text" id="search-input" placeholder="z.B. Gojira oder Death Metal...">
+            </div>
+
+            <div class="control-group">
+                <label>3. Vergleichen mit...</label>
+                <div id="compare-container" class="compare-list">
+                </div>
+            </div>
+        </div>
+
+        <main>
+            <div id="stats">Initialisierung...</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:40px"></th>
+                        <th>Band</th>
+                        <th>Genre</th>
+                    </tr>
+                </thead>
+                <tbody id="band-table-body"></tbody>
+            </table>
+        </main>
     </div>
 
-    <main>
-        <div id="stats" style="margin-bottom: 15px; font-size: 14px; color: #888;"></div>
-        <table>
-            <thead>
-                <tr>
-                    <th style="width:50px"></th>
-                    <th>Band</th>
-                    <th>Genre</th>
-                </tr>
-            </thead>
-            <tbody id="band-table-body"></tbody>
-        </table>
-    </main>
-
     <script>
-        // --- KONFIGURATION ---
+        // --- CONFIG ---
         const GITHUB_USER = 'm0b4'; // Ändern!
         const GITHUB_REPO = 'Festival_Overview'; // Ändern!
         const DATA_FOLDER = 'data'; // Ordnername, in dem die JSONs liegen
 
-        const select = document.getElementById('festival-select');
-        const toggle = document.getElementById('compare-toggle');
+        const primarySelect = document.getElementById('primary-select');
+        const compareContainer = document.getElementById('compare-container');
+        const searchInput = document.getElementById('search-input');
         const tableBody = document.getElementById('band-table-body');
         const stats = document.getElementById('stats');
 
+        let allFestivalFiles = [];
+        let primaryBands = [];
+        let cachedComparisons = {};
+
+        // Vollständige Länderliste (hier gekürzt für Platz, nimm deine 190er Liste)
         const countryCodes = {
             // --- EUROPA & SUB-NATIONEN ---
             "germany": "de",
@@ -382,91 +462,117 @@
         };
 
         function getFlagImg(countryName) {
-            if (!countryName) return '🏴‍☠️';
+            if (!countryName) return '🏴';
             const code = countryCodes[countryName.trim().toLowerCase()];
-            return code ? `<img src="https://flagcdn.com/w40/${code}.png" class="flag-icon" title="${countryName}">` : '🏴‍☠️';
+            return code ? `<img src="https://flagcdn.com/w40/${code}.png" class="flag-icon">` : '🏴';
         }
 
-        // 1. Automatisch alle JSON-Dateien aus dem Ordner finden
-        async function fetchFestivalFiles() {
-            const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${DATA_FOLDER}`;
+        function prettyName(filename) {
+            return filename.replace('.json', '').replace(/_/g, ' ')
+                .split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+        }
 
+        // 1. Dateien von GitHub holen
+        async function init() {
             try {
-                const response = await fetch(apiUrl);
-                const files = await response.json();
+                const res = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${DATA_FOLDER}`);
+                const files = await res.json();
+                allFestivalFiles = files.filter(f => f.name.endsWith('.json'));
 
-                // Filtern: Nur .json Dateien
-                const jsonFiles = files.filter(file => file.name.endsWith('.json'));
+                primarySelect.innerHTML = '';
+                compareContainer.innerHTML = '';
 
-                select.innerHTML = ''; // "Lade..." entfernen
-
-                jsonFiles.forEach(file => {
-                    const option = document.createElement('option');
-                    option.value = file.path; // z.B. data/wacken.json
-
-                    // Namen hübsch machen: wacken_2026.json -> Wacken 2026
-                    let prettyName = file.name.replace('.json', '').replace(/_/g, ' ');
-                    prettyName = prettyName.charAt(0).toUpperCase() + prettyName.slice(1);
-
-                    option.textContent = prettyName;
-                    select.appendChild(option);
+                allFestivalFiles.forEach(file => {
+                    // Haupt-Select
+                    const opt = document.createElement('option');
+                    opt.value = file.path;
+                    opt.textContent = prettyName(file.name);
+                    primarySelect.appendChild(opt);
                 });
 
-                if (jsonFiles.length > 0) loadAndCompare();
+                updateCompareCheckboxes();
+                loadPrimaryData();
 
             } catch (e) {
-                console.error("API Fehler:", e);
-                select.innerHTML = '<option>Fehler beim Laden</option>';
+                stats.innerText = "Fehler beim Laden der GitHub-Daten.";
             }
         }
 
-        // 2. Daten laden und vergleichen
-        async function loadAndCompare() {
-            if (!select.value) return;
-            tableBody.innerHTML = '<tr><td colspan="3" style="text-align:center;">Lade Lineup...</td></tr>';
+        // 2. Vergleichs-Checkboxen generieren (ohne das Hauptfestival)
+        function updateCompareCheckboxes() {
+            compareContainer.innerHTML = '';
+            allFestivalFiles.forEach(file => {
+                if (file.path === primarySelect.value) return;
 
-            try {
-                const res1 = await fetch(select.value);
-                const bands1 = await res1.json();
-                let sharedNames = new Set();
+                const label = document.createElement('label');
+                label.className = 'compare-item';
+                label.innerHTML = `<input type="checkbox" value="${file.path}"> ${prettyName(file.name)}`;
+                label.querySelector('input').addEventListener('change', renderTable);
+                compareContainer.appendChild(label);
+            });
+        }
 
-                if (toggle.checked && select.options.length > 1) {
-                    // Nimm einfach das erste andere Festival aus der Liste zum Vergleichen
-                    const otherIdx = select.selectedIndex === 0 ? 1 : 0;
-                    const otherFile = select.options[otherIdx].value;
+        // 3. Hauptdaten laden
+        async function loadPrimaryData() {
+            const res = await fetch(primarySelect.value);
+            primaryBands = await res.json();
+            renderTable();
+        }
 
-                    const res2 = await fetch(otherFile);
-                    const bands2 = await res2.json();
-                    const names2 = new Set(bands2.map(b => b.name.toLowerCase().trim()));
-                    sharedNames = new Set(bands1.filter(b => names2.has(b.name.toLowerCase().trim())).map(b => b.name.toLowerCase().trim()));
+        // 4. Kern-Logik: Filtern, Vergleichen und Anzeigen
+        async function renderTable() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const checkedCheckboxes = Array.from(compareContainer.querySelectorAll('input:checked'));
 
-                    stats.innerText = `${sharedNames.size} Überschneidungen mit ${select.options[otherIdx].textContent} gefunden.`;
-                } else {
-                    stats.innerText = `${bands1.length} Bands bestätigt.`;
+            // Alle aktiven Vergleichs-Festivals laden/cachen
+            let sharedBandsMap = new Set();
+            for (let cb of checkedCheckboxes) {
+                if (!cachedComparisons[cb.value]) {
+                    const res = await fetch(cb.value);
+                    const data = await res.json();
+                    cachedComparisons[cb.value] = new Set(data.map(b => b.name.toLowerCase().trim()));
                 }
-
-                tableBody.innerHTML = '';
-                bands1.forEach(band => {
-                    const isShared = sharedNames.has(band.name.toLowerCase().trim());
-                    const row = document.createElement('tr');
-                    if (isShared) row.classList.add('shared-band');
-                    row.innerHTML = `
-                    <td>${getFlagImg(band.country)}</td>
-                    <td class="band-name">${band.name} ${isShared ? '<span class="badge">DOPPELT</span>' : ''}</td>
-                    <td>${band.genre || "N/A"}</td>
-                `;
-                    tableBody.appendChild(row);
-                });
-            } catch (e) {
-                tableBody.innerHTML = '<tr><td colspan="3" style="text-align:center;">Fehler beim Laden der Daten.</td></tr>';
+                // Namen sammeln
+                cachedComparisons[cb.value].forEach(name => sharedBandsMap.add(name));
             }
+
+            const filtered = primaryBands.filter(band => {
+                const matchesSearch = band.name.toLowerCase().includes(searchTerm) ||
+                    band.genre.toLowerCase().includes(searchTerm);
+                return matchesSearch;
+            });
+
+            tableBody.innerHTML = '';
+            let overlapCount = 0;
+
+            filtered.forEach(band => {
+                const lowName = band.name.toLowerCase().trim();
+                const isShared = sharedBandsMap.has(lowName);
+                if (isShared) overlapCount++;
+
+                const row = document.createElement('tr');
+                if (isShared) row.classList.add('shared-band');
+
+                row.innerHTML = `
+                <td>${getFlagImg(band.country)}</td>
+                <td class="band-name">${band.name}${isShared ? '<span class="badge">MATCH</span>' : ''}</td>
+                <td>${band.genre}</td>
+            `;
+                tableBody.appendChild(row);
+            });
+
+            stats.innerText = `${filtered.length} Bands angezeigt. ` +
+                (checkedCheckboxes.length > 0 ? `| ${overlapCount} Überschneidungen mit Auswahl.` : '');
         }
 
-        select.addEventListener('change', loadAndCompare);
-        toggle.addEventListener('change', loadAndCompare);
+        // Events
+        primarySelect.addEventListener('change', () => {
+            updateCompareCheckboxes();
+            loadPrimaryData();
+        });
+        searchInput.addEventListener('input', renderTable);
 
-        // Initialisierung
-        fetchFestivalFiles();
+        init();
     </script>
 </body>
 
