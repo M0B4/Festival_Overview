@@ -45,6 +45,7 @@
             font-size: 16px;
             border-radius: 4px;
             cursor: pointer;
+            min-width: 200px;
         }
         
         .compare-box {
@@ -83,19 +84,11 @@
             background-color: #252525;
             color: #f39c12;
             text-transform: uppercase;
-            font-size: 14px;
         }
         
         .flag-icon {
             width: 24px;
-            height: auto;
             border-radius: 2px;
-            vertical-align: middle;
-        }
-        
-        .col-country {
-            width: 50px;
-            text-align: center;
         }
         
         .shared-band {
@@ -112,10 +105,6 @@
             margin-left: 10px;
         }
         
-        tr:hover {
-            background-color: #282828;
-        }
-        
         .band-name {
             color: #ffffff;
             font-weight: 600;
@@ -126,13 +115,12 @@
 <body>
 
     <header>
-        <h1>Festival Comparison 2026</h1>
+        <h1>Festival Tracker 2026</h1>
     </header>
 
     <div class="controls">
         <select id="festival-select">
-        <option value="wacken_2026_sortiert.json">Wacken 2026</option>
-        <option value="hellfest_2026_sortiert.json">Hellfest 2026</option>
+        <option value="">Lade Festivals...</option>
     </select>
 
         <label class="compare-box">
@@ -146,7 +134,7 @@
         <table>
             <thead>
                 <tr>
-                    <th class="col-country"></th>
+                    <th style="width:50px"></th>
                     <th>Band</th>
                     <th>Genre</th>
                 </tr>
@@ -156,12 +144,16 @@
     </main>
 
     <script>
+        // --- KONFIGURATION ---
+        const GITHUB_USER = 'm0b4'; // Ändern!
+        const GITHUB_REPO = 'Festival_Overview'; // Ändern!
+        const DATA_FOLDER = 'data'; // Ordnername, in dem die JSONs liegen
+
         const select = document.getElementById('festival-select');
         const toggle = document.getElementById('compare-toggle');
         const tableBody = document.getElementById('band-table-body');
         const stats = document.getElementById('stats');
 
-        // Erweitertes Mapping
         const countryCodes = {
             "germany": "de",
             "sweden": "se",
@@ -181,85 +173,96 @@
             "canada": "ca",
             "denmark": "dk",
             "australia": "au",
-            "japan": "jp",
-            "greece": "gr",
-            "ireland": "ie"
+            "japan": "jp"
         };
 
         function getFlagImg(countryName) {
             if (!countryName) return '🏴‍☠️';
-            const cleanName = countryName.trim().toLowerCase();
-            const code = countryCodes[cleanName] || null;
-            if (!code) return `<span title="${countryName}">🏴‍☠️</span>`;
-            return `<img src="https://flagcdn.com/w40/${code}.png" class="flag-icon" title="${countryName}">`;
+            const code = countryCodes[countryName.trim().toLowerCase()];
+            return code ? `<img src="https://flagcdn.com/w40/${code}.png" class="flag-icon" title="${countryName}">` : '🏴‍☠️';
         }
 
+        // 1. Automatisch alle JSON-Dateien aus dem Ordner finden
+        async function fetchFestivalFiles() {
+            const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${DATA_FOLDER}`;
+
+            try {
+                const response = await fetch(apiUrl);
+                const files = await response.json();
+
+                // Filtern: Nur .json Dateien
+                const jsonFiles = files.filter(file => file.name.endsWith('.json'));
+
+                select.innerHTML = ''; // "Lade..." entfernen
+
+                jsonFiles.forEach(file => {
+                    const option = document.createElement('option');
+                    option.value = file.path; // z.B. data/wacken.json
+
+                    // Namen hübsch machen: wacken_2026.json -> Wacken 2026
+                    let prettyName = file.name.replace('.json', '').replace(/_/g, ' ');
+                    prettyName = prettyName.charAt(0).toUpperCase() + prettyName.slice(1);
+
+                    option.textContent = prettyName;
+                    select.appendChild(option);
+                });
+
+                if (jsonFiles.length > 0) loadAndCompare();
+
+            } catch (e) {
+                console.error("API Fehler:", e);
+                select.innerHTML = '<option>Fehler beim Laden</option>';
+            }
+        }
+
+        // 2. Daten laden und vergleichen
         async function loadAndCompare() {
+            if (!select.value) return;
             tableBody.innerHTML = '<tr><td colspan="3" style="text-align:center;">Lade Lineup...</td></tr>';
 
             try {
-                // 1. Primäres Festival laden
-                const primaryFile = select.value;
-                const res1 = await fetch(primaryFile);
-                if (!res1.ok) throw new Error(`Datei ${primaryFile} nicht gefunden`);
+                const res1 = await fetch(select.value);
                 const bands1 = await res1.json();
-
                 let sharedNames = new Set();
 
-                // 2. Optionaler Vergleich (mit Fehler-Schutz)
-                if (toggle.checked) {
-                    try {
-                        const secondaryFile = (primaryFile === 'wacken_2026_sortiert.json') ?
-                            'hellfest_2026_sortiert.json' :
-                            'wacken_2026_sortiert.json';
+                if (toggle.checked && select.options.length > 1) {
+                    // Nimm einfach das erste andere Festival aus der Liste zum Vergleichen
+                    const otherIdx = select.selectedIndex === 0 ? 1 : 0;
+                    const otherFile = select.options[otherIdx].value;
 
-                        const res2 = await fetch(secondaryFile);
-                        if (res2.ok) {
-                            const bands2 = await res2.json();
-                            const names2 = new Set(bands2.map(b => b.name.toLowerCase().trim()));
-                            sharedNames = new Set(bands1.filter(b => names2.has(b.name.toLowerCase().trim())).map(b => b.name.toLowerCase().trim()));
-                            stats.innerText = `${sharedNames.size} Überschneidungen gefunden.`;
-                        } else {
-                            stats.innerText = "Zweite Datei für Vergleich nicht gefunden.";
-                        }
-                    } catch (e) {
-                        console.warn("Vergleichsdatei konnte nicht geladen werden.");
-                    }
+                    const res2 = await fetch(otherFile);
+                    const bands2 = await res2.json();
+                    const names2 = new Set(bands2.map(b => b.name.toLowerCase().trim()));
+                    sharedNames = new Set(bands1.filter(b => names2.has(b.name.toLowerCase().trim())).map(b => b.name.toLowerCase().trim()));
+
+                    stats.innerText = `${sharedNames.size} Überschneidungen mit ${select.options[otherIdx].textContent} gefunden.`;
                 } else {
                     stats.innerText = `${bands1.length} Bands bestätigt.`;
                 }
 
-                // 3. Tabelle rendern
                 tableBody.innerHTML = '';
                 bands1.forEach(band => {
-                    const bName = (band.name || "Unbekannt").trim();
-                    const isShared = sharedNames.has(bName.toLowerCase());
-
+                    const isShared = sharedNames.has(band.name.toLowerCase().trim());
                     const row = document.createElement('tr');
                     if (isShared) row.classList.add('shared-band');
-
                     row.innerHTML = `
-                    <td class="col-country">${getFlagImg(band.country)}</td>
-                    <td class="band-name">
-                        ${bName} 
-                        ${isShared ? '<span class="badge">DOPPELT</span>' : ''}
-                    </td>
+                    <td>${getFlagImg(band.country)}</td>
+                    <td class="band-name">${band.name} ${isShared ? '<span class="badge">DOPPELT</span>' : ''}</td>
                     <td>${band.genre || "N/A"}</td>
                 `;
                     tableBody.appendChild(row);
                 });
-
-            } catch (error) {
-                console.error(error);
-                tableBody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:red;">Fehler: ${error.message}</td></tr>`;
+            } catch (e) {
+                tableBody.innerHTML = '<tr><td colspan="3" style="text-align:center;">Fehler beim Laden der Daten.</td></tr>';
             }
         }
 
         select.addEventListener('change', loadAndCompare);
         toggle.addEventListener('change', loadAndCompare);
-        loadAndCompare();
-    </script>
 
+        // Initialisierung
+        fetchFestivalFiles();
+    </script>
 </body>
 
 </html>
