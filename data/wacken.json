@@ -1,5 +1,4 @@
-[
-    {
+[{
         "name": "5th Avenue",
         "country": "Germany",
         "genre": "Hard Rock"
@@ -235,9 +234,9 @@
         "genre": "Viking Metal"
     },
     {
-        "name": "Electric Callboy",
+        "name": "Electric Bassboy",
         "country": "Germany",
-        "genre": "Electronicore"
+        "genre": "DJ"
     },
     {
         "name": "Eläkeläiset",
