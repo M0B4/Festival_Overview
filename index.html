@@ -46,7 +46,6 @@
             border-radius: 4px;
             cursor: pointer;
         }
-        /* Checkbox Styling */
         
         .compare-box {
             display: flex;
@@ -57,10 +56,6 @@
             padding: 10px 15px;
             border-radius: 4px;
             border: 1px solid #444;
-        }
-        
-        .compare-box:hover {
-            border-color: #f39c12;
         }
         
         main {
@@ -80,7 +75,7 @@
         th,
         td {
             text-align: left;
-            padding: 15px;
+            padding: 12px;
             border-bottom: 1px solid #333;
         }
         
@@ -88,15 +83,25 @@
             background-color: #252525;
             color: #f39c12;
             text-transform: uppercase;
+            font-size: 14px;
         }
-        /* Highlight für Überschneidungen */
+        /* Flaggen-Styling */
+        
+        .flag-icon {
+            width: 24px;
+            height: auto;
+            border-radius: 2px;
+            vertical-align: middle;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .col-country {
+            width: 50px;
+            text-align: center;
+        }
         
         .shared-band {
-            background-color: rgba(46, 204, 113, 0.15) !important;
-        }
-        
-        .shared-band td {
-            border-bottom-color: #2ecc71;
+            background-color: rgba(46, 204, 113, 0.1) !important;
         }
         
         .badge {
@@ -107,7 +112,6 @@
             font-size: 10px;
             font-weight: bold;
             margin-left: 10px;
-            vertical-align: middle;
         }
         
         tr:hover {
@@ -128,27 +132,24 @@
     </header>
 
     <div class="controls">
-        <div>
-            <label>Festival: </label>
-            <select id="festival-select">
-            <option value="wacken_2026_sortiert.json">Wacken 2026</option>
-            <option value="hellfest_2026_sortiert.json">Hellfest 2026</option>
-        </select>
-        </div>
+        <select id="festival-select">
+        <option value="wacken_2026_sortiert.json">Wacken 2026</option>
+        <option value="hellfest_2026_sortiert.json">Hellfest 2026</option>
+    </select>
 
         <label class="compare-box">
         <input type="checkbox" id="compare-toggle"> 
-        <span>Mit anderem Festival vergleichen</span>
+        <span>Vergleichs-Modus</span>
     </label>
     </div>
 
     <main>
-        <div id="stats" style="margin-bottom: 10px; font-size: 14px; color: #aaa;"></div>
+        <div id="stats" style="margin-bottom: 15px; font-size: 14px; color: #888; font-style: italic;"></div>
         <table>
             <thead>
                 <tr>
+                    <th class="col-country"></th>
                     <th>Band</th>
-                    <th>Country</th>
                     <th>Genre</th>
                 </tr>
             </thead>
@@ -162,64 +163,50 @@
         const tableBody = document.getElementById('band-table-body');
         const stats = document.getElementById('stats');
 
+        // Übersetzungstabelle: Landname im JSON -> ISO Code für Flagge
+        const countryCodes = {
+            "Germany": "de",
+            "Sweden": "se",
+            "USA": "us",
+            "United Kingdom": "gb",
+            "France": "fr",
+            "Norway": "no",
+            "Finland": "fi",
+            "Switzerland": "ch",
+            "Austria": "at",
+            "Belgium": "be",
+            "Netherlands": "nl",
+            "Italy": "it",
+            "Spain": "es",
+            "Poland": "pl",
+            "Brazil": "br",
+            "Canada": "ca",
+            "Denmark": "dk",
+            "Australia": "au",
+            "Japan": "jp"
+                // Du kannst hier weitere Länder hinzufügen
+        };
+
+        function getFlagImg(countryName) {
+            const code = countryCodes[countryName.trim()] || null;
+            if (!code) return `<span title="${countryName}">🏴‍☠️</span>`; // Piratenflagge als Platzhalter
+            return `<img src="https://flagcdn.com/w40/${code}.png" class="flag-icon" title="${countryName}" alt="${countryName}">`;
+        }
+
         async function loadAndCompare() {
-            tableBody.innerHTML = '<tr><td colspan="3" style="text-align:center;">Lade Daten...</td></tr>';
+            tableBody.innerHTML = '<tr><td colspan="3" style="text-align:center;">Lade Lineup...</td></tr>';
 
             try {
-                // 1. Primäres Festival laden
                 const primaryFile = select.value;
                 const res1 = await fetch(primaryFile);
                 const bands1 = await res1.json();
 
                 let sharedNames = new Set();
 
-                // 2. Optional: Das andere Festival laden, wenn Checkbox aktiv ist
                 if (toggle.checked) {
-                    // Finde heraus, welches das "andere" Festival ist
                     const secondaryFile = (primaryFile === 'wacken_2026_sortiert.json') ?
                         'hellfest_2026_sortiert.json' :
                         'wacken_2026_sortiert.json';
 
                     const res2 = await fetch(secondaryFile);
-                    const bands2 = await res2.json();
-
-                    // Erstelle ein Set mit Namen für schnellen Abgleich
-                    const names2 = new Set(bands2.map(b => b.name.toLowerCase()));
-                    sharedNames = new Set(bands1.filter(b => names2.has(b.name.toLowerCase())).map(b => b.name.toLowerCase()));
-
-                    stats.innerText = `${sharedNames.size} Überschneidungen gefunden.`;
-                } else {
-                    stats.innerText = `${bands1.length} Bands insgesamt.`;
-                }
-
-                // 3. Tabelle rendern
-                tableBody.innerHTML = '';
-                bands1.forEach(band => {
-                    const isShared = sharedNames.has(band.name.toLowerCase());
-                    const row = document.createElement('tr');
-                    if (isShared) row.classList.add('shared-band');
-
-                    row.innerHTML = `
-                    <td class="band-name">
-                        ${band.name} 
-                        ${isShared ? '<span class="badge">AUCH BEIM ANDEREN</span>' : ''}
-                    </td>
-                    <td>${band.country}</td>
-                    <td>${band.genre}</td>
-                `;
-                    tableBody.appendChild(row);
-                });
-
-            } catch (error) {
-                tableBody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:red;">Fehler beim Laden.</td></tr>';
-            }
-        }
-
-        select.addEventListener('change', loadAndCompare);
-        toggle.addEventListener('change', loadAndCompare);
-        loadAndCompare();
-    </script>
-
-</body>
-
-</html>
+                    const bands
