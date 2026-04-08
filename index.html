@@ -149,6 +149,15 @@
         .shared-band {
             background-color: rgba(46, 204, 113, 0.08);
         }
+        /* Update für die Badges */
+        
+        .badge-container {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
         
         .badge {
             background: #2ecc71;
@@ -157,7 +166,7 @@
             border-radius: 3px;
             font-size: 10px;
             font-weight: bold;
-            margin-left: 8px;
+            white-space: nowrap;
         }
         
         .band-name {
@@ -524,21 +533,36 @@
             const searchTerm = searchInput.value.toLowerCase();
             const checkedCheckboxes = Array.from(compareContainer.querySelectorAll('input:checked'));
 
-            // Alle aktiven Vergleichs-Festivals laden/cachen
-            let sharedBandsMap = new Set();
+            // matchMap speichert: { "bandname": ["Festival A", "Festival B"] }
+            let matchMap = {};
+
             for (let cb of checkedCheckboxes) {
-                if (!cachedComparisons[cb.value]) {
-                    const res = await fetch(cb.value);
-                    const data = await res.json();
-                    cachedComparisons[cb.value] = new Set(data.map(b => b.name.toLowerCase().trim()));
+                const festivalPath = cb.value;
+                const festivalName = cb.parentNode.textContent.trim();
+
+                // Daten laden/cachen falls noch nicht geschehen
+                if (!cachedComparisons[festivalPath]) {
+                    try {
+                        const res = await fetch(festivalPath);
+                        const data = await res.json();
+                        cachedComparisons[festivalPath] = new Set(data.map(b => b.name.toLowerCase().trim()));
+                    } catch (e) {
+                        console.error("Fehler beim Laden von " + festivalName);
+                        continue;
+                    }
                 }
-                // Namen sammeln
-                cachedComparisons[cb.value].forEach(name => sharedBandsMap.add(name));
+
+                // Abgleich: Jeden Namen in der matchMap registrieren
+                cachedComparisons[festivalPath].forEach(name => {
+                    if (!matchMap[name]) matchMap[name] = [];
+                    matchMap[name].push(festivalName);
+                });
             }
 
+            // Filtern der primären Liste (Suche)
             const filtered = primaryBands.filter(band => {
-                const matchesSearch = band.name.toLowerCase().includes(searchTerm) ||
-                    band.genre.toLowerCase().includes(searchTerm);
+                const matchesSearch = (band.name || "").toLowerCase().includes(searchTerm) ||
+                    (band.genre || "").toLowerCase().includes(searchTerm);
                 return matchesSearch;
             });
 
@@ -546,23 +570,35 @@
             let overlapCount = 0;
 
             filtered.forEach(band => {
-                const lowName = band.name.toLowerCase().trim();
-                const isShared = sharedBandsMap.has(lowName);
+                const lowName = (band.name || "").toLowerCase().trim();
+                const matches = matchMap[lowName] || []; // Liste der Festivals, die diese Band auch haben
+                const isShared = matches.length > 0;
+
                 if (isShared) overlapCount++;
 
                 const row = document.createElement('tr');
                 if (isShared) row.classList.add('shared-band');
 
+                // Erstelle Badges für jedes gefundene Festival
+                let badgesHtml = '<div class="badge-container">';
+                matches.forEach(fest => {
+                    badgesHtml += `<span class="badge">${fest}</span>`;
+                });
+                badgesHtml += '</div>';
+
                 row.innerHTML = `
-                <td>${getFlagImg(band.country)}</td>
-                <td class="band-name">${band.name}${isShared ? '<span class="badge">MATCH</span>' : ''}</td>
-                <td>${band.genre}</td>
-            `;
+            <td>${getFlagImg(band.country)}</td>
+            <td class="band-name">
+                ${band.name}
+                ${isShared ? badgesHtml : ''}
+            </td>
+            <td>${band.genre || "N/A"}</td>
+        `;
                 tableBody.appendChild(row);
             });
 
             stats.innerText = `${filtered.length} Bands angezeigt. ` +
-                (checkedCheckboxes.length > 0 ? `| ${overlapCount} Überschneidungen mit Auswahl.` : '');
+                (checkedCheckboxes.length > 0 ? `| ${overlapCount} Überschneidungen gefunden.` : '');
         }
 
         // Events
