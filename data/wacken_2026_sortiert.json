@@ -1,0 +1,762 @@
+[
+    {
+        "name": "5th Avenue",
+        "country": "Germany",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "9mm Headshot",
+        "country": "Germany",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Ad Infinitum",
+        "country": "Switzerland",
+        "genre": "Symphonic Metal"
+    },
+    {
+        "name": "Airbourne",
+        "country": "Australia",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Alcest",
+        "country": "France",
+        "genre": "Blackgaze"
+    },
+    {
+        "name": "Alestorm",
+        "country": "United Kingdom",
+        "genre": "Folk Metal"
+    },
+    {
+        "name": "Alfahanne",
+        "country": "Sweden",
+        "genre": "Melodic Black Metal/Rock"
+    },
+    {
+        "name": "Alien Ant Farm",
+        "country": "United States",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "Alien Rockin‘ Explosion",
+        "country": "Spain",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Allt",
+        "country": "Sweden",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Anaal Nathrakh",
+        "country": "United Kingdom",
+        "genre": "Black Metal"
+    },
+    {
+        "name": "Angelus Apatrida",
+        "country": "Spain",
+        "genre": "Thrash Metal"
+    },
+    {
+        "name": "Animals As Leaders",
+        "country": "United States",
+        "genre": "Progressive Metal"
+    },
+    {
+        "name": "Any Given Day",
+        "country": "Germany",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Arch Enemy",
+        "country": "Sweden",
+        "genre": "Melodic Death Metal"
+    },
+    {
+        "name": "Arroganz",
+        "country": "Germany",
+        "genre": "Black Metal / Death Metal"
+    },
+    {
+        "name": "Asrock",
+        "country": "Germany",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Battlecreek",
+        "country": "Germany",
+        "genre": "Thrash Metal"
+    },
+    {
+        "name": "Bear McCreary",
+        "country": "United States",
+        "genre": "Film Soundtracks"
+    },
+    {
+        "name": "Blaas Of Glory",
+        "country": "Netherlands",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Black Label Society",
+        "country": "United States",
+        "genre": "Southern Metal"
+    },
+    {
+        "name": "Black Tish",
+        "country": "Belgium",
+        "genre": "Industrial Metal"
+    },
+    {
+        "name": "Bleed From Within",
+        "country": "United Kingdom",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Blood Command",
+        "country": "Norway",
+        "genre": "Hardcore Punk"
+    },
+    {
+        "name": "Blood Fire Death",
+        "country": "Germany",
+        "genre": "Tribute To Bathory"
+    },
+    {
+        "name": "Blood Red Throne",
+        "country": "Norway",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "Broken By The Scream",
+        "country": "Japan",
+        "genre": "Kawaii Metal"
+    },
+    {
+        "name": "Brunhilde",
+        "country": "Germany",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Castle Rat",
+        "country": "United States",
+        "genre": "Doom Metal"
+    },
+    {
+        "name": "Chaosbay",
+        "country": "Germany",
+        "genre": "Progressive Metal"
+    },
+    {
+        "name": "Corrosion Of Conformity",
+        "country": "United States",
+        "genre": "Stoner Metal"
+    },
+    {
+        "name": "Craft",
+        "country": "Sweden",
+        "genre": "Black Metal"
+    },
+    {
+        "name": "Crematory",
+        "country": "Germany",
+        "genre": "Gothic Metal"
+    },
+    {
+        "name": "Crimson Glory",
+        "country": "United States",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Cruachan",
+        "country": "Ireland",
+        "genre": "Folk Metal"
+    },
+    {
+        "name": "Crypt Sermon",
+        "country": "United States",
+        "genre": "Epic Doom Metal"
+    },
+    {
+        "name": "Cursed Abyss",
+        "country": "Germany",
+        "genre": "Metalcore / Groove Metal"
+    },
+    {
+        "name": "Danko Jones",
+        "country": "Canada",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Deafheaven",
+        "country": "United States",
+        "genre": "Blackgaze"
+    },
+    {
+        "name": "Def Leppard",
+        "country": "United Kingdom",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Diabolisches Werk",
+        "country": "Germany",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "Dieter Birr",
+        "country": "Germany",
+        "genre": "Rock"
+    },
+    {
+        "name": "Dirty Shirt",
+        "country": "Romania",
+        "genre": "Nu Metal"
+    },
+    {
+        "name": "Divlje Jagode",
+        "country": "Bosnia and Herzegovina",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Dritte Wahl",
+        "country": "Germany",
+        "genre": "Punk Rock"
+    },
+    {
+        "name": "Dubioza Kolektiv",
+        "country": "Bosnia and Herzegovina",
+        "genre": "Reggae"
+    },
+    {
+        "name": "Einherjer",
+        "country": "Norway",
+        "genre": "Viking Metal"
+    },
+    {
+        "name": "Electric Callboy",
+        "country": "Germany",
+        "genre": "Electronicore"
+    },
+    {
+        "name": "Eläkeläiset",
+        "country": "Finland",
+        "genre": "Humppa"
+    },
+    {
+        "name": "Emperor",
+        "country": "Norway",
+        "genre": "Symphonic Black Metal"
+    },
+    {
+        "name": "Employed To Serve",
+        "country": "United Kingdom",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Europe",
+        "country": "Sweden",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Evil Jared",
+        "country": "United States",
+        "genre": "N/A"
+    },
+    {
+        "name": "Expellow",
+        "country": "Switzerland",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Faun",
+        "country": "Germany",
+        "genre": "Medieval Rock"
+    },
+    {
+        "name": "Finsterforst",
+        "country": "Germany",
+        "genre": "Viking Metal"
+    },
+    {
+        "name": "Firespawn",
+        "country": "Sweden",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "Fit For An Autopsy",
+        "country": "United States",
+        "genre": "Deathcore"
+    },
+    {
+        "name": "Focus.",
+        "country": "Germany",
+        "genre": "Punk Rock"
+    },
+    {
+        "name": "Future Palace",
+        "country": "Germany",
+        "genre": "Post-Hardcore"
+    },
+    {
+        "name": "Grand Magus",
+        "country": "Sweden",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Guilt Trip",
+        "country": "United Kingdom",
+        "genre": "Hardcore / Metalcore"
+    },
+    {
+        "name": "Gutalax",
+        "country": "Czechia",
+        "genre": "Goregrind"
+    },
+    {
+        "name": "H-Blockx",
+        "country": "Germany",
+        "genre": "Rap Rock"
+    },
+    {
+        "name": "Hackneyed",
+        "country": "Germany",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "Hardline",
+        "country": "United States",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Hatebreed",
+        "country": "United States",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Heartless Human Harvest",
+        "country": "Germany",
+        "genre": "Deathcore"
+    },
+    {
+        "name": "Heavysaurus",
+        "country": "Germany",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Hämatom",
+        "country": "Germany",
+        "genre": "Groove Metal"
+    },
+    {
+        "name": "In Flames",
+        "country": "Sweden",
+        "genre": "Melodic Death Metal"
+    },
+    {
+        "name": "Insanity Alert",
+        "country": "Austria",
+        "genre": "Crossover Thrash"
+    },
+    {
+        "name": "Judas Priest",
+        "country": "United Kingdom",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Kadavar",
+        "country": "Germany",
+        "genre": "Stoner Rock"
+    },
+    {
+        "name": "Katerfahrt",
+        "country": "Germany",
+        "genre": "Mittelalter Rock"
+    },
+    {
+        "name": "Kim Dracula",
+        "country": "Australia",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Kittie",
+        "country": "Canada",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Kupfergold",
+        "country": "Germany",
+        "genre": "Folk"
+    },
+    {
+        "name": "Kärbholz",
+        "country": "Germany",
+        "genre": "Punk Rock"
+    },
+    {
+        "name": "Lacuna Coil",
+        "country": "Italy",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Lagwagon",
+        "country": "United States",
+        "genre": "Skate Punk"
+    },
+    {
+        "name": "Lamb Of God",
+        "country": "United States",
+        "genre": "Groove Metal"
+    },
+    {
+        "name": "Life Of Agony",
+        "country": "United States",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Lovebites",
+        "country": "Japan",
+        "genre": "Power Metal"
+    },
+    {
+        "name": "Luna Kills",
+        "country": "Finland",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "Mambo Kurt",
+        "country": "Germany",
+        "genre": "Musical Parody"
+    },
+    {
+        "name": "Mantar",
+        "country": "Germany",
+        "genre": "Sludge Metal"
+    },
+    {
+        "name": "Mantra",
+        "country": "France",
+        "genre": "Progressive Metal"
+    },
+    {
+        "name": "Metaklapa",
+        "country": "Croatia",
+        "genre": "Iron Maiden A cappella Tribute"
+    },
+    {
+        "name": "Minotaurus",
+        "country": "Germany",
+        "genre": "Folk Metal"
+    },
+    {
+        "name": "Misery Index",
+        "country": "United States",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "Misþyrming",
+        "country": "Iceland",
+        "genre": "Black Metal"
+    },
+    {
+        "name": "Mr. Hurley & Die Pulveraffen",
+        "country": "Germany",
+        "genre": "Folk Rock"
+    },
+    {
+        "name": "Municipal Waste",
+        "country": "United States",
+        "genre": "Crossover Thrash"
+    },
+    {
+        "name": "Nergal",
+        "country": "Poland",
+        "genre": "Blackened Death Metal"
+    },
+    {
+        "name": "Nevermore",
+        "country": "United States",
+        "genre": "Progressive Metal"
+    },
+    {
+        "name": "Of Mice & Men",
+        "country": "United States",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Orbit Culture",
+        "country": "Sweden",
+        "genre": "Melodic Death Metal"
+    },
+    {
+        "name": "Our Promise",
+        "country": "Germany",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "P.O.D.",
+        "country": "United States",
+        "genre": "Rap Rock"
+    },
+    {
+        "name": "Paleface Swiss",
+        "country": "Switzerland",
+        "genre": "Deathcore"
+    },
+    {
+        "name": "Paradise Lost",
+        "country": "United Kingdom",
+        "genre": "Gothic Metal"
+    },
+    {
+        "name": "Phantom",
+        "country": "Mexico",
+        "genre": "Thrash Metal"
+    },
+    {
+        "name": "Pig Destroyer",
+        "country": "United States",
+        "genre": "Grindcore"
+    },
+    {
+        "name": "Poison The Preacher",
+        "country": "Colombia",
+        "genre": "Thrash Metal"
+    },
+    {
+        "name": "Powerwolf",
+        "country": "Germany",
+        "genre": "Power Metal"
+    },
+    {
+        "name": "President",
+        "country": "United Kingdom",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Ricky Warwick",
+        "country": "Ireland",
+        "genre": "Hardrock / Heavy Metal"
+    },
+    {
+        "name": "Rose Tattoo",
+        "country": "Australia",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Running Wild",
+        "country": "Germany",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Sacred Steel",
+        "country": "Germany",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Sagenbringer",
+        "country": "Germany",
+        "genre": "Folk Metal"
+    },
+    {
+        "name": "Savatage",
+        "country": "United States",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Saviourself",
+        "country": "Germany",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Saxon",
+        "country": "United Kingdom",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Sepultura",
+        "country": "Brazil",
+        "genre": "Groove Metal"
+    },
+    {
+        "name": "Skyline",
+        "country": "Germany",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Skynd",
+        "country": "Australia",
+        "genre": "Industrial Metal"
+    },
+    {
+        "name": "Spectral Wound",
+        "country": "Canada",
+        "genre": "Black Metal"
+    },
+    {
+        "name": "Stonem",
+        "country": "Germany",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Storm Seeker",
+        "country": "Germany",
+        "genre": "Folk Metal"
+    },
+    {
+        "name": "Subway To Sally",
+        "country": "Germany",
+        "genre": "Medieval Metal"
+    },
+    {
+        "name": "Temple Of The Absurd",
+        "country": "Germany",
+        "genre": "Thrash Metal"
+    },
+    {
+        "name": "ten56.",
+        "country": "France",
+        "genre": "Deathcore"
+    },
+    {
+        "name": "The Butcher Sisters",
+        "country": "Germany",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "The Gathering",
+        "country": "Netherlands",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "The Hardkiss",
+        "country": "Ukraine",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "The Haunted",
+        "country": "Sweden",
+        "genre": "Thrash Metal"
+    },
+    {
+        "name": "The Limit",
+        "country": "United States",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "The Other",
+        "country": "Germany",
+        "genre": "Horror Punk"
+    },
+    {
+        "name": "The Troops Of Doom",
+        "country": "Brazil",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "Therapy?",
+        "country": "United Kingdom",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "Thrown",
+        "country": "Sweden",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Thundermother",
+        "country": "Sweden",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Thy Art Is Murder",
+        "country": "Australia",
+        "genre": "Deathcore"
+    },
+    {
+        "name": "Triptykon",
+        "country": "Switzerland",
+        "genre": "Doom Metal"
+    },
+    {
+        "name": "Trold",
+        "country": "Denmark",
+        "genre": "Folk-Metal"
+    },
+    {
+        "name": "Turbonegro",
+        "country": "Norway",
+        "genre": "Punk Rock"
+    },
+    {
+        "name": "Tuxedoo",
+        "country": "Austria",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Uli Jon Roth",
+        "country": "Germany",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Unzucht",
+        "country": "Germany",
+        "genre": "Dark Rock, Metal"
+    },
+    {
+        "name": "Vanir",
+        "country": "Denmark",
+        "genre": "Folk Metal"
+    },
+    {
+        "name": "Velvet Rush",
+        "country": "Germany",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Vended",
+        "country": "United States",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Visions Of Atlantis",
+        "country": "Austria",
+        "genre": "Symphonic Metal"
+    },
+    {
+        "name": "Vogelfrey",
+        "country": "Germany",
+        "genre": "Folk Rock / Metal"
+    },
+    {
+        "name": "Wacken Firefighters",
+        "country": "Germany",
+        "genre": "Metal Meets Brass"
+    },
+    {
+        "name": "Wytch Hazel",
+        "country": "United Kingdom",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Wüstenberg",
+        "country": "Germany",
+        "genre": "Folk Rock"
+    },
+    {
+        "name": "Year Of The Goat",
+        "country": "Sweden",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Yngwie Malmsteen",
+        "country": "Sweden",
+        "genre": "Neoclassical Metal"
+    },
+    {
+        "name": "Zeltinger Band",
+        "country": "Germany",
+        "genre": "Rock"
+    }
+]
