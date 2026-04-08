@@ -85,14 +85,12 @@
             text-transform: uppercase;
             font-size: 14px;
         }
-        /* Flaggen-Styling */
         
         .flag-icon {
             width: 24px;
             height: auto;
             border-radius: 2px;
             vertical-align: middle;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
         }
         
         .col-country {
@@ -144,7 +142,7 @@
     </div>
 
     <main>
-        <div id="stats" style="margin-bottom: 15px; font-size: 14px; color: #888; font-style: italic;"></div>
+        <div id="stats" style="margin-bottom: 15px; font-size: 14px; color: #888;"></div>
         <table>
             <thead>
                 <tr>
@@ -163,50 +161,105 @@
         const tableBody = document.getElementById('band-table-body');
         const stats = document.getElementById('stats');
 
-        // Übersetzungstabelle: Landname im JSON -> ISO Code für Flagge
+        // Erweitertes Mapping
         const countryCodes = {
-            "Germany": "de",
-            "Sweden": "se",
-            "USA": "us",
-            "United Kingdom": "gb",
-            "France": "fr",
-            "Norway": "no",
-            "Finland": "fi",
-            "Switzerland": "ch",
-            "Austria": "at",
-            "Belgium": "be",
-            "Netherlands": "nl",
-            "Italy": "it",
-            "Spain": "es",
-            "Poland": "pl",
-            "Brazil": "br",
-            "Canada": "ca",
-            "Denmark": "dk",
-            "Australia": "au",
-            "Japan": "jp"
-                // Du kannst hier weitere Länder hinzufügen
+            "germany": "de",
+            "sweden": "se",
+            "usa": "us",
+            "united kingdom": "gb",
+            "france": "fr",
+            "norway": "no",
+            "finland": "fi",
+            "switzerland": "ch",
+            "austria": "at",
+            "belgium": "be",
+            "netherlands": "nl",
+            "italy": "it",
+            "spain": "es",
+            "poland": "pl",
+            "brazil": "br",
+            "canada": "ca",
+            "denmark": "dk",
+            "australia": "au",
+            "japan": "jp",
+            "greece": "gr",
+            "ireland": "ie"
         };
 
         function getFlagImg(countryName) {
-            const code = countryCodes[countryName.trim()] || null;
-            if (!code) return `<span title="${countryName}">🏴‍☠️</span>`; // Piratenflagge als Platzhalter
-            return `<img src="https://flagcdn.com/w40/${code}.png" class="flag-icon" title="${countryName}" alt="${countryName}">`;
+            if (!countryName) return '🏴‍☠️';
+            const cleanName = countryName.trim().toLowerCase();
+            const code = countryCodes[cleanName] || null;
+            if (!code) return `<span title="${countryName}">🏴‍☠️</span>`;
+            return `<img src="https://flagcdn.com/w40/${code}.png" class="flag-icon" title="${countryName}">`;
         }
 
         async function loadAndCompare() {
             tableBody.innerHTML = '<tr><td colspan="3" style="text-align:center;">Lade Lineup...</td></tr>';
 
             try {
+                // 1. Primäres Festival laden
                 const primaryFile = select.value;
                 const res1 = await fetch(primaryFile);
+                if (!res1.ok) throw new Error(`Datei ${primaryFile} nicht gefunden`);
                 const bands1 = await res1.json();
 
                 let sharedNames = new Set();
 
+                // 2. Optionaler Vergleich (mit Fehler-Schutz)
                 if (toggle.checked) {
-                    const secondaryFile = (primaryFile === 'wacken_2026_sortiert.json') ?
-                        'hellfest_2026_sortiert.json' :
-                        'wacken_2026_sortiert.json';
+                    try {
+                        const secondaryFile = (primaryFile === 'wacken_2026_sortiert.json') ?
+                            'hellfest_2026_sortiert.json' :
+                            'wacken_2026_sortiert.json';
 
-                    const res2 = await fetch(secondaryFile);
-                    const bands
+                        const res2 = await fetch(secondaryFile);
+                        if (res2.ok) {
+                            const bands2 = await res2.json();
+                            const names2 = new Set(bands2.map(b => b.name.toLowerCase().trim()));
+                            sharedNames = new Set(bands1.filter(b => names2.has(b.name.toLowerCase().trim())).map(b => b.name.toLowerCase().trim()));
+                            stats.innerText = `${sharedNames.size} Überschneidungen gefunden.`;
+                        } else {
+                            stats.innerText = "Zweite Datei für Vergleich nicht gefunden.";
+                        }
+                    } catch (e) {
+                        console.warn("Vergleichsdatei konnte nicht geladen werden.");
+                    }
+                } else {
+                    stats.innerText = `${bands1.length} Bands bestätigt.`;
+                }
+
+                // 3. Tabelle rendern
+                tableBody.innerHTML = '';
+                bands1.forEach(band => {
+                    const bName = (band.name || "Unbekannt").trim();
+                    const isShared = sharedNames.has(bName.toLowerCase());
+
+                    const row = document.createElement('tr');
+                    if (isShared) row.classList.add('shared-band');
+
+                    row.innerHTML = `
+                    <td class="col-country">${getFlagImg(band.country)}</td>
+                    <td class="band-name">
+                        ${bName} 
+                        ${isShared ? '<span class="badge">DOPPELT</span>' : ''}
+                    </td>
+                    <td>${band.genre || "N/A"}</td>
+                `;
+                    tableBody.appendChild(row);
+                });
+
+            } catch (error) {
+                console.error(error);
+                tableBody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:red;">Fehler: ${error.message}</td></tr>`;
+            }
+        }
+
+        select.addEventListener('change', loadAndCompare);
+        toggle.addEventListener('change', loadAndCompare);
+        loadAndCompare();
+    </script>
+
+</body>
+
+</html>
