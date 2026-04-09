@@ -40,7 +40,36 @@
             max-width: 1100px;
             margin: 0 auto;
         }
-        /* Genre Statistik Styling */
+        /* Festival Info Card Styling */
+        
+        #festival-info-card {
+            display: none;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+            border-left: 5px solid var(--metal-orange);
+        }
+        
+        .info-content-wrapper {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        
+        #info-poster {
+            max-width: 180px;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            border: 1px solid #444;
+        }
+        
+        .info-text-side {
+            flex: 1;
+        }
+        /* Genre Statistik */
         
         #genre-stats {
             background: #181818;
@@ -77,7 +106,6 @@
         .stat-bar-fill {
             background: var(--metal-orange);
             height: 100%;
-            border-radius: 3px;
             transition: width 0.5s ease;
         }
         
@@ -113,12 +141,6 @@
             padding: 12px;
             border-radius: 4px;
             font-size: 15px;
-        }
-        
-        input[type="text"]:focus,
-        select:focus {
-            border-color: var(--metal-orange);
-            outline: none;
         }
         
         .compare-list {
@@ -182,21 +204,13 @@
             background-color: rgba(46, 204, 113, 0.05);
         }
         
-        .badge-container {
-            display: inline-flex;
-            flex-wrap: wrap;
-            gap: 4px;
-            margin-left: 8px;
-            vertical-align: middle;
-        }
-        
         .badge {
             color: #000;
             padding: 2px 6px;
             border-radius: 3px;
             font-size: 10px;
             font-weight: bold;
-            white-space: nowrap;
+            margin-left: 5px;
         }
         
         .badge.metal-orange {
@@ -223,65 +237,13 @@
             color: white;
         }
         
-        .band-name {
-            color: #ffffff;
-            font-weight: 600;
-        }
-        
-        #stats {
-            margin-bottom: 15px;
-            font-size: 14px;
-            color: #888;
-            border-left: 3px solid var(--metal-orange);
-            padding-left: 10px;
-        }
-        /* Update für die Festival Info Card */
-        
-        #festival-info-card {
-            display: none;
-            background: #1e1e1e;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border: 1px solid #333;
-            border-left: 5px solid var(--metal-orange);
-        }
-        
-        .info-content-wrapper {
-            display: flex;
-            gap: 20px;
-            align-items: flex-start;
-        }
-        
-        #info-poster {
-            max-width: 200px;
-            /* Breite des Plakats */
-            height: auto;
-            border-radius: 4px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            border: 1px solid #444;
-        }
-        
-        .info-text-side {
-            flex: 1;
-            /* Nimmt den restlichen Platz ein */
-        }
-        
         @media (max-width: 600px) {
+            .controls-grid,
             .info-content-wrapper {
                 flex-direction: column;
-                /* Auf Handys Bild über Text */
-                align-items: center;
             }
             #info-poster {
                 max-width: 100%;
-                margin-bottom: 15px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .controls-grid {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -293,6 +255,21 @@
             <h1>Festival Hub 2026</h1>
         </header>
 
+        <div id="festival-info-card">
+            <div class="info-content-wrapper">
+                <img id="info-poster" src="" alt="Festival Plakat">
+                <div class="info-text-side">
+                    <h2 id="info-name" style="margin: 0 0 10px 0; color: var(--metal-orange); text-transform: uppercase;"></h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; font-size: 14px;">
+                        <div><strong>Datum:</strong> <span id="info-date"></span></div>
+                        <div><strong>Ort:</strong> <span id="info-location"></span></div>
+                        <div><strong>Web:</strong> <a id="info-link" href="#" target="_blank" style="color: #3498db; text-decoration: none;">Offizielle Seite</a></div>
+                    </div>
+                    <p id="info-desc" style="margin: 15px 0 0 0; font-size: 13px; color: #bbb; font-style: italic;"></p>
+                </div>
+            </div>
+        </div>
+
         <div class="controls-grid">
             <div class="control-group">
                 <label>Haupt-Festival & Suche</label>
@@ -302,39 +279,24 @@
                 <label style="margin-top:5px;">Anzeige-Filter</label>
                 <select id="display-filter">
                     <option value="all">Alle Bands anzeigen</option>
-                    <option value="exclusive">Nur exklusive Bands (Einzigartig)</option>
-                    <option value="shared">Nur Überschneidungen (Duplicates)</option>
+                    <option value="exclusive">Nur exklusive Bands</option>
+                    <option value="shared">Nur Überschneidungen</option>
                 </select>
             </div>
 
             <div class="control-group">
                 <label>Vergleichen mit...</label>
                 <div id="compare-container" class="compare-list"></div>
-                <p style="font-size: 10px; color: #666; margin: 0;">* Wähle Festivals aus, um Exklusivität zu berechnen.</p>
             </div>
         </div>
-        <div id="festival-info-card">
-            <div class="info-content-wrapper">
-                <img id="info-poster" src="" alt="Festival Plakat">
 
-                <div class="info-text-side">
-                    <h2 id="info-name" style="margin: 0 0 10px 0; color: var(--metal-orange); text-transform: uppercase;"></h2>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; font-size: 14px;">
-                        <div><strong>Datum:</strong> <span id="info-date"></span></div>
-                        <div><strong>Ort:</strong> <span id="info-location"></span></div>
-                        <div><strong>Webseite:</strong> <a id="info-link" href="#" target="_blank" style="color: #3498db; text-decoration: none;">Offizielle Seite</a></div>
-                    </div>
-                    <p id="info-desc" style="margin: 15px 0 0 0; font-size: 13px; color: #bbb; font-style: italic;"></p>
-                </div>
-            </div>
-        </div>
         <main>
             <div id="genre-stats">
                 <label>Festival DNA (Top Genres)</label>
                 <div id="stats-grid" class="stats-grid"></div>
             </div>
 
-            <div id="stats">Initialisierung...</div>
+            <div id="stats" style="margin-bottom:15px; font-size:14px; color:#888; border-left:3px solid var(--metal-orange); padding-left:10px;">Initialisierung...</div>
 
             <table>
                 <thead>
@@ -385,6 +347,31 @@
             return festivalColors[festivalPath];
         }
 
+        // --- NEU: INFO UPDATE FUNKTION ---
+        function updateFestivalInfo(filePath) {
+            const fileName = filePath.split('/').pop();
+            const info = festivalMetadata[fileName];
+            const card = document.getElementById('festival-info-card');
+            const posterImg = document.getElementById('info-poster');
+
+            if (info) {
+                card.style.display = 'block';
+                document.getElementById('info-name').innerText = prettyName(fileName);
+                document.getElementById('info-date').innerText = info.date;
+                document.getElementById('info-location').innerText = info.location;
+                document.getElementById('info-link').href = info.website;
+                document.getElementById('info-desc').innerText = info.description;
+                if (info.poster) {
+                    posterImg.src = info.poster;
+                    posterImg.style.display = 'block';
+                } else {
+                    posterImg.style.display = 'none';
+                }
+            } else {
+                card.style.display = 'none';
+            }
+        }
+
         async function init() {
             try {
                 const res = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${DATA_FOLDER}`);
@@ -417,39 +404,14 @@
         }
 
         async function loadPrimaryData() {
-            const filePath = primarySelect.value; // Pfad zwischenspeichern
-            updateFestivalInfo(filePath); // <--- Diese Zeile unbedingt hinzufügen!
+            const filePath = primarySelect.value;
+            updateFestivalInfo(filePath); // RUFT DIE INFO-LOGIK AUF
 
             const res = await fetch(filePath);
             primaryBands = await res.json();
             renderTable();
         }
 
-        function updateFestivalInfo(filePath) {
-            const fileName = filePath.split('/').pop();
-            const info = festivalMetadata[fileName];
-            const card = document.getElementById('festival-info-card');
-            const posterImg = document.getElementById('info-poster');
-
-            if (info) {
-                card.style.display = 'block';
-                document.getElementById('info-name').innerText = prettyName(fileName);
-                document.getElementById('info-date').innerText = info.date;
-                document.getElementById('info-location').innerText = info.location;
-                document.getElementById('info-link').href = info.website;
-                document.getElementById('info-desc').innerText = info.description;
-
-                // Poster Logik
-                if (info.poster) {
-                    posterImg.src = info.poster;
-                    posterImg.style.display = 'block';
-                } else {
-                    posterImg.style.display = 'none'; // Verstecken, wenn kein Bild da ist
-                }
-            } else {
-                card.style.display = 'none';
-            }
-        }
         async function renderTable() {
             const searchTerm = searchInput.value.toLowerCase();
             const filterMode = displayFilter.value;
@@ -475,7 +437,7 @@
             tableBody.innerHTML = '';
             let displayedCount = 0;
             let overlapCount = 0;
-            let filteredBandsForStats = []; // Liste für die Statistik
+            let bandsForStats = [];
 
             primaryBands.forEach(band => {
                 const lowName = (band.name || "").toLowerCase().trim();
@@ -488,7 +450,7 @@
 
                 displayedCount++;
                 if (isShared) overlapCount++;
-                filteredBandsForStats.push(band); // Band zur Statistik-Liste hinzufügen
+                bandsForStats.push(band);
 
                 const row = document.createElement('tr');
                 if (isShared) row.classList.add('shared-band');
@@ -508,43 +470,28 @@
             });
 
             stats.innerText = `${displayedCount} Bands angezeigt (${overlapCount} Überschneidungen).`;
-
-            // Statistik aufrufen
-            updateGenreStats(filteredBandsForStats);
+            updateGenreStats(bandsForStats);
         }
 
         function updateGenreStats(displayedBands) {
             const statsGrid = document.getElementById('stats-grid');
-            if (displayedBands.length === 0) {
-                statsGrid.innerHTML = '<p style="font-size:12px; color:#666;">Keine Daten für Statistik.</p>';
-                return;
-            }
-
             const counts = {};
             displayedBands.forEach(band => {
                 const genre = band.genre || "Unknown";
                 counts[genre] = (counts[genre] || 0) + 1;
             });
 
-            const sortedGenres = Object.entries(counts)
-                .sort((a, b) => b[1] - a[1])
-                .slice(0, 8);
-
+            const sortedGenres = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 8);
             const total = displayedBands.length;
-            statsGrid.innerHTML = '';
+            statsGrid.innerHTML = total === 0 ? '<p style="font-size:12px; color:#666;">Keine Daten.</p>' : '';
 
             sortedGenres.forEach(([genre, count]) => {
                 const percentage = Math.round((count / total) * 100);
                 const statItem = document.createElement('div');
                 statItem.className = 'stat-item';
                 statItem.innerHTML = `
-                    <div class="stat-info">
-                        <span>${genre}</span>
-                        <span>${percentage}%</span>
-                    </div>
-                    <div class="stat-bar-bg">
-                        <div class="stat-bar-fill" style="width: ${percentage}%"></div>
-                    </div>
+                    <div class="stat-info"><span>${genre}</span><span>${percentage}%</span></div>
+                    <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: ${percentage}%"></div></div>
                 `;
                 statsGrid.innerHTML += statItem.outerHTML;
             });
