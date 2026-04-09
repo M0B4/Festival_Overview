@@ -30,18 +30,17 @@
             margin: 0;
             padding: 20px;
         }
-        /* HEADER & LOGO */
         
         header {
             background-color: var(--bg-black);
             border-bottom: 2px solid var(--wacken-red);
             padding: 30px 0;
             margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
+            overflow: hidden;
         }
         
         header::before {
@@ -60,7 +59,6 @@
         #header-logo {
             display: block;
             width: 280px;
-            /* Feste Breite gegen Verschwinden */
             height: auto;
             max-height: 120px;
             max-width: 90%;
@@ -78,7 +76,6 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-        /* MODAL (Lightbox) */
         
         .modal {
             display: none;
@@ -102,7 +99,6 @@
             transform: translateY(-50%);
             border: 2px solid var(--wacken-red);
         }
-        /* CARDS & COLLAPSIBLE */
         
         .collapsible-card {
             background: var(--card-bg);
@@ -120,10 +116,6 @@
             cursor: pointer;
             background: rgba(255, 255, 255, 0.02);
             user-select: none;
-        }
-        
-        .section-header:hover {
-            background: rgba(227, 6, 19, 0.1);
         }
         
         .section-header label {
@@ -153,7 +145,6 @@
             padding: 20px;
             border-top: 1px solid #222;
         }
-        /* FILTER CONTROLS */
         
         .controls-grid {
             display: grid;
@@ -218,7 +209,6 @@
         .compare-item:hover {
             background: var(--wacken-red);
         }
-        /* STATS & TABLE */
         
         .stats-grid {
             display: grid;
@@ -281,14 +271,6 @@
         
         .badge.metal-orange {
             background: var(--wacken-red);
-        }
-        
-        .badge.metal-red {
-            background: #800;
-        }
-        
-        .badge.metal-blue {
-            background: #444;
         }
         
         @media (max-width: 768px) {
@@ -413,6 +395,7 @@
             document.getElementById(id).classList.toggle('collapsed');
         }
 
+        // --- VERBESSERTE LOGIK FÜR THUMBNAILS ---
         function updateFestivalInfo(filePath) {
             const fileName = decodeURIComponent(filePath.split('/').pop());
             const info = (typeof festivalMetadata !== 'undefined') ? festivalMetadata[fileName] : null;
@@ -426,9 +409,14 @@
                 document.getElementById('info-price').innerText = info.price || 'k.A.';
                 document.getElementById('info-link').href = info.website || '#';
                 document.getElementById('info-desc').innerText = info.description || '';
+
                 const posterImg = document.getElementById('info-poster');
-                if (info.poster) {
-                    posterImg.src = info.poster;
+
+                // Nutze poster_thumb wenn da, sonst fallback auf poster
+                const thumbSrc = info.poster_thumb || info.poster;
+
+                if (thumbSrc) {
+                    posterImg.src = thumbSrc;
                     posterImg.style.display = 'block';
                 } else {
                     posterImg.style.display = 'none';
@@ -471,7 +459,6 @@
                     primarySelect.appendChild(opt);
                 });
 
-                // AUTOMATISCHE VORAUSWAHL DES LETZTEN FESTIVALS
                 if (primarySelect.options.length > 0) {
                     primarySelect.selectedIndex = primarySelect.options.length - 1;
                 }
@@ -579,9 +566,9 @@
             sortedGenres.forEach(([genre, count]) => {
                 const percentage = Math.round((count / total) * 100);
                 statsGrid.innerHTML += `
-                    <div class="stat-item">
-                        <div class="stat-info"><span>${genre}</span><span>${percentage} %</span></div>
-                        <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: ${percentage}%"></div></div>
+                    <div class=\"stat-item\">
+                        <div class=\"stat-info\"><span>${genre}</span><span>${percentage} %</span></div>
+                        <div class=\"stat-bar-bg\"><div class=\"stat-bar-fill\" style=\"width: ${percentage}%\"></div></div>
                     </div>`;
             });
         }
@@ -597,11 +584,21 @@
             const modal = document.getElementById('poster-modal');
             if (e.target == modal) modal.style.display = "none";
         }
+
+        // --- VERBESSERTE LIGHTBOX LOGIK FÜR HOCHAUFLÖSENDE POSTER ---
         document.getElementById('info-poster').onclick = function() {
             const modal = document.getElementById('poster-modal');
             const modalImg = document.getElementById('modal-img');
-            modal.style.display = "block";
-            modalImg.src = this.src;
+
+            const filePath = primarySelect.value;
+            const fileName = decodeURIComponent(filePath.split('/').pop());
+            const info = (typeof festivalMetadata !== 'undefined') ? festivalMetadata[fileName] : null;
+
+            // Wenn poster_full existiert, nutze das, sonst das normale poster
+            if (info && (info.poster_full || info.poster)) {
+                modal.style.display = "block";
+                modalImg.src = info.poster_full || info.poster;
+            }
         }
 
         init();
