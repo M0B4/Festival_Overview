@@ -1,5 +1,5 @@
 const festivalMetadata = {
-    "wacken.json": {
+    "wacken open air 2026.json": {
         "date": "29.07. – 01.08.2026",
         "location": "Wacken, Deutschland",
         "website": "https://www.wacken.com",
@@ -7,11 +7,11 @@ const festivalMetadata = {
         "price": "333€",
         "description": ""
     },
-    "hellfest.json": {
+    "hellfest 2026.json": {
         "date": "18.06. – 21.06.2026",
         "location": "Clisson, Frankreich",
         "website": "https://www.hellfest.fr",
-        "price": "333€",
+        "price": "329€",
         "poster": "posters/hellfest_2026.jpg", // Oder eine URL
         "description": ""
     }
