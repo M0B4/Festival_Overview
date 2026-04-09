@@ -4,7 +4,7 @@ const festivalMetadata = {
         "location": "Wacken, Deutschland",
         "website": "https://www.wacken.com",
         "poster_thumb": "posters/thumbs/wacken_small.webp",
-        "poster_full": "posters/wacken_2016.webp",
+        "poster_full": "posters/wacken_2026.webp",
         "price": "333€",
         "description": ""
     },
