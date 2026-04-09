@@ -67,7 +67,7 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-        /* Lightbox / Modal */
+        /* Modal / Lightbox */
         
         .modal {
             display: none;
@@ -92,16 +92,67 @@
             border: 2px solid var(--wacken-red);
             box-shadow: 0 0 30px rgba(0, 0, 0, 1);
         }
-        /* Festival Info Card */
+        /* Einklappbare Sektoren Styling */
+        
+        .collapsible-card {
+            background: var(--card-bg);
+            border: 1px solid #333;
+            border-top: 4px solid var(--wacken-red);
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .section-header {
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.02);
+            transition: background 0.2s;
+            user-select: none;
+        }
+        
+        .section-header:hover {
+            background: rgba(227, 6, 19, 0.1);
+        }
+        
+        .section-header label {
+            margin: 0;
+            cursor: pointer;
+            color: var(--wacken-red);
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+        
+        .toggle-icon {
+            font-family: monospace;
+            font-size: 18px;
+            color: #666;
+        }
+        
+        .section-content {
+            padding: 20px;
+            border-top: 1px solid #222;
+        }
+        /* Verstecken-Logik */
+        
+        .collapsed .section-content {
+            display: none;
+        }
+        
+        .collapsed .toggle-icon::before {
+            content: "[ + ]";
+        }
+        
+        .toggle-icon::before {
+            content: "[ - ]";
+        }
+        /* Info Card Spezifisch */
         
         #festival-info-card {
             display: none;
-            background: var(--card-bg);
-            padding: 25px;
-            border: 1px solid #333;
-            border-top: 4px solid var(--wacken-red);
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            /* Wird via JS eingeblendet */
         }
         
         .info-content-wrapper {
@@ -111,8 +162,7 @@
         }
         
         #info-poster {
-            max-width: 220px;
-            height: auto;
+            max-width: 200px;
             border: 1px solid #444;
             transition: transform 0.3s;
             cursor: zoom-in;
@@ -122,25 +172,20 @@
             transform: scale(1.05) rotate(1deg);
         }
         
-        .info-text-side {
-            flex: 1;
-        }
-        
         .info-text-side h2 {
-            color: var(--wacken-red);
+            color: #fff;
             text-transform: uppercase;
-            font-size: 28px;
-            margin-top: 0;
-            margin-bottom: 15px;
+            font-size: 24px;
+            margin: 0 0 15px 0;
         }
-        /* Controls */
+        /* Filter Controls */
         
         .controls-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 25px;
+            gap: 20px;
             background: #111;
-            padding: 25px;
+            padding: 20px;
             border: 1px solid #222;
             margin-bottom: 30px;
             background-image: linear-gradient(45deg, #111 25%, #151515 25%, #151515 50%, #111 50%, #111 75%, #151515 75%, #151515 100%);
@@ -166,7 +211,6 @@
             font-size: 14px;
             width: 100%;
             outline: none;
-            border-radius: 0;
         }
         
         input:focus,
@@ -177,7 +221,7 @@
         .compare-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
             padding: 10px;
             background: #000;
             border: 1px solid #333;
@@ -192,15 +236,14 @@
             background: #222;
             color: #fff;
             border: 1px solid #444;
-            padding: 6px 12px;
-            font-size: 12px;
+            padding: 5px 10px;
+            font-size: 11px;
             text-transform: uppercase;
             cursor: pointer;
         }
         
         .compare-item:hover {
             background: var(--wacken-red);
-            border-color: var(--wacken-red);
         }
         /* Table & Stats */
         
@@ -208,22 +251,13 @@
             background: var(--card-bg);
             padding: 25px;
             border: 1px solid #222;
-            overflow-x: auto;
-        }
-        
-        #genre-stats {
-            background: #0a0a0a;
-            padding: 20px;
-            border-radius: 4px;
-            margin-bottom: 25px;
-            border: 1px solid #222;
         }
         
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 15px;
-            margin-top: 15px;
+            margin-top: 5px;
         }
         
         .stat-info {
@@ -244,40 +278,34 @@
             background: var(--wacken-red);
             height: 100%;
             transition: width 0.6s ease;
-            box-shadow: 0 0 10px rgba(227, 6, 19, 0.4);
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 20px;
         }
         
         th,
         td {
             text-align: left;
-            padding: 15px;
+            padding: 12px;
             border-bottom: 1px solid #222;
         }
         
         th {
             color: var(--wacken-red);
             text-transform: uppercase;
-            font-size: 13px;
-            letter-spacing: 1px;
+            font-size: 12px;
             border-bottom: 2px solid var(--wacken-red);
-        }
-        
-        .flag-icon {
-            width: 24px;
-            filter: grayscale(0.2);
         }
         
         .badge {
             color: #fff;
-            padding: 3px 8px;
+            padding: 2px 6px;
             font-size: 10px;
             font-weight: bold;
-            margin-left: 8px;
+            margin-left: 5px;
             text-transform: uppercase;
         }
         
@@ -294,9 +322,6 @@
         }
         
         @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
             .controls-grid,
             .info-content-wrapper {
                 grid-template-columns: 1fr;
@@ -304,11 +329,6 @@
             }
             #info-poster {
                 max-width: 100%;
-            }
-            td,
-            th {
-                padding: 10px;
-                font-size: 13px;
             }
         }
     </style>
@@ -324,18 +344,24 @@
     </header>
 
     <div class="container">
-        <div id="festival-info-card">
-            <div class="info-content-wrapper">
-                <img id="info-poster" src="" alt="Poster">
-                <div class="info-text-side">
-                    <h2 id="info-name"></h2>
-                    <div style="display: flex; flex-direction: column; gap: 10px; font-size: 15px;">
-                        <div><strong style="color:var(--wacken-red)">DATUM:</strong> <span id="info-date"></span></div>
-                        <div><strong style="color:var(--wacken-red)">ORT:</strong> <span id="info-location"></span></div>
-                        <div><strong style="color:var(--wacken-red)">PREIS:</strong> <span id="info-price"></span></div>
-                        <div><strong style="color:var(--wacken-red)">WEB:</strong> <a id="info-link" href="#" target="_blank" style="color: #fff; text-decoration: underline;">OFFIZIELLE SEITE</a></div>
+        <div id="festival-info-card" class="collapsible-card">
+            <div class="section-header" onclick="toggleSection('festival-info-card')">
+                <label>FESTIVAL DETAILS</label>
+                <span class="toggle-icon"></span>
+            </div>
+            <div class="section-content">
+                <div class="info-content-wrapper">
+                    <img id="info-poster" src="" alt="Poster">
+                    <div class="info-text-side">
+                        <h2 id="info-name"></h2>
+                        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
+                            <div><strong style="color:var(--wacken-red)">DATUM:</strong> <span id="info-date"></span></div>
+                            <div><strong style="color:var(--wacken-red)">ORT:</strong> <span id="info-location"></span></div>
+                            <div><strong style="color:var(--wacken-red)">PREIS:</strong> <span id="info-price"></span></div>
+                            <div><strong style="color:var(--wacken-red)">WEB:</strong> <a id="info-link" href="#" target="_blank" style="color: #fff; text-decoration: underline;">WEBSEITE</a></div>
+                        </div>
+                        <p id="info-desc" style="margin-top: 15px; color: #aaa; font-style: italic; font-size: 13px;"></p>
                     </div>
-                    <p id="info-desc" style="margin-top: 20px; color: #aaa; line-height: 1.6; font-style: italic;"></p>
                 </div>
             </div>
         </div>
@@ -343,33 +369,38 @@
         <div class="controls-grid">
             <div class="control-group">
                 <label>Haupt-Festival & Suche</label>
-                <select id="primary-select"><option>Lade Festivals...</option></select>
-                <input type="text" id="search-input" placeholder="Band oder Genre tippen...">
-
-                <label style="margin-top:10px">Anzeige-Modus</label>
+                <select id="primary-select"><option>Lade Daten...</option></select>
+                <input type="text" id="search-input" placeholder="Band oder Genre suchen...">
+                <label style="margin-top:10px">Filter</label>
                 <select id="display-filter">
-                    <option value="all">Alle Bands anzeigen</option>
+                    <option value="all">Alle Bands</option>
                     <option value="exclusive">Nur exklusive Bands</option>
                     <option value="shared">Nur Überschneidungen</option>
                 </select>
             </div>
             <div class="control-group">
-                <label>Lineup-Vergleich (Zweitfestivals)</label>
+                <label>Vergleichen mit...</label>
                 <div id="compare-container" class="compare-list"></div>
             </div>
         </div>
 
         <main>
-            <div id="genre-stats">
-                <label>Lineup DNA (Top 10 Genres)</label>
-                <div id="stats-grid" class="stats-grid"></div>
+            <div id="genre-stats-card" class="collapsible-card">
+                <div class="section-header" onclick="toggleSection('genre-stats-card')">
+                    <label>LINEUP DNA (TOP 10 GENRES)</label>
+                    <span class="toggle-icon"></span>
+                </div>
+                <div class="section-content">
+                    <div id="stats-grid" class="stats-grid"></div>
+                </div>
             </div>
-            <div id="stats" style="margin-bottom:20px; font-size:14px; color:#888; border-left:4px solid var(--wacken-red); padding-left:15px;">Initialisierung...</div>
+
+            <div id="stats" style="margin-bottom:15px; font-size:13px; color:#888; border-left:3px solid var(--wacken-red); padding-left:10px;">Bereitschaft...</div>
 
             <table>
                 <thead>
                     <tr>
-                        <th style="width:50px"></th>
+                        <th style="width:40px"></th>
                         <th>Band</th>
                         <th>Genre</th>
                     </tr>
@@ -380,7 +411,6 @@
     </div>
 
     <script>
-        // Konfiguration
         const GITHUB_USER = 'm0b4';
         const GITHUB_REPO = 'Festival_Overview';
         const DATA_FOLDER = 'data';
@@ -398,7 +428,12 @@
         const colorPallet = ["metal-orange", "metal-red", "metal-blue"];
         let festivalColors = {};
 
-        // 1. Info Karte aktualisieren
+        // NEU: Einklapp-Funktion
+        function toggleSection(id) {
+            const el = document.getElementById(id);
+            el.classList.toggle('collapsed');
+        }
+
         function updateFestivalInfo(filePath) {
             const fileName = decodeURIComponent(filePath.split('/').pop());
             if (typeof festivalMetadata !== 'undefined' && festivalMetadata[fileName]) {
@@ -417,16 +452,13 @@
                 } else {
                     posterImg.style.display = 'none';
                 }
-            } else {
-                document.getElementById('festival-info-card').style.display = 'none';
             }
         }
 
-        // 2. Hilfsfunktionen
         function getFlagImg(countryName) {
             if (!countryName) return '🏴';
             const code = typeof countryCodes !== 'undefined' ? countryCodes[countryName.trim().toLowerCase()] : null;
-            return code ? `<img src="https://flagcdn.com/w40/${code}.png" class="flag-icon">` : '🏴';
+            return code ? `<img src="https://flagcdn.com/w40/${code}.png" style="width:20px; border-radius:1px;">` : '🏴';
         }
 
         function prettyName(filename) {
@@ -441,7 +473,6 @@
             return festivalColors[festivalPath];
         }
 
-        // 3. Daten laden
         async function init() {
             try {
                 const res = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${DATA_FOLDER}`);
@@ -457,7 +488,7 @@
                 updateCompareCheckboxes();
                 loadPrimaryData();
             } catch (e) {
-                stats.innerText = "Fehler: Verbindung zu GitHub fehlgeschlagen.";
+                stats.innerText = "GitHub-Ladefehler.";
             }
         }
 
@@ -481,7 +512,6 @@
             renderTable();
         }
 
-        // 4. Tabelle rendern
         async function renderTable() {
             const searchTerm = searchInput.value.toLowerCase();
             const filterMode = displayFilter.value;
@@ -531,20 +561,19 @@
                 row.innerHTML = `
                     <td>${getFlagImg(band.country)}</td>
                     <td><strong>${band.name}</strong>${badgesHtml}</td>
-                    <td style="color:#888; font-size:13px">${band.genre}</td>
+                    <td style="color:#666; font-size:12px">${band.genre}</td>
                 `;
                 tableBody.appendChild(row);
             });
 
-            stats.innerText = `${displayedCount} BANDS GEFUNDEN (${overlapCount} ÜBERSCHNEIDUNGEN).`;
+            stats.innerText = `${displayedCount} BANDS (${overlapCount} ÜBERSCHNEIDUNGEN).`;
             updateGenreStats(bandsForStats);
         }
 
-        // 5. Statistik
         function updateGenreStats(displayedBands) {
             const statsGrid = document.getElementById('stats-grid');
             if (!displayedBands || displayedBands.length === 0) {
-                statsGrid.innerHTML = '<p style="font-size:12px; color:#666;">KEINE DATEN VERFÜGBAR.</p>';
+                statsGrid.innerHTML = 'Keine Daten.';
                 return;
             }
             const counts = {};
@@ -566,7 +595,6 @@
             });
         }
 
-        // 6. Event Listener & Lightbox
         primarySelect.addEventListener('change', () => {
             updateCompareCheckboxes();
             loadPrimaryData();
@@ -585,7 +613,6 @@
             modalImg.src = this.src;
         }
 
-        // Start
         init();
     </script>
 </body>
