@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metal Festival Hub 2026</title>
+
     <script src="countries.js"></script>
     <script src="festivals.js"></script>
+
     <style>
          :root {
             --metal-orange: #f39c12;
@@ -40,10 +42,11 @@
             max-width: 1100px;
             margin: 0 auto;
         }
-        /* Festival Info Card Styling */
+        /* NEU: Festival Info Card Styling */
         
         #festival-info-card {
             display: none;
+            /* Wird erst eingeblendet, wenn Daten da sind */
             background: var(--card-bg);
             padding: 20px;
             border-radius: 8px;
@@ -69,45 +72,7 @@
         .info-text-side {
             flex: 1;
         }
-        /* Genre Statistik */
-        
-        #genre-stats {
-            background: #181818;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border: 1px solid #333;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 10px;
-            margin-top: 10px;
-        }
-        
-        .stat-item {
-            font-size: 12px;
-        }
-        
-        .stat-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 4px;
-        }
-        
-        .stat-bar-bg {
-            background: #333;
-            height: 6px;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        
-        .stat-bar-fill {
-            background: var(--metal-orange);
-            height: 100%;
-            transition: width 0.5s ease;
-        }
+        /* Controls & Filter */
         
         .controls-grid {
             display: grid;
@@ -166,12 +131,40 @@
             border: 1px solid #444;
             cursor: pointer;
         }
+        /* Tabelle & Statistik */
         
         main {
             background: var(--card-bg);
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        #genre-stats {
+            background: #181818;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .stat-bar-bg {
+            background: #333;
+            height: 6px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .stat-bar-fill {
+            background: var(--metal-orange);
+            height: 100%;
+            transition: width 0.5s ease;
         }
         
         table {
@@ -187,21 +180,14 @@
         }
         
         th {
-            background-color: #252525;
             color: var(--metal-orange);
             text-transform: uppercase;
             font-size: 13px;
-            position: sticky;
-            top: 0;
         }
         
         .flag-icon {
             width: 24px;
             border-radius: 2px;
-        }
-        
-        .shared-band {
-            background-color: rgba(46, 204, 113, 0.05);
         }
         
         .badge {
@@ -227,16 +213,6 @@
             color: white;
         }
         
-        .badge.metal-purple {
-            background: #9b59b6;
-            color: white;
-        }
-        
-        .badge.metal-grey {
-            background: #7f8c8d;
-            color: white;
-        }
-        
         @media (max-width: 600px) {
             .controls-grid,
             .info-content-wrapper {
@@ -257,13 +233,13 @@
 
         <div id="festival-info-card">
             <div class="info-content-wrapper">
-                <img id="info-poster" src="" alt="Festival Plakat">
+                <img id="info-poster" src="" alt="Poster">
                 <div class="info-text-side">
                     <h2 id="info-name" style="margin: 0 0 10px 0; color: var(--metal-orange); text-transform: uppercase;"></h2>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; font-size: 14px;">
                         <div><strong>Datum:</strong> <span id="info-date"></span></div>
                         <div><strong>Ort:</strong> <span id="info-location"></span></div>
-                        <div><strong>Web:</strong> <a id="info-link" href="#" target="_blank" style="color: #3498db; text-decoration: none;">Offizielle Seite</a></div>
+                        <div><strong>Web:</strong> <a id="info-link" href="#" target="_blank" style="color: #3498db; text-decoration: none;">Webseite</a></div>
                     </div>
                     <p id="info-desc" style="margin: 15px 0 0 0; font-size: 13px; color: #bbb; font-style: italic;"></p>
                 </div>
@@ -272,18 +248,15 @@
 
         <div class="controls-grid">
             <div class="control-group">
-                <label>Haupt-Festival & Suche</label>
+                <label>Haupt-Festival</label>
                 <select id="primary-select"><option>Lade...</option></select>
-                <input type="text" id="search-input" placeholder="Band oder Genre suchen...">
-
-                <label style="margin-top:5px;">Anzeige-Filter</label>
+                <input type="text" id="search-input" placeholder="Suchen...">
                 <select id="display-filter">
-                    <option value="all">Alle Bands anzeigen</option>
-                    <option value="exclusive">Nur exklusive Bands</option>
+                    <option value="all">Alle Bands</option>
+                    <option value="exclusive">Nur exklusive</option>
                     <option value="shared">Nur Überschneidungen</option>
                 </select>
             </div>
-
             <div class="control-group">
                 <label>Vergleichen mit...</label>
                 <div id="compare-container" class="compare-list"></div>
@@ -292,12 +265,10 @@
 
         <main>
             <div id="genre-stats">
-                <label>Festival DNA (Top Genres)</label>
+                <label>Festival DNA</label>
                 <div id="stats-grid" class="stats-grid"></div>
             </div>
-
-            <div id="stats" style="margin-bottom:15px; font-size:14px; color:#888; border-left:3px solid var(--metal-orange); padding-left:10px;">Initialisierung...</div>
-
+            <div id="stats" style="margin-bottom:15px; font-size:14px; color:#888;">Initialisierung...</div>
             <table>
                 <thead>
                     <tr>
@@ -312,6 +283,7 @@
     </div>
 
     <script>
+        // --- KONFIGURATION ---
         const GITHUB_USER = 'm0b4';
         const GITHUB_REPO = 'Festival_Overview';
         const DATA_FOLDER = 'data';
@@ -326,12 +298,36 @@
         let allFestivalFiles = [];
         let primaryBands = [];
         let cachedComparisons = {};
-        const colorPallet = ["metal-orange", "metal-red", "metal-blue", "metal-purple", "metal-grey"];
+        const colorPallet = ["metal-orange", "metal-red", "metal-blue", "metal-purple"];
         let festivalColors = {};
+
+        // INFO UPDATE LOGIK
+        function updateFestivalInfo(filePath) {
+            const fileName = filePath.split('/').pop();
+            // festivalMetadata kommt aus der festivals.js
+            if (typeof festivalMetadata !== 'undefined' && festivalMetadata[fileName]) {
+                const info = festivalMetadata[fileName];
+                document.getElementById('festival-info-card').style.display = 'block';
+                document.getElementById('info-name').innerText = prettyName(fileName);
+                document.getElementById('info-date').innerText = info.date || '-';
+                document.getElementById('info-location').innerText = info.location || '-';
+                document.getElementById('info-link').href = info.website || '#';
+                document.getElementById('info-desc').innerText = info.description || '';
+                const posterImg = document.getElementById('info-poster');
+                if (info.poster) {
+                    posterImg.src = info.poster;
+                    posterImg.style.display = 'block';
+                } else {
+                    posterImg.style.display = 'none';
+                }
+            } else {
+                document.getElementById('festival-info-card').style.display = 'none';
+            }
+        }
 
         function getFlagImg(countryName) {
             if (!countryName) return '🏴';
-            const code = countryCodes[countryName.trim().toLowerCase()];
+            const code = typeof countryCodes !== 'undefined' ? countryCodes[countryName.trim().toLowerCase()] : null;
             return code ? `<img src="https://flagcdn.com/w40/${code}.png" class="flag-icon">` : '🏴';
         }
 
@@ -345,31 +341,6 @@
                 festivalColors[festivalPath] = colorPallet[index % colorPallet.length];
             }
             return festivalColors[festivalPath];
-        }
-
-        // --- NEU: INFO UPDATE FUNKTION ---
-        function updateFestivalInfo(filePath) {
-            const fileName = filePath.split('/').pop();
-            const info = festivalMetadata[fileName];
-            const card = document.getElementById('festival-info-card');
-            const posterImg = document.getElementById('info-poster');
-
-            if (info) {
-                card.style.display = 'block';
-                document.getElementById('info-name').innerText = prettyName(fileName);
-                document.getElementById('info-date').innerText = info.date;
-                document.getElementById('info-location').innerText = info.location;
-                document.getElementById('info-link').href = info.website;
-                document.getElementById('info-desc').innerText = info.description;
-                if (info.poster) {
-                    posterImg.src = info.poster;
-                    posterImg.style.display = 'block';
-                } else {
-                    posterImg.style.display = 'none';
-                }
-            } else {
-                card.style.display = 'none';
-            }
         }
 
         async function init() {
@@ -387,7 +358,7 @@
                 updateCompareCheckboxes();
                 loadPrimaryData();
             } catch (e) {
-                stats.innerText = "Fehler beim Laden.";
+                stats.innerText = "Fehler beim Laden von GitHub.";
             }
         }
 
@@ -405,7 +376,8 @@
 
         async function loadPrimaryData() {
             const filePath = primarySelect.value;
-            updateFestivalInfo(filePath); // RUFT DIE INFO-LOGIK AUF
+            // AUFRUF DER INFOS
+            updateFestivalInfo(filePath);
 
             const res = await fetch(filePath);
             primaryBands = await res.json();
@@ -469,7 +441,7 @@
                 tableBody.appendChild(row);
             });
 
-            stats.innerText = `${displayedCount} Bands angezeigt (${overlapCount} Überschneidungen).`;
+            stats.innerText = `${displayedCount} Bands (${overlapCount} Treffer).`;
             updateGenreStats(bandsForStats);
         }
 
@@ -480,20 +452,12 @@
                 const genre = band.genre || "Unknown";
                 counts[genre] = (counts[genre] || 0) + 1;
             });
-
             const sortedGenres = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 8);
             const total = displayedBands.length;
-            statsGrid.innerHTML = total === 0 ? '<p style="font-size:12px; color:#666;">Keine Daten.</p>' : '';
-
+            statsGrid.innerHTML = total === 0 ? 'Keine Daten' : '';
             sortedGenres.forEach(([genre, count]) => {
                 const percentage = Math.round((count / total) * 100);
-                const statItem = document.createElement('div');
-                statItem.className = 'stat-item';
-                statItem.innerHTML = `
-                    <div class="stat-info"><span>${genre}</span><span>${percentage}%</span></div>
-                    <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: ${percentage}%"></div></div>
-                `;
-                statsGrid.innerHTML += statItem.outerHTML;
+                statsGrid.innerHTML += `<div class="stat-item"><div class="stat-info"><span>${genre}</span><span>${percentage}%</span></div><div class="stat-bar-bg"><div class="stat-bar-fill" style="width: ${percentage}%"></div></div></div>`;
             });
         }
 
