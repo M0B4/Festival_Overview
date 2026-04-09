@@ -23,7 +23,7 @@ const festivalMetadata = {
         "poster": "posters/graspop_metal_meeting_2026.jpg", // Oder eine URL
         "description": ""
     },
-    "metal_im_dorf.json": {
+    "metal_im_dorf_2026.json": {
         "date": "18.06. – 21.06.2026",
         "location": "Vogtei, Deutschland",
         "website": "https://www.fb.com/metalimdorf",
