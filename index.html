@@ -7,6 +7,38 @@
     <title>Metal Festival Hub 2026</title>
     <script src="countries.js"></script>
     <style>
+         :root {
+            --metal-orange: #f39c12;
+            --bg-dark: #121212;
+            --card-bg: #1e1e1e;
+        }
+        
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-dark);
+            color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        header {
+            border-bottom: 3px solid var(--metal-orange);
+            padding: 20px 0;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: var(--metal-orange);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
         /* Genre Statistik Styling */
         
         #genre-stats {
@@ -46,39 +78,6 @@
             height: 100%;
             border-radius: 3px;
             transition: width 0.5s ease;
-        }
-        
-         :root {
-            --metal-orange: #f39c12;
-            --bg-dark: #121212;
-            --card-bg: #1e1e1e;
-        }
-        
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: var(--bg-dark);
-            color: #e0e0e0;
-            margin: 0;
-            padding: 20px;
-        }
-        
-        header {
-            border-bottom: 3px solid var(--metal-orange);
-            padding: 20px 0;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        h1 {
-            color: var(--metal-orange);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin: 0;
-        }
-        
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
         }
         
         .controls-grid {
@@ -198,7 +197,6 @@
             font-weight: bold;
             white-space: nowrap;
         }
-        /* Badge Farben */
         
         .badge.metal-orange {
             background: #f39c12;
@@ -246,7 +244,6 @@
 </head>
 
 <body>
-
     <div class="container">
         <header>
             <h1>Festival Hub 2026</h1>
@@ -260,10 +257,10 @@
 
                 <label style="margin-top:5px;">Anzeige-Filter</label>
                 <select id="display-filter">
-                <option value="all">Alle Bands anzeigen</option>
-                <option value="exclusive">Nur exklusive Bands (Einzigartig)</option>
-                <option value="shared">Nur Überschneidungen (Duplicates)</option>
-            </select>
+                    <option value="all">Alle Bands anzeigen</option>
+                    <option value="exclusive">Nur exklusive Bands (Einzigartig)</option>
+                    <option value="shared">Nur Überschneidungen (Duplicates)</option>
+                </select>
             </div>
 
             <div class="control-group">
@@ -272,35 +269,32 @@
                 <p style="font-size: 10px; color: #666; margin: 0;">* Wähle Festivals aus, um Exklusivität zu berechnen.</p>
             </div>
         </div>
+
         <main>
             <div id="genre-stats">
                 <label>Festival DNA (Top Genres)</label>
-                <div id="stats-grid" class="stats-grid">
-                </div>
+                <div id="stats-grid" class="stats-grid"></div>
             </div>
 
             <div id="stats">Initialisierung...</div>
-            ...
-            <main>
-                <div id="stats">Initialisierung...</div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th style="width:40px"></th>
-                            <th>Band</th>
-                            <th>Genre</th>
-                        </tr>
-                    </thead>
-                    <tbody id="band-table-body"></tbody>
-                </table>
-            </main>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:40px"></th>
+                        <th>Band</th>
+                        <th>Genre</th>
+                    </tr>
+                </thead>
+                <tbody id="band-table-body"></tbody>
+            </table>
+        </main>
     </div>
 
     <script>
-        // --- KONFIGURATION (Bitte anpassen!) ---
-        const GITHUB_USER = 'm0b4'; // Ändern!
-        const GITHUB_REPO = 'Festival_Overview'; // Ändern!
-        const DATA_FOLDER = 'data'; // Ordnername, in dem die JSONs liegen
+        const GITHUB_USER = 'm0b4';
+        const GITHUB_REPO = 'Festival_Overview';
+        const DATA_FOLDER = 'data';
 
         const primarySelect = document.getElementById('primary-select');
         const compareContainer = document.getElementById('compare-container');
@@ -314,10 +308,6 @@
         let cachedComparisons = {};
         const colorPallet = ["metal-orange", "metal-red", "metal-blue", "metal-purple", "metal-grey"];
         let festivalColors = {};
-
-        // Vollständige Länderliste (hier gekürzt für Platz, nimm deine 190er Liste)
-
-
 
         function getFlagImg(countryName) {
             if (!countryName) return '🏴';
@@ -380,7 +370,6 @@
             const checkedCheckboxes = Array.from(compareContainer.querySelectorAll('input:checked'));
 
             let matchMap = {};
-
             for (let cb of checkedCheckboxes) {
                 const path = cb.value;
                 if (!cachedComparisons[path]) {
@@ -400,21 +389,20 @@
             tableBody.innerHTML = '';
             let displayedCount = 0;
             let overlapCount = 0;
+            let filteredBandsForStats = []; // Liste für die Statistik
 
             primaryBands.forEach(band => {
                 const lowName = (band.name || "").toLowerCase().trim();
                 const matches = matchMap[lowName] || [];
                 const isShared = matches.length > 0;
 
-                // --- FILTER LOGIK ---
                 if (filterMode === 'exclusive' && isShared) return;
                 if (filterMode === 'shared' && !isShared) return;
-
-                // Suche
                 if (!band.name.toLowerCase().includes(searchTerm) && !band.genre.toLowerCase().includes(searchTerm)) return;
 
                 displayedCount++;
                 if (isShared) overlapCount++;
+                filteredBandsForStats.push(band); // Band zur Statistik-Liste hinzufügen
 
                 const row = document.createElement('tr');
                 if (isShared) row.classList.add('shared-band');
@@ -426,54 +414,54 @@
                 badgesHtml += '</div>';
 
                 row.innerHTML = `
-                <td>${getFlagImg(band.country)}</td>
-                <td class="band-name">${band.name}${isShared ? badgesHtml : ''}</td>
-                <td>${band.genre}</td>
-            `;
+                    <td>${getFlagImg(band.country)}</td>
+                    <td class="band-name">${band.name}${isShared ? badgesHtml : ''}</td>
+                    <td>${band.genre}</td>
+                `;
                 tableBody.appendChild(row);
             });
 
             stats.innerText = `${displayedCount} Bands angezeigt (${overlapCount} Überschneidungen).`;
 
-            function updateGenreStats(displayedBands) {
-                const statsGrid = document.getElementById('stats-grid');
-                if (displayedBands.length === 0) {
-                    statsGrid.innerHTML = '<p style="font-size:12px; color:#666;">Keine Daten für Statistik.</p>';
-                    return;
-                }
+            // Statistik aufrufen
+            updateGenreStats(filteredBandsForStats);
+        }
 
-                // 1. Genres zählen
-                const counts = {};
-                displayedBands.forEach(band => {
-                    const genre = band.genre || "Unknown";
-                    counts[genre] = (counts[genre] || 0) + 1;
-                });
-
-                // 2. Sortieren (Häufigste zuerst) und Top 8 nehmen
-                const sortedGenres = Object.entries(counts)
-                    .sort((a, b) => b[1] - a[1])
-                    .slice(0, 8);
-
-                // 3. HTML generieren
-                const total = displayedBands.length;
-                statsGrid.innerHTML = '';
-
-                sortedGenres.forEach(([genre, count]) => {
-                    const percentage = Math.round((count / total) * 100);
-                    const statItem = document.createElement('div');
-                    statItem.className = 'stat-item';
-                    statItem.innerHTML = `
-            <div class="stat-info">
-                <span>${genre}</span>
-                <span>${percentage}%</span>
-            </div>
-            <div class="stat-bar-bg">
-                <div class="stat-bar-fill" style="width: ${percentage}%"></div>
-            </div>
-        `;
-                    statsGrid.innerHTML += statItem.outerHTML;
-                });
+        function updateGenreStats(displayedBands) {
+            const statsGrid = document.getElementById('stats-grid');
+            if (displayedBands.length === 0) {
+                statsGrid.innerHTML = '<p style="font-size:12px; color:#666;">Keine Daten für Statistik.</p>';
+                return;
             }
+
+            const counts = {};
+            displayedBands.forEach(band => {
+                const genre = band.genre || "Unknown";
+                counts[genre] = (counts[genre] || 0) + 1;
+            });
+
+            const sortedGenres = Object.entries(counts)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 8);
+
+            const total = displayedBands.length;
+            statsGrid.innerHTML = '';
+
+            sortedGenres.forEach(([genre, count]) => {
+                const percentage = Math.round((count / total) * 100);
+                const statItem = document.createElement('div');
+                statItem.className = 'stat-item';
+                statItem.innerHTML = `
+                    <div class="stat-info">
+                        <span>${genre}</span>
+                        <span>${percentage}%</span>
+                    </div>
+                    <div class="stat-bar-bg">
+                        <div class="stat-bar-fill" style="width: ${percentage}%"></div>
+                    </div>
+                `;
+                statsGrid.innerHTML += statItem.outerHTML;
+            });
         }
 
         primarySelect.addEventListener('change', () => {
