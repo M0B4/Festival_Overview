@@ -22,5 +22,13 @@ const festivalMetadata = {
         "price": "319€",
         "poster": "posters/graspop_metal_meeting_2026.jpg", // Oder eine URL
         "description": ""
+    },
+    "metal_im_dorf.json": {
+        "date": "18.06. – 21.06.2026",
+        "location": "Vogtei, Deutschland",
+        "website": "https://www.fb.com/metalimdorf",
+        "price": "20",
+        "poster": "posters/mid.jpg", // Oder eine URL
+        "description": ""
     }
 };
