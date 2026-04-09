@@ -10,6 +10,10 @@
     <script src="festivals.js"></script>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+        
          :root {
             --metal-orange: #f39c12;
             --bg-dark: #121212;
@@ -145,7 +149,11 @@
             border-radius: 4px;
             max-height: 150px;
             overflow-y: auto;
+            overflow-x: hidden;
+            /* Verhindert seitliches Ausbrechen */
             border: 1px solid #333;
+            width: 100%;
+            /* Zwingt die Box, im Container zu bleiben */
         }
         
         .compare-item {
@@ -240,13 +248,18 @@
             color: white;
         }
         
-        @media (max-width: 600px) {
-            .controls-grid,
+        @media (max-width: 768px) {
+            .controls-grid {
+                grid-template-columns: 1fr;
+                /* Eine Spalte auf kleinen Bildschirmen */
+            }
             .info-content-wrapper {
                 flex-direction: column;
+                align-items: center;
             }
             #info-poster {
                 max-width: 100%;
+                margin-bottom: 15px;
             }
         }
     </style>
