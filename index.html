@@ -516,12 +516,19 @@
                 const genre = band.genre || "Unknown";
                 counts[genre] = (counts[genre] || 0) + 1;
             });
-            const sortedGenres = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 8);
-            const total = displayedBands.length;
-            statsGrid.innerHTML = total === 0 ? 'Keine Daten' : '';
             sortedGenres.forEach(([genre, count]) => {
                 const percentage = Math.round((count / total) * 100);
-                statsGrid.innerHTML += `<div class="stat-item"><div class="stat-info"><span>${genre}</span><span>${percentage} %</span></div><div class="stat-bar-bg"><div class="stat-bar-fill" style="width: ${percentage} %"></div></div></div>`;
+                const statItem = document.createElement('div');
+                statItem.className = 'stat-item';
+                statItem.innerHTML = `
+        <div class="stat-info">
+            <span>${genre}</span>
+            <span>${percentage} %</span> </div>
+        <div class="stat-bar-bg">
+            <div class="stat-bar-fill" style="width: ${percentage}%"></div>
+        </div>
+    `;
+                statsGrid.innerHTML += statItem.outerHTML;
             });
         }
 
