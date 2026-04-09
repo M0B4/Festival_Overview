@@ -32,13 +32,26 @@
         }
         
         header {
-            background-color: var(--bg-black);
+            padding: 20px 0;
+            /* Etwas weniger Padding, da Bilder oft eigenen Raum einnehmen */
             border-bottom: 2px solid var(--wacken-red);
-            padding: 30px 0;
-            margin-bottom: 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+        }
+        /* Suche den Bereich, wo du das Logo-Styling hast oder füge es neu hinzu */
+        
+        #header-logo {
+            max-width: 90%;
+            height: auto;
+            max-height: 120px;
+            /* 1. Ein dezenter schwarzer Schatten für die Tiefe im Normalzustand */
+            filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.7));
+            /* 2. Der Übergang (macht das Aufleuchten sanft und nicht abgehakt) */
+            transition: filter 0.3s ease-in-out;
+        }
+        /* 3. Der eigentliche Glow-Effekt beim Hover */
+        
+        #header-logo:hover {
+            filter: drop-shadow(0 0 15px var(--wacken-red));
+            cursor: pointer;
         }
         
         header::before {
@@ -301,7 +314,9 @@
     </div>
 
     <header>
-        <h1>Mos Lineup Lab</h1>
+        <a href="index.html">
+            <img src="dein-logo.svg" alt="Mo's Lineup Lab" id="header-logo">
+        </a>
     </header>
 
     <div class="container">
