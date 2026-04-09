@@ -1,25 +1,5 @@
 [
     {
-        "name": "Bring Me The Horizon",
-        "country": "United Kingdom",
-        "genre": "Alternative Metal"
-    },
-    {
-        "name": "Sabaton",
-        "country": "Sweden",
-        "genre": "Power Metal"
-    },
-    {
-        "name": "The Offspring",
-        "country": "United States",
-        "genre": "Pop Punk"
-    },
-    {
-        "name": "Volbeat",
-        "country": "Denmark",
-        "genre": "Heavy Metal"
-    },
-    {
         "name": "A Day To Remember",
         "country": "United States",
         "genre": "Easycore"
@@ -102,6 +82,11 @@
     {
         "name": "Breaking Benjamin",
         "country": "United States",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Bring Me The Horizon",
+        "country": "United Kingdom",
         "genre": "Alternative Metal"
     },
     {
@@ -470,6 +455,11 @@
         "genre": "Technical Death Metal"
     },
     {
+        "name": "Sabaton",
+        "country": "Sweden",
+        "genre": "Power Metal"
+    },
+    {
         "name": "Scowl",
         "country": "United States",
         "genre": "Alternative Rock"
@@ -535,11 +525,6 @@
         "genre": "Post-Metal"
     },
     {
-        "name": "TX2",
-        "country": "United States",
-        "genre": "Alternative Metal"
-    },
-    {
         "name": "Terrorizer",
         "country": "United States",
         "genre": "Grindcore"
@@ -563,6 +548,11 @@
         "name": "The Gathering",
         "country": "Netherlands",
         "genre": "Alternative Rock"
+    },
+    {
+        "name": "The Offspring",
+        "country": "United States",
+        "genre": "Pop Punk"
     },
     {
         "name": "The Plot In You",
@@ -600,6 +590,11 @@
         "genre": "Melodic Metalcore"
     },
     {
+        "name": "TX2",
+        "country": "United States",
+        "genre": "Alternative Metal"
+    },
+    {
         "name": "Uada",
         "country": "United States",
         "genre": "Black Metal"
@@ -623,6 +618,11 @@
         "name": "Vltimas",
         "country": "World",
         "genre": "Blackened Death Metal"
+    },
+    {
+        "name": "Volbeat",
+        "country": "Denmark",
+        "genre": "Heavy Metal"
     },
     {
         "name": "Wargasm",
