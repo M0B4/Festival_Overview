@@ -10,7 +10,7 @@
     <script src="festivals.js"></script>
 
     <style>
-* {
+        * {
             box-sizing: border-box;
         }
         
@@ -30,6 +30,7 @@
             margin: 0;
             padding: 20px;
         }
+        /* HEADER & LOGO */
         
         header {
             background-color: var(--bg-black);
@@ -38,7 +39,6 @@
             margin-bottom: 30px;
             position: relative;
             overflow: hidden;
-            /* Zentrierung aktivieren */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -59,258 +59,250 @@
         
         #header-logo {
             display: block;
-            /* Festgelegte Größen, damit es nicht auf 0px kollabiert */
-            width: 250px;
+            width: 280px;
+            /* Feste Breite gegen Verschwinden */
             height: auto;
             max-height: 120px;
             max-width: 90%;
-            /* Falls dein Logo schwarz ist: Dieser Filter macht es hell/weiß */
-            /* Nimm die Zeile unten weg, wenn dein Logo farbig bleiben soll */
-            /* filter: invert(1) brightness(2); */
-            /* Schatten für die Sichtbarkeit auf der Stein-Textur */
             filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.8));
             transition: filter 0.3s ease-in-out;
+            position: relative;
+            z-index: 10;
         }
         
         #header-logo:hover {
             filter: drop-shadow(0 0 15px var(--wacken-red));
         }
-    }
-}
-h1 {
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    margin: 0;
-    font-weight: 900;
-    text-shadow: 2px 2px 4px rgba(0,
-    0,
-    0,
-    0.8);
-}
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Modal / Lightbox */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,
-    0,
-    0,
-    0.95);
-    cursor: zoom-out;
-}
-.modal-content {
-    margin: auto;
-    display: block;
-    max-width: 90%;
-    max-height: 90%;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    border: 2px solid var(--wacken-red);
-}
-
-/* Eigenständige Cards */
-.collapsible-card {
-    background: var(--card-bg);
-    border: 1px solid #333;
-    border-top: 4px solid var(--wacken-red);
-    margin-bottom: 25px;
-    box-shadow: 0 10px 30px rgba(0,
-    0,
-    0,
-    0.5);
-}
-.section-header {
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    background: rgba(255,
-    255,
-    255,
-    0.02);
-    user-select: none;
-}
-.section-header:hover {
-    background: rgba(227,
-    6,
-    19,
-    0.1);
-}
-.section-header label {
-    margin: 0;
-    cursor: pointer;
-    color: var(--wacken-red);
-    font-weight: 900;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-.toggle-icon::before {
-    content: "[ - ]";
-    font-family: monospace;
-    color: #666;
-}
-.collapsed .toggle-icon::before {
-    content: "[ + ]";
-}
-.collapsed .section-content {
-    display: none;
-}
-.section-content {
-    padding: 20px;
-    border-top: 1px solid #222;
-}
-
-/* Filter Controls */
-.controls-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    background: #111;
-    padding: 20px;
-    border: 1px solid #222;
-    margin-bottom: 30px;
-    background-image: linear-gradient(45deg,
-    #111 25%,
-    #151515 25%,
-    #151515 50%,
-    #111 50%,
-    #111 75%,
-    #151515 75%,
-    #151515 100%);
-    background-size: 4px 4px;
-}
-label {
-    font-size: 11px;
-    text-transform: uppercase;
-    color: #888;
-    margin-bottom: 8px;
-    display: block;
-    font-weight: bold;
-}
-input[type="text"],
-select {
-    background: #000;
-    color: #fff;
-    border: 1px solid #444;
-    padding: 12px;
-    font-size: 14px;
-    width: 100%;
-    outline: none;
-}
-input:focus,
-select:focus {
-    border-color: var(--wacken-red);
-}
-.compare-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 10px;
-    background: #000;
-    border: 1px solid #333;
-    max-height: 150px;
-    overflow-y: auto;
-}
-.compare-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: #222;
-    border: 1px solid #444;
-    padding: 5px 10px;
-    font-size: 11px;
-    text-transform: uppercase;
-    cursor: pointer;
-}
-.compare-item:hover {
-    background: var(--wacken-red);
-}
-
-/* Stats & Table */
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill,
-    minmax(200px, 1fr));
-    gap: 15px;
-}
-.stat-info {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
-    font-size: 12px;
-    text-transform: uppercase;
-}
-.stat-bar-bg {
-    background: #222;
-    height: 8px;
-    overflow: hidden;
-}
-.stat-bar-fill {
-    background: var(--wacken-red);
-    height: 100%;
-    transition: width 0.6s ease;
-}
-.table-wrapper {
-    width: 100%;
-    overflow-x: auto;
-}
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-th,
-td {
-    text-align: left;
-    padding: 12px;
-    border-bottom: 1px solid #222;
-}
-th {
-    color: var(--wacken-red);
-    text-transform: uppercase;
-    font-size: 12px;
-    border-bottom: 2px solid var(--wacken-red);
-}
-.badge {
-    color: #fff;
-    padding: 2px 6px;
-    font-size: 10px;
-    font-weight: bold;
-    margin-left: 5px;
-    text-transform: uppercase;
-}
-.badge.metal-orange {
-    background: var(--wacken-red);
-}
-.badge.metal-red {
-    background: #800;
-}
-.badge.metal-blue {
-    background: #444;
-}
-@media (max-width: 768px) {
-    .controls-grid {
-        grid-template-columns: 1fr;
-    }
-    .info-content-wrapper {
-        flex-direction: column;
-        align-items: center;
-    }
-    #info-poster {
-        max-width: 100%;
-    }
-}
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        /* MODAL (Lightbox) */
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            cursor: zoom-out;
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 2px solid var(--wacken-red);
+        }
+        /* CARDS & COLLAPSIBLE */
+        
+        .collapsible-card {
+            background: var(--card-bg);
+            border: 1px solid #333;
+            border-top: 4px solid var(--wacken-red);
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .section-header {
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.02);
+            user-select: none;
+        }
+        
+        .section-header:hover {
+            background: rgba(227, 6, 19, 0.1);
+        }
+        
+        .section-header label {
+            margin: 0;
+            cursor: pointer;
+            color: var(--wacken-red);
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .toggle-icon::before {
+            content: "[ - ]";
+            font-family: monospace;
+            color: #666;
+        }
+        
+        .collapsed .toggle-icon::before {
+            content: "[ + ]";
+        }
+        
+        .collapsed .section-content {
+            display: none;
+        }
+        
+        .section-content {
+            padding: 20px;
+            border-top: 1px solid #222;
+        }
+        /* FILTER CONTROLS */
+        
+        .controls-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            background: #111;
+            padding: 20px;
+            border: 1px solid #222;
+            margin-bottom: 30px;
+            background-image: linear-gradient(45deg, #111 25%, #151515 25%, #151515 50%, #111 50%, #111 75%, #151515 75%, #151515 100%);
+            background-size: 4px 4px;
+        }
+        
+        label {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #888;
+            margin-bottom: 8px;
+            display: block;
+            font-weight: bold;
+        }
+        
+        input[type="text"],
+        select {
+            background: #000;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 12px;
+            font-size: 14px;
+            width: 100%;
+            outline: none;
+        }
+        
+        input:focus,
+        select:focus {
+            border-color: var(--wacken-red);
+        }
+        
+        .compare-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 10px;
+            background: #000;
+            border: 1px solid #333;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        
+        .compare-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #222;
+            border: 1px solid #444;
+            padding: 5px 10px;
+            font-size: 11px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+        
+        .compare-item:hover {
+            background: var(--wacken-red);
+        }
+        /* STATS & TABLE */
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .stat-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        
+        .stat-bar-bg {
+            background: #222;
+            height: 8px;
+            overflow: hidden;
+        }
+        
+        .stat-bar-fill {
+            background: var(--wacken-red);
+            height: 100%;
+            transition: width 0.6s ease;
+        }
+        
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th,
+        td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #222;
+        }
+        
+        th {
+            color: var(--wacken-red);
+            text-transform: uppercase;
+            font-size: 12px;
+            border-bottom: 2px solid var(--wacken-red);
+        }
+        
+        .badge {
+            color: #fff;
+            padding: 2px 6px;
+            font-size: 10px;
+            font-weight: bold;
+            margin-left: 8px;
+            text-transform: uppercase;
+        }
+        
+        .badge.metal-orange {
+            background: var(--wacken-red);
+        }
+        
+        .badge.metal-red {
+            background: #800;
+        }
+        
+        .badge.metal-blue {
+            background: #444;
+        }
+        
+        @media (max-width: 768px) {
+            .controls-grid {
+                grid-template-columns: 1fr;
+            }
+            .info-content-wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+            #info-poster {
+                max-width: 100%;
+            }
+        }
     </style>
 </head>
 
@@ -322,7 +314,6 @@ th {
     <header>
         <a href="index.html">
             <img src="header.svg" alt="Mos Lineup Lab" id="header-logo">
-
         </a>
     </header>
 
@@ -334,7 +325,7 @@ th {
             </div>
             <div class="section-content">
                 <div class="info-content-wrapper" style="display: flex; gap: 30px;">
-                    <img id="info-poster" src="" alt="Poster" style="max-width: 200px; border: 1px solid #444; cursor: zoom-in;">
+                    <img id="info-poster" src="" alt="Poster" loading="lazy" style="max-width: 200px; border: 1px solid #444; cursor: zoom-in;">
                     <div class="info-text-side">
                         <h2 id="info-name" style="color: #fff; text-transform: uppercase; font-size: 24px; margin: 0 0 15px 0;"></h2>
                         <div style="display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
@@ -480,6 +471,7 @@ th {
                     primarySelect.appendChild(opt);
                 });
 
+                // AUTOMATISCHE VORAUSWAHL DES LETZTEN FESTIVALS
                 if (primarySelect.options.length > 0) {
                     primarySelect.selectedIndex = primarySelect.options.length - 1;
                 }
