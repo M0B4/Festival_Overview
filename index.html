@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mo's Lineup Lab</title>
+    <title>Mos Lineup Lab</title>
 
     <script src="countries.js"></script>
     <script src="festivals.js"></script>
@@ -15,37 +15,59 @@
         }
         
          :root {
-            --metal-orange: #f39c12;
-            --bg-dark: #121212;
-            --card-bg: #1e1e1e;
+            --wacken-red: #e30613;
+            --bg-black: #0a0a0a;
+            --card-bg: #151515;
+            --stone-texture: url('https://www.transparenttextures.com/patterns/dark-matter.png');
+            --halftone: radial-gradient(circle, #333 1px, transparent 1px);
         }
         
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: var(--bg-dark);
-            color: #e0e0e0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--bg-black);
+            background-image: var(--stone-texture);
+            color: #efefef;
             margin: 0;
             padding: 20px;
         }
         
         header {
-            border-bottom: 3px solid var(--metal-orange);
-            padding: 20px 0;
-            margin-bottom: 20px;
+            background-color: var(--bg-black);
+            border-bottom: 2px solid var(--wacken-red);
+            padding: 30px 0;
+            margin-bottom: 30px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: var(--halftone);
+            background-size: 10px 10px;
+            opacity: 0.1;
+            pointer-events: none;
         }
         
         h1 {
-            color: var(--metal-orange);
+            color: #fff;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
             margin: 0;
+            font-weight: 900;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
         
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
         }
+        /* Lightbox / Modal */
         
         .modal {
             display: none;
@@ -55,7 +77,7 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.95);
             cursor: zoom-out;
         }
         
@@ -67,76 +89,89 @@
             position: relative;
             top: 50%;
             transform: translateY(-50%);
-            border: 2px solid var(--metal-orange);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 1);
+            border: 2px solid var(--wacken-red);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 1);
         }
-        
-        #info-poster {
-            max-width: 180px;
-            height: auto;
-            border-radius: 4px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            border: 1px solid #444;
-            cursor: zoom-in;
-            transition: transform 0.2s;
-        }
-        
-        #info-poster:hover {
-            transform: scale(1.02);
-        }
+        /* Festival Info Card */
         
         #festival-info-card {
             display: none;
             background: var(--card-bg);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
+            padding: 25px;
             border: 1px solid #333;
-            border-left: 5px solid var(--metal-orange);
+            border-top: 4px solid var(--wacken-red);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
         
         .info-content-wrapper {
             display: flex;
-            gap: 20px;
+            gap: 30px;
             align-items: flex-start;
+        }
+        
+        #info-poster {
+            max-width: 220px;
+            height: auto;
+            border: 1px solid #444;
+            transition: transform 0.3s;
+            cursor: zoom-in;
+        }
+        
+        #info-poster:hover {
+            transform: scale(1.05) rotate(1deg);
         }
         
         .info-text-side {
             flex: 1;
         }
         
+        .info-text-side h2 {
+            color: var(--wacken-red);
+            text-transform: uppercase;
+            font-size: 28px;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        /* Controls */
+        
         .controls-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border: 1px solid #333;
-        }
-        
-        .control-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            gap: 25px;
+            background: #111;
+            padding: 25px;
+            border: 1px solid #222;
+            margin-bottom: 30px;
+            background-image: linear-gradient(45deg, #111 25%, #151515 25%, #151515 50%, #111 50%, #111 75%, #151515 75%, #151515 100%);
+            background-size: 4px 4px;
         }
         
         label {
             font-size: 11px;
             text-transform: uppercase;
-            color: var(--metal-orange);
+            color: #888;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: block;
             font-weight: bold;
         }
         
         input[type="text"],
         select {
-            background: #252525;
-            color: white;
+            background: #000;
+            color: #fff;
             border: 1px solid #444;
             padding: 12px;
-            border-radius: 4px;
-            font-size: 15px;
+            font-size: 14px;
+            width: 100%;
+            outline: none;
+            border-radius: 0;
+        }
+        
+        input:focus,
+        select:focus {
+            border-color: var(--wacken-red);
         }
         
         .compare-list {
@@ -144,129 +179,136 @@
             flex-wrap: wrap;
             gap: 10px;
             padding: 10px;
-            background: #181818;
-            border-radius: 4px;
+            background: #000;
+            border: 1px solid #333;
             max-height: 150px;
             overflow-y: auto;
-            overflow-x: hidden;
-            border: 1px solid #333;
-            width: 100%;
         }
         
         .compare-item {
             display: flex;
             align-items: center;
-            gap: 5px;
-            font-size: 12px;
-            background: #252525;
-            padding: 5px 10px;
-            border-radius: 20px;
+            gap: 8px;
+            background: #222;
+            color: #fff;
             border: 1px solid #444;
+            padding: 6px 12px;
+            font-size: 12px;
+            text-transform: uppercase;
             cursor: pointer;
         }
         
+        .compare-item:hover {
+            background: var(--wacken-red);
+            border-color: var(--wacken-red);
+        }
+        /* Table & Stats */
+        
         main {
             background: var(--card-bg);
-            padding: 20px;
-            border-radius: 8px;
-            width: 100%;
+            padding: 25px;
+            border: 1px solid #222;
             overflow-x: auto;
         }
         
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 0;
-        }
-        
         #genre-stats {
-            background: #181818;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border: 1px solid #333;
+            background: #0a0a0a;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            border: 1px solid #222;
         }
         
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 10px;
-            margin-top: 10px;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .stat-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 12px;
+            text-transform: uppercase;
         }
         
         .stat-bar-bg {
-            background: #333;
-            height: 6px;
-            border-radius: 3px;
+            background: #222;
+            height: 8px;
             overflow: hidden;
         }
         
         .stat-bar-fill {
-            background: var(--metal-orange);
+            background: var(--wacken-red);
             height: 100%;
-            transition: width 0.5s ease;
+            transition: width 0.6s ease;
+            box-shadow: 0 0 10px rgba(227, 6, 19, 0.4);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
         
         th,
         td {
             text-align: left;
-            padding: 12px;
-            border-bottom: 1px solid #333;
+            padding: 15px;
+            border-bottom: 1px solid #222;
         }
         
         th {
-            color: var(--metal-orange);
+            color: var(--wacken-red);
             text-transform: uppercase;
             font-size: 13px;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--wacken-red);
         }
         
         .flag-icon {
             width: 24px;
-            border-radius: 2px;
+            filter: grayscale(0.2);
         }
         
         .badge {
-            color: #000;
-            padding: 2px 6px;
-            border-radius: 3px;
+            color: #fff;
+            padding: 3px 8px;
             font-size: 10px;
             font-weight: bold;
-            margin-left: 5px;
+            margin-left: 8px;
+            text-transform: uppercase;
         }
         
         .badge.metal-orange {
-            background: #f39c12;
+            background: var(--wacken-red);
         }
         
         .badge.metal-red {
-            background: #e74c3c;
-            color: white;
+            background: #800;
         }
         
         .badge.metal-blue {
-            background: #3498db;
-            color: white;
+            background: #444;
         }
         
         @media (max-width: 768px) {
             body {
                 padding: 10px;
             }
-            .controls-grid {
-                grid-template-columns: 1fr;
-            }
+            .controls-grid,
             .info-content-wrapper {
+                grid-template-columns: 1fr;
                 flex-direction: column;
-                align-items: center;
             }
             #info-poster {
                 max-width: 100%;
-                margin-bottom: 15px;
             }
             td,
             th {
-                padding: 8px;
-                font-size: 14px;
+                padding: 10px;
+                font-size: 13px;
             }
         }
     </style>
@@ -277,54 +319,57 @@
         <img class="modal-content" id="modal-img">
     </div>
 
-    <div class="container">
-        <header>
-            <h1>Mo's Lineup Lab</h1>
-        </header>
+    <header>
+        <h1>Mos Lineup Lab</h1>
+    </header>
 
+    <div class="container">
         <div id="festival-info-card">
             <div class="info-content-wrapper">
                 <img id="info-poster" src="" alt="Poster">
                 <div class="info-text-side">
-                    <h2 id="info-name" style="margin: 0 0 10px 0; color: var(--metal-orange); text-transform: uppercase;"></h2>
-                    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
-                        <div><strong>Datum:</strong> <span id="info-date"></span></div>
-                        <div><strong>Ort:</strong> <span id="info-location"></span></div>
-                        <div><strong>Preis:</strong> <span id="info-price"></span></div>
-                        <div><strong>Web:</strong> <a id="info-link" href="#" target="_blank" style="color: #3498db; text-decoration: none;">Webseite</a></div>
+                    <h2 id="info-name"></h2>
+                    <div style="display: flex; flex-direction: column; gap: 10px; font-size: 15px;">
+                        <div><strong style="color:var(--wacken-red)">DATUM:</strong> <span id="info-date"></span></div>
+                        <div><strong style="color:var(--wacken-red)">ORT:</strong> <span id="info-location"></span></div>
+                        <div><strong style="color:var(--wacken-red)">PREIS:</strong> <span id="info-price"></span></div>
+                        <div><strong style="color:var(--wacken-red)">WEB:</strong> <a id="info-link" href="#" target="_blank" style="color: #fff; text-decoration: underline;">OFFIZIELLE SEITE</a></div>
                     </div>
-                    <p id="info-desc" style="margin: 15px 0 0 0; font-size: 13px; color: #bbb; font-style: italic;"></p>
+                    <p id="info-desc" style="margin-top: 20px; color: #aaa; line-height: 1.6; font-style: italic;"></p>
                 </div>
             </div>
         </div>
 
         <div class="controls-grid">
             <div class="control-group">
-                <label>Haupt-Festival</label>
-                <select id="primary-select"><option>Lade...</option></select>
-                <input type="text" id="search-input" placeholder="Suchen...">
+                <label>Haupt-Festival & Suche</label>
+                <select id="primary-select"><option>Lade Festivals...</option></select>
+                <input type="text" id="search-input" placeholder="Band oder Genre tippen...">
+
+                <label style="margin-top:10px">Anzeige-Modus</label>
                 <select id="display-filter">
-                    <option value="all">Alle Bands</option>
-                    <option value="exclusive">Nur exklusive</option>
+                    <option value="all">Alle Bands anzeigen</option>
+                    <option value="exclusive">Nur exklusive Bands</option>
                     <option value="shared">Nur Überschneidungen</option>
                 </select>
             </div>
             <div class="control-group">
-                <label>Vergleichen mit...</label>
+                <label>Lineup-Vergleich (Zweitfestivals)</label>
                 <div id="compare-container" class="compare-list"></div>
             </div>
         </div>
 
         <main>
             <div id="genre-stats">
-                <label>Top 10 Genre</label>
+                <label>Lineup DNA (Top 10 Genres)</label>
                 <div id="stats-grid" class="stats-grid"></div>
             </div>
-            <div id="stats" style="margin-bottom:15px; font-size:14px; color:#888;">Initialisierung...</div>
+            <div id="stats" style="margin-bottom:20px; font-size:14px; color:#888; border-left:4px solid var(--wacken-red); padding-left:15px;">Initialisierung...</div>
+
             <table>
                 <thead>
                     <tr>
-                        <th style="width:40px"></th>
+                        <th style="width:50px"></th>
                         <th>Band</th>
                         <th>Genre</th>
                     </tr>
@@ -335,6 +380,7 @@
     </div>
 
     <script>
+        // Konfiguration
         const GITHUB_USER = 'm0b4';
         const GITHUB_REPO = 'Festival_Overview';
         const DATA_FOLDER = 'data';
@@ -349,11 +395,12 @@
         let allFestivalFiles = [];
         let primaryBands = [];
         let cachedComparisons = {};
-        const colorPallet = ["metal-orange", "metal-red", "metal-blue", "metal-purple"];
+        const colorPallet = ["metal-orange", "metal-red", "metal-blue"];
         let festivalColors = {};
 
+        // 1. Info Karte aktualisieren
         function updateFestivalInfo(filePath) {
-            const fileName = filePath.split('/').pop();
+            const fileName = decodeURIComponent(filePath.split('/').pop());
             if (typeof festivalMetadata !== 'undefined' && festivalMetadata[fileName]) {
                 const info = festivalMetadata[fileName];
                 document.getElementById('festival-info-card').style.display = 'block';
@@ -375,6 +422,7 @@
             }
         }
 
+        // 2. Hilfsfunktionen
         function getFlagImg(countryName) {
             if (!countryName) return '🏴';
             const code = typeof countryCodes !== 'undefined' ? countryCodes[countryName.trim().toLowerCase()] : null;
@@ -393,6 +441,7 @@
             return festivalColors[festivalPath];
         }
 
+        // 3. Daten laden
         async function init() {
             try {
                 const res = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${DATA_FOLDER}`);
@@ -408,7 +457,7 @@
                 updateCompareCheckboxes();
                 loadPrimaryData();
             } catch (e) {
-                stats.innerText = "Fehler beim Laden von GitHub.";
+                stats.innerText = "Fehler: Verbindung zu GitHub fehlgeschlagen.";
             }
         }
 
@@ -432,6 +481,7 @@
             renderTable();
         }
 
+        // 4. Tabelle rendern
         async function renderTable() {
             const searchTerm = searchInput.value.toLowerCase();
             const filterMode = displayFilter.value;
@@ -473,65 +523,50 @@
                 bandsForStats.push(band);
 
                 const row = document.createElement('tr');
-                if (isShared) row.classList.add('shared-band');
-
-                let badgesHtml = '<div class="badge-container">';
+                let badgesHtml = '';
                 matches.forEach(m => {
                     badgesHtml += `<span class="badge ${m.color}">${m.name}</span>`;
                 });
-                badgesHtml += '</div>';
 
                 row.innerHTML = `
                     <td>${getFlagImg(band.country)}</td>
-                    <td class="band-name">${band.name}${isShared ? badgesHtml : ''}</td>
-                    <td>${band.genre}</td>
+                    <td><strong>${band.name}</strong>${badgesHtml}</td>
+                    <td style="color:#888; font-size:13px">${band.genre}</td>
                 `;
                 tableBody.appendChild(row);
             });
 
-            stats.innerText = `${displayedCount} Bands (${overlapCount} Treffer).`;
+            stats.innerText = `${displayedCount} BANDS GEFUNDEN (${overlapCount} ÜBERSCHNEIDUNGEN).`;
             updateGenreStats(bandsForStats);
         }
 
+        // 5. Statistik
         function updateGenreStats(displayedBands) {
             const statsGrid = document.getElementById('stats-grid');
-
             if (!displayedBands || displayedBands.length === 0) {
-                statsGrid.innerHTML = '<p style="font-size:12px; color:#666;">Keine Daten für Statistik.</p>';
+                statsGrid.innerHTML = '<p style="font-size:12px; color:#666;">KEINE DATEN VERFÜGBAR.</p>';
                 return;
             }
-
             const counts = {};
             displayedBands.forEach(band => {
                 const genre = band.genre || "Unknown";
                 counts[genre] = (counts[genre] || 0) + 1;
             });
-
             const total = displayedBands.length;
-            const sortedGenres = Object.entries(counts)
-                .sort((a, b) => b[1] - a[1])
-                .slice(0, 10);
+            const sortedGenres = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10);
 
             statsGrid.innerHTML = '';
-
             sortedGenres.forEach(([genre, count]) => {
                 const percentage = Math.round((count / total) * 100);
-                const statItem = document.createElement('div');
-                statItem.className = 'stat-item';
-                statItem.innerHTML = `
-                    <div class="stat-info" style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-                        <span>${genre}</span>
-                        <span>${percentage} %</span>
-                    </div>
-                    <div class="stat-bar-bg">
-                        <div class="stat-bar-fill" style="width: ${percentage}%"></div>
-                    </div>
-                `;
-                statsGrid.innerHTML += statItem.outerHTML;
+                statsGrid.innerHTML += `
+                    <div class="stat-item">
+                        <div class="stat-info"><span>${genre}</span><span>${percentage} %</span></div>
+                        <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: ${percentage}%"></div></div>
+                    </div>`;
             });
         }
 
-        // Event-Listener
+        // 6. Event Listener & Lightbox
         primarySelect.addEventListener('change', () => {
             updateCompareCheckboxes();
             loadPrimaryData();
@@ -539,21 +574,15 @@
         searchInput.addEventListener('input', renderTable);
         displayFilter.addEventListener('change', renderTable);
 
-        // Lightbox Logik
-        window.onclick = function(event) {
+        window.onclick = function(e) {
             const modal = document.getElementById('poster-modal');
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
+            if (e.target == modal) modal.style.display = "none";
         }
-
         document.getElementById('info-poster').onclick = function() {
             const modal = document.getElementById('poster-modal');
             const modalImg = document.getElementById('modal-img');
-            if (this.src && this.src !== window.location.href) {
-                modal.style.display = "block";
-                modalImg.src = this.src;
-            }
+            modal.style.display = "block";
+            modalImg.src = this.src;
         }
 
         // Start
