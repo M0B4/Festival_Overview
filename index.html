@@ -172,6 +172,17 @@
             background: var(--card-bg);
             padding: 20px;
             border-radius: 8px;
+            width: 100%;
+            /* Sicherstellen, dass main nicht breiter als die Container ist */
+            overflow-x: auto;
+            /* Erlaubt horizontales Scrollen innerhalb der Tabelle, falls nötig */
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0;
+            /* Verhindert ungewollte Außenabstände */
         }
         
         #genre-stats {
@@ -249,9 +260,13 @@
         }
         
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                /* Weniger Abstand am Rand auf kleinen Bildschirmen */
+            }
             .controls-grid {
                 grid-template-columns: 1fr;
-                /* Eine Spalte auf kleinen Bildschirmen */
+                /* Spalten untereinander statt nebeneinander */
             }
             .info-content-wrapper {
                 flex-direction: column;
@@ -260,6 +275,12 @@
             #info-poster {
                 max-width: 100%;
                 margin-bottom: 15px;
+            }
+            td,
+            th {
+                padding: 8px;
+                /* Etwas weniger Padding in der Tabelle für mehr Platz */
+                font-size: 14px;
             }
         }
     </style>
