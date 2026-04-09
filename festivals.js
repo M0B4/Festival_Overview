@@ -1,5 +1,5 @@
 const festivalMetadata = {
-    "wacken_open_air_ 2026.json": {
+    "wacken_open_air_2026.json": {
         "date": "29.07. – 01.08.2026",
         "location": "Wacken, Deutschland",
         "website": "https://www.wacken.com",
