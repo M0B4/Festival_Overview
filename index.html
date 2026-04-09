@@ -428,16 +428,27 @@
         }
 
         function updateFestivalInfo(filePath) {
+            // 1. Dateinamen aus dem Pfad extrahieren
             const fileName = decodeURIComponent(filePath.split('/').pop());
-            if (typeof festivalMetadata !== 'undefined' && festivalMetadata[fileName]) {
-                const info = festivalMetadata[fileName];
-                document.getElementById('festival-info-card').style.display = 'block';
+
+            // Debugging: Schau in die Browser-Konsole (F12), ob der Name stimmt
+            console.log("Suche Infos für:", fileName);
+
+            const info = (typeof festivalMetadata !== 'undefined') ? festivalMetadata[fileName] : null;
+            const infoCard = document.getElementById('festival-info-card');
+
+            if (info) {
+                // Karte sichtbar machen
+                infoCard.style.display = 'block';
+
+                // Inhalte füllen
                 document.getElementById('info-name').innerText = prettyName(fileName);
                 document.getElementById('info-date').innerText = info.date || '-';
-                document.getElementById('info-price').innerText = info.price || 'k.A.';
                 document.getElementById('info-location').innerText = info.location || '-';
+                document.getElementById('info-price').innerText = info.price || 'k.A.';
                 document.getElementById('info-link').href = info.website || '#';
                 document.getElementById('info-desc').innerText = info.description || '';
+
                 const posterImg = document.getElementById('info-poster');
                 if (info.poster) {
                     posterImg.src = info.poster;
@@ -445,6 +456,13 @@
                 } else {
                     posterImg.style.display = 'none';
                 }
+
+                // Sicherstellen, dass die Sektion nicht eingeklappt ist, wenn neue Infos kommen
+                infoCard.classList.remove('collapsed');
+            } else {
+                // Wenn keine Infos gefunden wurden, Karte verstecken
+                console.warn("Keine Metadaten für " + fileName + " gefunden.");
+                infoCard.style.display = 'none';
             }
         }
 
