@@ -43,6 +43,43 @@
             margin: 0 auto;
         }
         /* NEU: Festival Info Card Styling */
+        /* Styling für das vergrößerte Poster (Lightbox) */
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            /* Ganz oben über allem */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            /* Dunkler Hintergrund */
+            cursor: zoom-out;
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 2px solid var(--metal-orange);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 1);
+        }
+        /* Mauszeiger auf dem kleinen Poster ändern */
+        
+        #info-poster {
+            cursor: zoom-in;
+            transition: transform 0.2s;
+        }
+        
+        #info-poster:hover {
+            transform: scale(1.02);
+        }
         
         #festival-info-card {
             display: none;
@@ -469,8 +506,28 @@
         });
         searchInput.addEventListener('input', renderTable);
         displayFilter.addEventListener('change', renderTable);
+        // Lightbox Logik
+        const modal = document.getElementById('poster-modal');
+        const modalImg = document.getElementById('modal-img');
+        const posterImg = document.getElementById('info-poster');
+
+        // Wenn man auf das kleine Poster klickt
+        posterImg.onclick = function() {
+            if (this.src && this.src !== window.location.href) {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+            }
+        }
+
+        // Wenn man irgendwo auf das dunkle Overlay klickt, schließt es sich
+        modal.onclick = function() {
+            modal.style.display = "none";
+        }
         init();
     </script>
+    <div id="poster-modal" class="modal">
+        <img class="modal-content" id="modal-img">
+    </div>
 </body>
 
 </html>
