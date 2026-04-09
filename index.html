@@ -234,6 +234,49 @@
             border-left: 3px solid var(--metal-orange);
             padding-left: 10px;
         }
+        /* Update für die Festival Info Card */
+        
+        #festival-info-card {
+            display: none;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+            border-left: 5px solid var(--metal-orange);
+        }
+        
+        .info-content-wrapper {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        
+        #info-poster {
+            max-width: 200px;
+            /* Breite des Plakats */
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            border: 1px solid #444;
+        }
+        
+        .info-text-side {
+            flex: 1;
+            /* Nimmt den restlichen Platz ein */
+        }
+        
+        @media (max-width: 600px) {
+            .info-content-wrapper {
+                flex-direction: column;
+                /* Auf Handys Bild über Text */
+                align-items: center;
+            }
+            #info-poster {
+                max-width: 100%;
+                margin-bottom: 15px;
+            }
+        }
         
         @media (max-width: 768px) {
             .controls-grid {
@@ -269,7 +312,21 @@
                 <p style="font-size: 10px; color: #666; margin: 0;">* Wähle Festivals aus, um Exklusivität zu berechnen.</p>
             </div>
         </div>
+        <div id="festival-info-card">
+            <div class="info-content-wrapper">
+                <img id="info-poster" src="" alt="Festival Plakat">
 
+                <div class="info-text-side">
+                    <h2 id="info-name" style="margin: 0 0 10px 0; color: var(--metal-orange); text-transform: uppercase;"></h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; font-size: 14px;">
+                        <div><strong>Datum:</strong> <span id="info-date"></span></div>
+                        <div><strong>Ort:</strong> <span id="info-location"></span></div>
+                        <div><strong>Webseite:</strong> <a id="info-link" href="#" target="_blank" style="color: #3498db; text-decoration: none;">Offizielle Seite</a></div>
+                    </div>
+                    <p id="info-desc" style="margin: 15px 0 0 0; font-size: 13px; color: #bbb; font-style: italic;"></p>
+                </div>
+            </div>
+        </div>
         <main>
             <div id="genre-stats">
                 <label>Festival DNA (Top Genres)</label>
@@ -364,6 +421,31 @@
             renderTable();
         }
 
+        function updateFestivalInfo(filePath) {
+            const fileName = filePath.split('/').pop();
+            const info = festivalMetadata[fileName];
+            const card = document.getElementById('festival-info-card');
+            const posterImg = document.getElementById('info-poster');
+
+            if (info) {
+                card.style.display = 'block';
+                document.getElementById('info-name').innerText = prettyName(fileName);
+                document.getElementById('info-date').innerText = info.date;
+                document.getElementById('info-location').innerText = info.location;
+                document.getElementById('info-link').href = info.website;
+                document.getElementById('info-desc').innerText = info.description;
+
+                // Poster Logik
+                if (info.poster) {
+                    posterImg.src = info.poster;
+                    posterImg.style.display = 'block';
+                } else {
+                    posterImg.style.display = 'none'; // Verstecken, wenn kein Bild da ist
+                }
+            } else {
+                card.style.display = 'none';
+            }
+        }
         async function renderTable() {
             const searchTerm = searchInput.value.toLowerCase();
             const filterMode = displayFilter.value;
