@@ -245,19 +245,35 @@
             width: 100%;
             border-collapse: collapse;
         }
-        
-        th,
-        td {
-            text-align: left;
-            padding: 12px;
-            border-bottom: 1px solid #222;
-        }
+        /* SORTIERBARE HEADER */
         
         th {
             color: var(--wacken-red);
             text-transform: uppercase;
             font-size: 12px;
             border-bottom: 2px solid var(--wacken-red);
+            text-align: left;
+            padding: 12px;
+        }
+        
+        th.sortable {
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        th.sortable:hover {
+            background: rgba(227, 6, 19, 0.1);
+        }
+        
+        .sort-indicator {
+            margin-left: 5px;
+            font-size: 10px;
+            color: #666;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #222;
         }
         
         .badge {
@@ -284,6 +300,23 @@
             #info-poster {
                 max-width: 100%;
             }
+        }
+        /* CUSTOM SCROLLBAR (BONUS) */
+        
+         ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+         ::-webkit-scrollbar-track {
+            background: var(--bg-black);
+        }
+        
+         ::-webkit-scrollbar-thumb {
+            background: var(--wacken-red);
+        }
+        
+         ::-webkit-scrollbar-thumb:hover {
+            background: #ff0000;
         }
     </style>
 </head>
@@ -362,8 +395,8 @@
                         <thead>
                             <tr>
                                 <th style="width:40px"></th>
-                                <th>Band</th>
-                                <th>Genre</th>
+                                <th class="sortable" onclick="handleSort('name')">Band <span id="sort-name" class="sort-indicator"></span></th>
+                                <th class="sortable" onclick="handleSort('genre')">Genre <span id="sort-genre" class="sort-indicator"></span></th>
                             </tr>
                         </thead>
                         <tbody id="band-table-body"></tbody>
@@ -391,11 +424,27 @@
         const colorPallet = ["metal-orange", "metal-red", "metal-blue"];
         let festivalColors = {};
 
+        // NEU: Sortier-Zustand
+        let currentSort = {
+            column: 'name',
+            direction: 'asc'
+        };
+
         function toggleSection(id) {
             document.getElementById(id).classList.toggle('collapsed');
         }
 
-        // --- VERBESSERTE LOGIK FÜR THUMBNAILS ---
+        // NEU: Sortier-Funktion
+        function handleSort(column) {
+            if (currentSort.column === column) {
+                currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+            } else {
+                currentSort.column = column;
+                currentSort.direction = 'asc';
+            }
+            renderTable();
+        }
+
         function updateFestivalInfo(filePath) {
             const fileName = decodeURIComponent(filePath.split('/').pop());
             const info = (typeof festivalMetadata !== 'undefined') ? festivalMetadata[fileName] : null;
@@ -411,8 +460,6 @@
                 document.getElementById('info-desc').innerText = info.description || '';
 
                 const posterImg = document.getElementById('info-poster');
-
-                // Nutze poster_thumb wenn da, sonst fallback auf poster
                 const thumbSrc = info.poster_thumb || info.poster;
 
                 if (thumbSrc) {
@@ -512,23 +559,42 @@
                 });
             }
 
-            tableBody.innerHTML = '';
-            let displayedCount = 0;
-            let overlapCount = 0;
-            let bandsForStats = [];
-
-            primaryBands.forEach(band => {
+            // 1. Filtern der Bands
+            let filteredBands = primaryBands.filter(band => {
                 const lowName = (band.name || "").toLowerCase().trim();
                 const matches = matchMap[lowName] || [];
                 const isShared = matches.length > 0;
 
-                if (filterMode === 'exclusive' && isShared) return;
-                if (filterMode === 'shared' && !isShared) return;
-                if (!band.name.toLowerCase().includes(searchTerm) && !band.genre.toLowerCase().includes(searchTerm)) return;
+                if (filterMode === 'exclusive' && isShared) return false;
+                if (filterMode === 'shared' && !isShared) return false;
+                if (!band.name.toLowerCase().includes(searchTerm) && !band.genre.toLowerCase().includes(searchTerm)) return false;
+                return true;
+            });
 
-                displayedCount++;
+            // 2. NEU: Sortieren der gefilterten Liste
+            filteredBands.sort((a, b) => {
+                let valA = a[currentSort.column].toLowerCase();
+                let valB = b[currentSort.column].toLowerCase();
+                if (currentSort.direction === 'asc') {
+                    return valA < valB ? -1 : (valA > valB ? 1 : 0);
+                } else {
+                    return valA > valB ? -1 : (valA < valB ? 1 : 0);
+                }
+            });
+
+            // 3. UI-Indikatoren aktualisieren
+            document.getElementById('sort-name').innerText = currentSort.column === 'name' ? (currentSort.direction === 'asc' ? '▲' : '▼') : '';
+            document.getElementById('sort-genre').innerText = currentSort.column === 'genre' ? (currentSort.direction === 'asc' ? '▲' : '▼') : '';
+
+            // 4. Tabelle befüllen
+            tableBody.innerHTML = '';
+            let overlapCount = 0;
+
+            filteredBands.forEach(band => {
+                const lowName = (band.name || "").toLowerCase().trim();
+                const matches = matchMap[lowName] || [];
+                const isShared = matches.length > 0;
                 if (isShared) overlapCount++;
-                bandsForStats.push(band);
 
                 const row = document.createElement('tr');
                 let badgesHtml = '';
@@ -544,8 +610,8 @@
                 tableBody.appendChild(row);
             });
 
-            stats.innerText = `${displayedCount} BANDS (${overlapCount} ÜBERSCHNEIDUNGEN).`;
-            updateGenreStats(bandsForStats);
+            stats.innerText = `${filteredBands.length} BANDS (${overlapCount} ÜBERSCHNEIDUNGEN).`;
+            updateGenreStats(filteredBands);
         }
 
         function updateGenreStats(displayedBands) {
@@ -566,9 +632,9 @@
             sortedGenres.forEach(([genre, count]) => {
                 const percentage = Math.round((count / total) * 100);
                 statsGrid.innerHTML += `
-                    <div class=\"stat-item\">
-                        <div class=\"stat-info\"><span>${genre}</span><span>${percentage} %</span></div>
-                        <div class=\"stat-bar-bg\"><div class=\"stat-bar-fill\" style=\"width: ${percentage}%\"></div></div>
+                    <div class="stat-item">
+                        <div class="stat-info"><span>${genre}</span><span>${percentage} %</span></div>
+                        <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: ${percentage}%"></div></div>
                     </div>`;
             });
         }
@@ -585,16 +651,13 @@
             if (e.target == modal) modal.style.display = "none";
         }
 
-        // --- VERBESSERTE LIGHTBOX LOGIK FÜR HOCHAUFLÖSENDE POSTER ---
         document.getElementById('info-poster').onclick = function() {
             const modal = document.getElementById('poster-modal');
             const modalImg = document.getElementById('modal-img');
-
             const filePath = primarySelect.value;
             const fileName = decodeURIComponent(filePath.split('/').pop());
             const info = (typeof festivalMetadata !== 'undefined') ? festivalMetadata[fileName] : null;
 
-            // Wenn poster_full existiert, nutze das, sonst das normale poster
             if (info && (info.poster_full || info.poster)) {
                 modal.style.display = "block";
                 modalImg.src = info.poster_full || info.poster;
