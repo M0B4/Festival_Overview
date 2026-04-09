@@ -521,7 +521,7 @@
             statsGrid.innerHTML = total === 0 ? 'Keine Daten' : '';
             sortedGenres.forEach(([genre, count]) => {
                 const percentage = Math.round((count / total) * 100);
-                statsGrid.innerHTML += `<div class="stat-item"><div class="stat-info"><span>${genre}</span><span>${percentage}%</span></div><div class="stat-bar-bg"><div class="stat-bar-fill" style="width: ${percentage}%"></div></div></div>`;
+                statsGrid.innerHTML += `<div class="stat-item"><div class="stat-info"><span>${genre}</span><span>${percentage} %</span></div><div class="stat-bar-bg"><div class="stat-bar-fill" style="width: ${percentage} %"></div></div></div>`;
             });
         }
 
