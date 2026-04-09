@@ -311,6 +311,7 @@
                 document.getElementById('festival-info-card').style.display = 'block';
                 document.getElementById('info-name').innerText = prettyName(fileName);
                 document.getElementById('info-date').innerText = info.date || '-';
+                document.getElementById('info-price').innerText = info.price || 'k.A.';
                 document.getElementById('info-location').innerText = info.location || '-';
                 document.getElementById('info-link').href = info.website || '#';
                 document.getElementById('info-desc').innerText = info.description || '';
