@@ -1,22 +1,30 @@
 [{
-        "name": "5th Avenue",
+        "name": "Axetasy",
+        "country": "Germany",
+        "genre": "Speed Metal"
+
+    },
+    {
+        "name": "Earaser",
         "country": "Germany",
         "genre": "Hard Rock"
     },
     {
-        "name": "9mm Headshot",
+        "name": "GrimGod",
         "country": "Germany",
-        "genre": "Hard Rock"
+        "genre": "Heavy Rock"
+    },
+
+    {
+        "name": "Traitor",
+        "country": "Germany",
+        "genre": "Trash Metal"
     },
     {
-        "name": "Ad Infinitum",
-        "country": "Switzerland",
-        "genre": "Symphonic Metal"
-    },
-    {
-        "name": "Airbourne",
-        "country": "Australia",
-        "genre": "Hard Rock"
+        "name": "Tusk",
+        "country": "Germany",
+        "genre": "Heavy Metal"
     }
+
 
 ]
