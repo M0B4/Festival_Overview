@@ -1,5 +1,5 @@
 const festivalMetadata = {
-    "wacken open air 2026.json": {
+    "wacken_open_air_2026.json": {
         "date": "29.07. – 01.08.2026",
         "location": "Wacken, Deutschland",
         "website": "https://www.wacken.com",
@@ -7,7 +7,7 @@ const festivalMetadata = {
         "price": "333€",
         "description": ""
     },
-    "hellfest 2026.json": {
+    "hellfest_2026.json": {
         "date": "18.06. – 21.06.2026",
         "location": "Clisson, Frankreich",
         "website": "https://www.hellfest.fr",
