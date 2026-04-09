@@ -15,4 +15,12 @@ const festivalMetadata = {
         "poster": "posters/hellfest_2026.jpg", // Oder eine URL
         "description": ""
     }
+    "graspop_metal_meeting_2026.json": {
+        "date": "18.06. – 21.06.2026",
+        "location": "Dessel, Belgien",
+        "website": "https://www.hellfest.fr",
+        "price": "319€",
+        "poster": "posters/graspop_metal_meeting_2026.jpg", // Oder eine URL
+        "description": ""
+    }
 };
