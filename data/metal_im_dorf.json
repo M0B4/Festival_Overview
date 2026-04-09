@@ -1,0 +1,22 @@
+[{
+        "name": "5th Avenue",
+        "country": "Germany",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "9mm Headshot",
+        "country": "Germany",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Ad Infinitum",
+        "country": "Switzerland",
+        "genre": "Symphonic Metal"
+    },
+    {
+        "name": "Airbourne",
+        "country": "Australia",
+        "genre": "Hard Rock"
+    }
+
+]
