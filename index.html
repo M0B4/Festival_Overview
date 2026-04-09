@@ -38,7 +38,7 @@
             margin-bottom: 30px;
             position: relative;
             overflow: hidden;
-            /* ZENTRIERUNG AKTIVIEREN */
+            /* Zentrierung aktivieren */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -59,12 +59,14 @@
         
         #header-logo {
             max-width: 90%;
+            /* Verhindert Ausbrechen auf dem Handy */
             height: auto;
             max-height: 120px;
+            /* Begrenzt die Höhe */
+            display: block;
+            /* Schatten & Glow-Effekt */
             filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.7));
             transition: filter 0.3s ease-in-out;
-            display: block;
-            /* Verhindert unerwünschte Abstände unter dem Bild */
         }
         
         #header-logo:hover {
