@@ -90,15 +90,14 @@
             top: 50%;
             transform: translateY(-50%);
             border: 2px solid var(--wacken-red);
-            box-shadow: 0 0 30px rgba(0, 0, 0, 1);
         }
-        /* Collapsible Sektionen */
+        /* Eigenständige Cards */
         
         .collapsible-card {
             background: var(--card-bg);
             border: 1px solid #333;
             border-top: 4px solid var(--wacken-red);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
         
@@ -109,7 +108,6 @@
             align-items: center;
             cursor: pointer;
             background: rgba(255, 255, 255, 0.02);
-            transition: background 0.2s;
             user-select: none;
         }
         
@@ -123,12 +121,12 @@
             color: var(--wacken-red);
             font-weight: 900;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
         
         .toggle-icon::before {
             content: "[ - ]";
             font-family: monospace;
-            font-size: 16px;
             color: #666;
         }
         
@@ -143,36 +141,6 @@
         .section-content {
             padding: 20px;
             border-top: 1px solid #222;
-        }
-        /* Festival Info Card */
-        
-        #festival-info-card {
-            display: none;
-            /* Sichtbar nach init */
-        }
-        
-        .info-content-wrapper {
-            display: flex;
-            gap: 30px;
-            align-items: flex-start;
-        }
-        
-        #info-poster {
-            max-width: 200px;
-            border: 1px solid #444;
-            transition: transform 0.3s;
-            cursor: zoom-in;
-        }
-        
-        #info-poster:hover {
-            transform: scale(1.05) rotate(1deg);
-        }
-        
-        .info-text-side h2 {
-            color: #fff;
-            text-transform: uppercase;
-            font-size: 24px;
-            margin: 0 0 15px 0;
         }
         /* Filter Controls */
         
@@ -192,7 +160,6 @@
             font-size: 11px;
             text-transform: uppercase;
             color: #888;
-            letter-spacing: 1px;
             margin-bottom: 8px;
             display: block;
             font-weight: bold;
@@ -230,7 +197,6 @@
             align-items: center;
             gap: 8px;
             background: #222;
-            color: #fff;
             border: 1px solid #444;
             padding: 5px 10px;
             font-size: 11px;
@@ -241,13 +207,7 @@
         .compare-item:hover {
             background: var(--wacken-red);
         }
-        /* Table & Stats */
-        
-        main {
-            background: var(--card-bg);
-            padding: 25px;
-            border: 1px solid #222;
-        }
+        /* Stats & Table */
         
         .stats-grid {
             display: grid;
@@ -275,10 +235,14 @@
             transition: width 0.6s ease;
         }
         
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+        
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
         }
         
         th,
@@ -317,10 +281,12 @@
         }
         
         @media (max-width: 768px) {
-            .controls-grid,
-            .info-content-wrapper {
+            .controls-grid {
                 grid-template-columns: 1fr;
+            }
+            .info-content-wrapper {
                 flex-direction: column;
+                align-items: center;
             }
             #info-poster {
                 max-width: 100%;
@@ -339,16 +305,16 @@
     </header>
 
     <div class="container">
-        <div id="festival-info-card" class="collapsible-card">
+        <div id="festival-info-card" class="collapsible-card" style="display:none;">
             <div class="section-header" onclick="toggleSection('festival-info-card')">
                 <label>FESTIVAL DETAILS</label>
                 <span class="toggle-icon"></span>
             </div>
             <div class="section-content">
-                <div class="info-content-wrapper">
-                    <img id="info-poster" src="" alt="Poster">
+                <div class="info-content-wrapper" style="display: flex; gap: 30px;">
+                    <img id="info-poster" src="" alt="Poster" style="max-width: 200px; border: 1px solid #444; cursor: zoom-in;">
                     <div class="info-text-side">
-                        <h2 id="info-name"></h2>
+                        <h2 id="info-name" style="color: #fff; text-transform: uppercase; font-size: 24px; margin: 0 0 15px 0;"></h2>
                         <div style="display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
                             <div><strong style="color:var(--wacken-red)">DATUM:</strong> <span id="info-date"></span></div>
                             <div><strong style="color:var(--wacken-red)">ORT:</strong> <span id="info-location"></span></div>
@@ -379,30 +345,37 @@
             </div>
         </div>
 
-        <main>
-            <div id="genre-stats-card" class="collapsible-card">
-                <div class="section-header" onclick="toggleSection('genre-stats-card')">
-                    <label>LINEUP DNA (TOP 10 GENRES)</label>
-                    <span class="toggle-icon"></span>
-                </div>
-                <div class="section-content">
-                    <div id="stats-grid" class="stats-grid"></div>
+        <div id="genre-stats-card" class="collapsible-card">
+            <div class="section-header" onclick="toggleSection('genre-stats-card')">
+                <label>LINEUP DNA (TOP 10 GENRES)</label>
+                <span class="toggle-icon"></span>
+            </div>
+            <div class="section-content">
+                <div id="stats-grid" class="stats-grid"></div>
+            </div>
+        </div>
+
+        <div id="band-list-card" class="collapsible-card">
+            <div class="section-header" onclick="toggleSection('band-list-card')">
+                <label>LINEUP ÜBERSICHT</label>
+                <span class="toggle-icon"></span>
+            </div>
+            <div class="section-content">
+                <div id="stats" style="margin-bottom:15px; font-size:13px; color:#888; border-left:3px solid var(--wacken-red); padding-left:10px;">Status: Aktiv</div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:40px"></th>
+                                <th>Band</th>
+                                <th>Genre</th>
+                            </tr>
+                        </thead>
+                        <tbody id="band-table-body"></tbody>
+                    </table>
                 </div>
             </div>
-
-            <div id="stats" style="margin-bottom:15px; font-size:13px; color:#888; border-left:3px solid var(--wacken-red); padding-left:10px;">Status: Aktiv</div>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width:40px"></th>
-                        <th>Band</th>
-                        <th>Genre</th>
-                    </tr>
-                </thead>
-                <tbody id="band-table-body"></tbody>
-            </table>
-        </main>
+        </div>
     </div>
 
     <script>
@@ -428,27 +401,18 @@
         }
 
         function updateFestivalInfo(filePath) {
-            // 1. Dateinamen aus dem Pfad extrahieren
             const fileName = decodeURIComponent(filePath.split('/').pop());
-
-            // Debugging: Schau in die Browser-Konsole (F12), ob der Name stimmt
-            console.log("Suche Infos für:", fileName);
-
             const info = (typeof festivalMetadata !== 'undefined') ? festivalMetadata[fileName] : null;
             const infoCard = document.getElementById('festival-info-card');
 
             if (info) {
-                // Karte sichtbar machen
                 infoCard.style.display = 'block';
-
-                // Inhalte füllen
                 document.getElementById('info-name').innerText = prettyName(fileName);
                 document.getElementById('info-date').innerText = info.date || '-';
                 document.getElementById('info-location').innerText = info.location || '-';
                 document.getElementById('info-price').innerText = info.price || 'k.A.';
                 document.getElementById('info-link').href = info.website || '#';
                 document.getElementById('info-desc').innerText = info.description || '';
-
                 const posterImg = document.getElementById('info-poster');
                 if (info.poster) {
                     posterImg.src = info.poster;
@@ -456,12 +420,8 @@
                 } else {
                     posterImg.style.display = 'none';
                 }
-
-                // Sicherstellen, dass die Sektion nicht eingeklappt ist, wenn neue Infos kommen
                 infoCard.classList.remove('collapsed');
             } else {
-                // Wenn keine Infos gefunden wurden, Karte verstecken
-                console.warn("Keine Metadaten für " + fileName + " gefunden.");
                 infoCard.style.display = 'none';
             }
         }
@@ -469,7 +429,7 @@
         function getFlagImg(countryName) {
             if (!countryName) return '🏴';
             const code = typeof countryCodes !== 'undefined' ? countryCodes[countryName.trim().toLowerCase()] : null;
-            return code ? `<img src="https://flagcdn.com/w40/${code}.png" style="width:20px; border-radius:1px;">` : '🏴';
+            return code ? `<img src="https://flagcdn.com/w40/${code}.png" style="width:20px;">` : '🏴';
         }
 
         function prettyName(filename) {
@@ -498,16 +458,14 @@
                     primarySelect.appendChild(opt);
                 });
 
-                // --- NEU: WÄHLE DAS LETZTE ELEMENT IN DER LISTE ---
                 if (primarySelect.options.length > 0) {
                     primarySelect.selectedIndex = primarySelect.options.length - 1;
                 }
-                // --------------------------------------------------
 
                 updateCompareCheckboxes();
                 loadPrimaryData();
             } catch (e) {
-                stats.innerText = "Fehler beim Laden der GitHub-Daten.";
+                stats.innerText = "GitHub-Ladefehler.";
             }
         }
 
