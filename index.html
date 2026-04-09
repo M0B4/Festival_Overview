@@ -92,7 +92,7 @@
             border: 2px solid var(--wacken-red);
             box-shadow: 0 0 30px rgba(0, 0, 0, 1);
         }
-        /* Einklappbare Sektoren Styling */
+        /* Collapsible Sektionen */
         
         .collapsible-card {
             background: var(--card-bg);
@@ -125,34 +125,30 @@
             letter-spacing: 1px;
         }
         
-        .toggle-icon {
+        .toggle-icon::before {
+            content: "[ - ]";
             font-family: monospace;
-            font-size: 18px;
+            font-size: 16px;
             color: #666;
-        }
-        
-        .section-content {
-            padding: 20px;
-            border-top: 1px solid #222;
-        }
-        /* Verstecken-Logik */
-        
-        .collapsed .section-content {
-            display: none;
         }
         
         .collapsed .toggle-icon::before {
             content: "[ + ]";
         }
         
-        .toggle-icon::before {
-            content: "[ - ]";
+        .collapsed .section-content {
+            display: none;
         }
-        /* Info Card Spezifisch */
+        
+        .section-content {
+            padding: 20px;
+            border-top: 1px solid #222;
+        }
+        /* Festival Info Card */
         
         #festival-info-card {
             display: none;
-            /* Wird via JS eingeblendet */
+            /* Sichtbar nach init */
         }
         
         .info-content-wrapper {
@@ -257,7 +253,6 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 15px;
-            margin-top: 5px;
         }
         
         .stat-info {
@@ -358,7 +353,7 @@
                             <div><strong style="color:var(--wacken-red)">DATUM:</strong> <span id="info-date"></span></div>
                             <div><strong style="color:var(--wacken-red)">ORT:</strong> <span id="info-location"></span></div>
                             <div><strong style="color:var(--wacken-red)">PREIS:</strong> <span id="info-price"></span></div>
-                            <div><strong style="color:var(--wacken-red)">WEB:</strong> <a id="info-link" href="#" target="_blank" style="color: #fff; text-decoration: underline;">WEBSEITE</a></div>
+                            <div><strong style="color:var(--wacken-red)">WEB:</strong> <a id="info-link" href="#" target="_blank" style="color: #fff; text-decoration: underline;">OFFIZIELLE WEBSEITE</a></div>
                         </div>
                         <p id="info-desc" style="margin-top: 15px; color: #aaa; font-style: italic; font-size: 13px;"></p>
                     </div>
@@ -395,7 +390,7 @@
                 </div>
             </div>
 
-            <div id="stats" style="margin-bottom:15px; font-size:13px; color:#888; border-left:3px solid var(--wacken-red); padding-left:10px;">Bereitschaft...</div>
+            <div id="stats" style="margin-bottom:15px; font-size:13px; color:#888; border-left:3px solid var(--wacken-red); padding-left:10px;">Status: Aktiv</div>
 
             <table>
                 <thead>
@@ -428,10 +423,8 @@
         const colorPallet = ["metal-orange", "metal-red", "metal-blue"];
         let festivalColors = {};
 
-        // NEU: Einklapp-Funktion
         function toggleSection(id) {
-            const el = document.getElementById(id);
-            el.classList.toggle('collapsed');
+            document.getElementById(id).classList.toggle('collapsed');
         }
 
         function updateFestivalInfo(filePath) {
@@ -478,6 +471,7 @@
                 const res = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${DATA_FOLDER}`);
                 const files = await res.json();
                 allFestivalFiles = files.filter(f => f.name.endsWith('.json'));
+
                 primarySelect.innerHTML = '';
                 allFestivalFiles.forEach(file => {
                     const opt = document.createElement('option');
@@ -485,10 +479,17 @@
                     opt.textContent = prettyName(file.name);
                     primarySelect.appendChild(opt);
                 });
+
+                // --- NEU: WÄHLE DAS LETZTE ELEMENT IN DER LISTE ---
+                if (primarySelect.options.length > 0) {
+                    primarySelect.selectedIndex = primarySelect.options.length - 1;
+                }
+                // --------------------------------------------------
+
                 updateCompareCheckboxes();
                 loadPrimaryData();
             } catch (e) {
-                stats.innerText = "GitHub-Ladefehler.";
+                stats.innerText = "Fehler beim Laden der GitHub-Daten.";
             }
         }
 
