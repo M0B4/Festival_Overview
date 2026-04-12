@@ -283,7 +283,6 @@
             margin-left: 8px;
             text-transform: uppercase;
         }
-        /* --- DIE 10 FARBKLASSEN --- */
         
         .badge.metal-red {
             background: #e30613;
@@ -309,7 +308,6 @@
             background: #f1c40f;
             color: #000;
         }
-        /* Dunkler Text für Lesbarkeit */
         
         .badge.metal-cyan {
             background: #16a085;
@@ -323,7 +321,6 @@
             background: #ecf0f1;
             color: #000;
         }
-        /* Dunkler Text für Lesbarkeit */
         
         .badge.metal-grey {
             background: #7f8c8d;
@@ -618,12 +615,20 @@
 
             tableBody.innerHTML = '';
             let overlapCount = 0;
+            let festivalOverlapCounts = {}; // NEU: Counter pro Festival
 
             filteredBands.forEach(band => {
                 const lowName = (band.name || "").toLowerCase().trim();
                 const matches = matchMap[lowName] || [];
                 const isShared = matches.length > 0;
-                if (isShared) overlapCount++;
+
+                if (isShared) {
+                    overlapCount++;
+                    // Jedes Festival in den Matches hochzählen
+                    matches.forEach(m => {
+                        festivalOverlapCounts[m.name] = (festivalOverlapCounts[m.name] || 0) + 1;
+                    });
+                }
 
                 const row = document.createElement('tr');
                 let badgesHtml = '';
@@ -639,7 +644,17 @@
                 tableBody.appendChild(row);
             });
 
-            stats.innerText = `${filteredBands.length} BANDS (${overlapCount} ÜBERSCHNEIDUNGEN).`;
+            // --- NEU: Detaillierte Stats-Anzeige ---
+            let statsHTML = `<strong>${filteredBands.length} BANDS</strong> GEFUNDEN (${overlapCount} ÜBERSCHNEIDUNGEN)`;
+
+            if (Object.keys(festivalOverlapCounts).length > 0) {
+                let breakdown = Object.entries(festivalOverlapCounts)
+                    .map(([name, count]) => `${name}: ${count}`)
+                    .join(' | ');
+                statsHTML += ` <span style="color:#666; font-size:11px; margin-left:15px; letter-spacing:0.5px;">[ ${breakdown} ]</span>`;
+            }
+
+            stats.innerHTML = statsHTML;
             updateGenreStats(filteredBands);
         }
 
