@@ -245,7 +245,6 @@
             width: 100%;
             border-collapse: collapse;
         }
-        /* SORTIERBARE HEADER */
         
         th {
             color: var(--wacken-red);
@@ -284,9 +283,50 @@
             margin-left: 8px;
             text-transform: uppercase;
         }
+        /* --- DIE 10 FARBKLASSEN --- */
+        
+        .badge.metal-red {
+            background: #e30613;
+        }
         
         .badge.metal-orange {
-            background: var(--wacken-red);
+            background: #f39c12;
+        }
+        
+        .badge.metal-blue {
+            background: #2980b9;
+        }
+        
+        .badge.metal-green {
+            background: #27ae60;
+        }
+        
+        .badge.metal-purple {
+            background: #8e44ad;
+        }
+        
+        .badge.metal-yellow {
+            background: #f1c40f;
+            color: #000;
+        }
+        /* Dunkler Text für Lesbarkeit */
+        
+        .badge.metal-cyan {
+            background: #16a085;
+        }
+        
+        .badge.metal-pink {
+            background: #d81b60;
+        }
+        
+        .badge.metal-white {
+            background: #ecf0f1;
+            color: #000;
+        }
+        /* Dunkler Text für Lesbarkeit */
+        
+        .badge.metal-grey {
+            background: #7f8c8d;
         }
         
         @media (max-width: 768px) {
@@ -301,7 +341,6 @@
                 max-width: 100%;
             }
         }
-        /* CUSTOM SCROLLBAR (BONUS) */
         
          ::-webkit-scrollbar {
             width: 8px;
@@ -421,10 +460,7 @@
         let allFestivalFiles = [];
         let primaryBands = [];
         let cachedComparisons = {};
-        const colorPallet = ["metal-orange", "metal-red", "metal-blue"];
-        let festivalColors = {};
 
-        // NEU: Sortier-Zustand
         let currentSort = {
             column: 'name',
             direction: 'asc'
@@ -434,7 +470,6 @@
             document.getElementById(id).classList.toggle('collapsed');
         }
 
-        // NEU: Sortier-Funktion
         function handleSort(column) {
             if (currentSort.column === column) {
                 currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
@@ -443,6 +478,12 @@
                 currentSort.direction = 'asc';
             }
             renderTable();
+        }
+
+        function getFestivalColor(festivalPath) {
+            const fileName = decodeURIComponent(festivalPath.split('/').pop());
+            const info = (typeof festivalMetadata !== 'undefined') ? festivalMetadata[fileName] : null;
+            return (info && info.color) ? info.color : "metal-grey";
         }
 
         function updateFestivalInfo(filePath) {
@@ -482,14 +523,6 @@
 
         function prettyName(filename) {
             return filename.replace('.json', '').replace(/_/g, ' ').split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-        }
-
-        function getFestivalColor(festivalPath) {
-            if (!festivalColors[festivalPath]) {
-                const index = allFestivalFiles.findIndex(f => f.path === festivalPath);
-                festivalColors[festivalPath] = colorPallet[index % colorPallet.length];
-            }
-            return festivalColors[festivalPath];
         }
 
         async function init() {
@@ -559,7 +592,6 @@
                 });
             }
 
-            // 1. Filtern der Bands
             let filteredBands = primaryBands.filter(band => {
                 const lowName = (band.name || "").toLowerCase().trim();
                 const matches = matchMap[lowName] || [];
@@ -571,7 +603,6 @@
                 return true;
             });
 
-            // 2. NEU: Sortieren der gefilterten Liste
             filteredBands.sort((a, b) => {
                 let valA = a[currentSort.column].toLowerCase();
                 let valB = b[currentSort.column].toLowerCase();
@@ -582,11 +613,9 @@
                 }
             });
 
-            // 3. UI-Indikatoren aktualisieren
             document.getElementById('sort-name').innerText = currentSort.column === 'name' ? (currentSort.direction === 'asc' ? '▲' : '▼') : '';
             document.getElementById('sort-genre').innerText = currentSort.column === 'genre' ? (currentSort.direction === 'asc' ? '▲' : '▼') : '';
 
-            // 4. Tabelle befüllen
             tableBody.innerHTML = '';
             let overlapCount = 0;
 
