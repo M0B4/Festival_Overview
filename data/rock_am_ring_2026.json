@@ -1,0 +1,372 @@
+[
+    {
+        "name": "A Perfect Circle",
+        "country": "United States",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "Alter Bridge",
+        "country": "United States",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Ankor",
+        "country": "Spain",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Architects",
+        "country": "United Kingdom",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "BABYMETAL",
+        "country": "Japan",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Bad Nerves",
+        "country": "United Kingdom",
+        "genre": "Garage Punk"
+    },
+    {
+        "name": "Bad Omens",
+        "country": "United States",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Badflower",
+        "country": "United States",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Basement",
+        "country": "United Kingdom",
+        "genre": "Emocore"
+    },
+    {
+        "name": "Bilmuri",
+        "country": "United States",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "Black Veil Brides",
+        "country": "United States",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Blood Incantation",
+        "country": "United States",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "Bloodywood",
+        "country": "India",
+        "genre": "Nu Metal"
+    },
+    {
+        "name": "Boundaries",
+        "country": "United States",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Breaking Benjamin",
+        "country": "United States",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Bury Tomorrow",
+        "country": "United Kingdom",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Bush",
+        "country": "United Kingdom",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "Catch Your Breath",
+        "country": "United States",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Danko Jones",
+        "country": "Canada",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Don Broco",
+        "country": "United Kingdom",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "Drain",
+        "country": "United States",
+        "genre": "Hardcore Punk"
+    },
+    {
+        "name": "Dying Wish",
+        "country": "United States",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Ecca Vandal",
+        "country": "South Africa",
+        "genre": "Post-Punk"
+    },
+    {
+        "name": "Ego Kill Talent",
+        "country": "Brazil",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "Electric Callboy",
+        "country": "Germany",
+        "genre": "Electronicore"
+    },
+    {
+        "name": "Finch",
+        "country": "United States",
+        "genre": "Post-Hardcore"
+    },
+    {
+        "name": "Gatecreeper",
+        "country": "United States",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "H-Blockx",
+        "country": "Germany",
+        "genre": "Rap Rock"
+    },
+    {
+        "name": "High Vis",
+        "country": "United Kingdom",
+        "genre": "Post-Punk"
+    },
+    {
+        "name": "Hollywood Undead",
+        "country": "United States",
+        "genre": "Rap Rock"
+    },
+    {
+        "name": "Ice Nine Kills",
+        "country": "United States",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Iron Maiden",
+        "country": "United Kingdom",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Kublai Khan TX",
+        "country": "United States",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Landmvrks",
+        "country": "France",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Letlive.",
+        "country": "United States",
+        "genre": "Post-Hardcore"
+    },
+    {
+        "name": "Limp Bizkit",
+        "country": "United States",
+        "genre": "Nu Metal"
+    },
+    {
+        "name": "Linkin Park",
+        "country": "United States",
+        "genre": "Nu Metal"
+    },
+    {
+        "name": "Loathe",
+        "country": "United Kingdom",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Magnolia Park",
+        "country": "United States",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Malevolence",
+        "country": "United Kingdom",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Marteria",
+        "country": "Germany",
+        "genre": "Pop Rap"
+    },
+    {
+        "name": "Mastodon",
+        "country": "United States",
+        "genre": "Progressive Sludge Metal"
+    },
+    {
+        "name": "Max Grimm",
+        "country": "Germany",
+        "genre": "Ambient"
+    },
+    {
+        "name": "Mehnersmoos",
+        "country": "Germany",
+        "genre": "Rap"
+    },
+    {
+        "name": "Mouth Culture",
+        "country": "United Kingdom",
+        "genre": "Indie Rock"
+    },
+    {
+        "name": "Palaye Royale",
+        "country": "Canada",
+        "genre": "Glam Rock"
+    },
+    {
+        "name": "Paleface Swiss",
+        "country": "Switzerland",
+        "genre": "Deathcore"
+    },
+    {
+        "name": "Papa Roach",
+        "country": "United States",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "President",
+        "country": "United Kingdom",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Return To Dust",
+        "country": "United States",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "Sabaton",
+        "country": "Sweden",
+        "genre": "Power Metal"
+    },
+    {
+        "name": "Set It Off",
+        "country": "United States",
+        "genre": "Pop Rock"
+    },
+    {
+        "name": "Slay Squad",
+        "country": "United States",
+        "genre": "Rap Metal"
+    },
+    {
+        "name": "Social Distortion",
+        "country": "United States",
+        "genre": "Punk Rock"
+    },
+    {
+        "name": "Sondaschule",
+        "country": "Germany",
+        "genre": "Ska Punk"
+    },
+    {
+        "name": "TesseracT",
+        "country": "United Kingdom",
+        "genre": "Progressive Metal"
+    },
+    {
+        "name": "The Butcher Sisters",
+        "country": "Germany",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "The Funeral Portrait",
+        "country": "United States",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "The Garden",
+        "country": "United States",
+        "genre": "Art Punk"
+    },
+    {
+        "name": "The Hives",
+        "country": "Sweden",
+        "genre": "Garage Rock"
+    },
+    {
+        "name": "The Offspring",
+        "country": "United States",
+        "genre": "Pop Punk"
+    },
+    {
+        "name": "The Plot In You",
+        "country": "United States",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "The Pretty Reckless",
+        "country": "United States",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "The Story So Far",
+        "country": "United States",
+        "genre": "Pop Punk"
+    },
+    {
+        "name": "The Subways",
+        "country": "United Kingdom",
+        "genre": "Garage Rock"
+    },
+    {
+        "name": "Thornhill",
+        "country": "Australia",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Three Days Grace",
+        "country": "Canada",
+        "genre": "Post-grunge"
+    },
+    {
+        "name": "Tom Morello",
+        "country": "United States",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "Trivium",
+        "country": "United States",
+        "genre": "Melodic Metalcore"
+    },
+    {
+        "name": "TX2",
+        "country": "United States",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Volbeat",
+        "country": "Denmark",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Wargasm",
+        "country": "United Kingdom",
+        "genre": "Nu Metal"
+    },
+    {
+        "name": "We Came As Romans",
+        "country": "United States",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Within Temptation",
+        "country": "Netherlands",
+        "genre": "Symphonic Metal"
+    }
+]

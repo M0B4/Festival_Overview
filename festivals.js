@@ -26,6 +26,15 @@ const festivalMetadata = {
         "poster_full": "posters/graspop_metal_meeting_2026.webp",
         "description": ""
     },
+    "rock_am_ring_2026.json": {
+        "date": "05.06. – 07.06.2026",
+        "location": "Nürburgring, Deutschland",
+        "website": "https://www.rock-am-ring.com/",
+        "price": "259€",
+        "poster_thumb": "posters/thumbs/rar_small.webp",
+        "poster_full": "posters/rock_am_ring_2026.webp",
+        "description": ""
+    },
     "metal_im_dorf_2026.json": {
         "date": "18.06. – 21.06.2026",
         "location": "Vogtei, Deutschland",
