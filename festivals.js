@@ -44,7 +44,7 @@ const festivalMetadata = {
         "date": "18.06. – 21.06.2026",
         "location": "Vogtei, Deutschland",
         "website": "https://www.fb.com/metalimdorf",
-        "price": "20",
+        "price": "20€",
         "poster_thumb": "posters/thumbs/mid_small.webp",
         "poster_full": "posters/mid.webp",
         "description": ""
