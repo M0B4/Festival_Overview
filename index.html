@@ -407,31 +407,53 @@
             renderTable();
         }
 
-        // --- AUTOMATISCHE FARBEXTRAKTION ---
+        // --- OPTIMIERTE FARBEXTRAKTION FÜR HIGHLIGHTS ---
         async function getFestivalColor(festivalPath) {
             const fileName = decodeURIComponent(festivalPath.split('/').pop());
 
-            // 1. Wenn wir die Farbe schon haben, gib sie zurück
             if (festivalColorCache[fileName]) return festivalColorCache[fileName];
 
-            // 2. Suche das Poster in den Metadaten
             const info = (typeof festivalMetadata !== 'undefined') ? festivalMetadata[fileName] : null;
             const posterUrl = info ? (info.poster_thumb || info.poster) : null;
 
             if (!posterUrl) {
-                festivalColorCache[fileName] = 'rgb(127, 140, 141)'; // Fallback grau
+                festivalColorCache[fileName] = 'rgb(127, 140, 141)';
                 return festivalColorCache[fileName];
             }
 
-            // 3. Farbe aus Bild extrahieren
             return new Promise((resolve) => {
                 const img = new Image();
-                img.crossOrigin = "Anonymous"; // Wichtig für CORS (GitHub Bilder)
+                img.crossOrigin = "Anonymous";
                 img.src = posterUrl;
                 img.onload = () => {
                     try {
-                        const rgb = colorThief.getColor(img);
-                        const colorString = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+                        // Hol dir eine Palette von 8 Farben statt nur einer
+                        const palette = colorThief.getPalette(img, 8);
+
+                        // Wir suchen die erste Farbe, die "bunt" genug ist
+                        let bestColor = palette[0]; // Fallback auf dominant
+                        let maxSaturation = 0;
+
+                        for (let i = 0; i < palette.length; i++) {
+                            const [r, g, b] = palette[i];
+
+                            // Einfache Berechnung der "Buntheit" (Differenz der Kanäle)
+                            const diff = Math.max(r, g, b) - Math.min(r, g, b);
+
+                            // Wir gewichten Farben höher, die nicht zu dunkel und nicht zu hell sind
+                            const brightness = (r + g + b) / 3;
+                            const isNotTooDark = brightness > 40;
+                            const isNotTooLight = brightness < 220;
+
+                            if (diff > maxSaturation && isNotTooDark && isNotTooLight) {
+                                maxSaturation = diff;
+                                bestColor = palette[i];
+                            }
+                        }
+
+                        // Falls gar keine bunte Farbe gefunden wurde (diff sehr klein), 
+                        // nehmen wir die dominanteste Farbe aus der Palette
+                        const colorString = `rgb(${bestColor[0]}, ${bestColor[1]}, ${bestColor[2]})`;
                         festivalColorCache[fileName] = colorString;
                         resolve(colorString);
                     } catch (e) {
@@ -440,6 +462,7 @@
                 };
                 img.onerror = () => resolve('rgb(127, 140, 141)');
             });
+        }
         }
 
         function updateFestivalInfo(filePath) {
