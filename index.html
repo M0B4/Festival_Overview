@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mos Lineup Lab</title>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
     <script src="countries.js"></script>
     <script src="festivals.js"></script>
 
@@ -206,10 +207,6 @@
             cursor: pointer;
         }
         
-        .compare-item:hover {
-            background: var(--wacken-red);
-        }
-        
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -257,17 +254,6 @@
         
         th.sortable {
             cursor: pointer;
-            transition: background 0.2s;
-        }
-        
-        th.sortable:hover {
-            background: rgba(227, 6, 19, 0.1);
-        }
-        
-        .sort-indicator {
-            margin-left: 5px;
-            font-size: 10px;
-            color: #666;
         }
         
         td {
@@ -282,61 +268,7 @@
             font-weight: bold;
             margin-left: 8px;
             text-transform: uppercase;
-        }
-        
-        .badge.metal-red {
-            background: #e30613;
-        }
-        
-        .badge.metal-orange {
-            background: #f39c12;
-        }
-        
-        .badge.metal-blue {
-            background: #2980b9;
-        }
-        
-        .badge.metal-green {
-            background: #27ae60;
-        }
-        
-        .badge.metal-purple {
-            background: #8e44ad;
-        }
-        
-        .badge.metal-yellow {
-            background: #f1c40f;
-            color: #000;
-        }
-        
-        .badge.metal-cyan {
-            background: #16a085;
-        }
-        
-        .badge.metal-pink {
-            background: #d81b60;
-        }
-        
-        .badge.metal-white {
-            background: #ecf0f1;
-            color: #000;
-        }
-        
-        .badge.metal-grey {
-            background: #7f8c8d;
-        }
-        
-        @media (max-width: 768px) {
-            .controls-grid {
-                grid-template-columns: 1fr;
-            }
-            .info-content-wrapper {
-                flex-direction: column;
-                align-items: center;
-            }
-            #info-poster {
-                max-width: 100%;
-            }
+            border-radius: 2px;
         }
         
          ::-webkit-scrollbar {
@@ -349,10 +281,6 @@
         
          ::-webkit-scrollbar-thumb {
             background: var(--wacken-red);
-        }
-        
-         ::-webkit-scrollbar-thumb:hover {
-            background: #ff0000;
         }
     </style>
 </head>
@@ -394,7 +322,7 @@
         <div class="controls-grid">
             <div class="control-group">
                 <label>Haupt-Festival & Suche</label>
-                <select id="primary-select"><option>Lade Daten...</option></select>
+                <select id="primary-select"></select>
                 <input type="text" id="search-input" placeholder="Band oder Genre suchen...">
                 <label style="margin-top:10px">Filter</label>
                 <select id="display-filter">
@@ -431,8 +359,8 @@
                         <thead>
                             <tr>
                                 <th style="width:40px"></th>
-                                <th class="sortable" onclick="handleSort('name')">Band <span id="sort-name" class="sort-indicator"></span></th>
-                                <th class="sortable" onclick="handleSort('genre')">Genre <span id="sort-genre" class="sort-indicator"></span></th>
+                                <th class="sortable" onclick="handleSort('name')">Band <span id="sort-name"></span></th>
+                                <th class="sortable" onclick="handleSort('genre')">Genre <span id="sort-genre"></span></th>
                             </tr>
                         </thead>
                         <tbody id="band-table-body"></tbody>
@@ -447,6 +375,9 @@
         const GITHUB_REPO = 'Festival_Overview';
         const DATA_FOLDER = 'data';
 
+        const colorThief = new ColorThief();
+        const festivalColorCache = {}; // Speichert extrahierte RGB Farben
+
         const primarySelect = document.getElementById('primary-select');
         const compareContainer = document.getElementById('compare-container');
         const searchInput = document.getElementById('search-input');
@@ -457,7 +388,6 @@
         let allFestivalFiles = [];
         let primaryBands = [];
         let cachedComparisons = {};
-
         let currentSort = {
             column: 'name',
             direction: 'asc'
@@ -477,10 +407,39 @@
             renderTable();
         }
 
-        function getFestivalColor(festivalPath) {
+        // --- AUTOMATISCHE FARBEXTRAKTION ---
+        async function getFestivalColor(festivalPath) {
             const fileName = decodeURIComponent(festivalPath.split('/').pop());
+
+            // 1. Wenn wir die Farbe schon haben, gib sie zurück
+            if (festivalColorCache[fileName]) return festivalColorCache[fileName];
+
+            // 2. Suche das Poster in den Metadaten
             const info = (typeof festivalMetadata !== 'undefined') ? festivalMetadata[fileName] : null;
-            return (info && info.color) ? info.color : "metal-grey";
+            const posterUrl = info ? (info.poster_thumb || info.poster) : null;
+
+            if (!posterUrl) {
+                festivalColorCache[fileName] = 'rgb(127, 140, 141)'; // Fallback grau
+                return festivalColorCache[fileName];
+            }
+
+            // 3. Farbe aus Bild extrahieren
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.crossOrigin = "Anonymous"; // Wichtig für CORS (GitHub Bilder)
+                img.src = posterUrl;
+                img.onload = () => {
+                    try {
+                        const rgb = colorThief.getColor(img);
+                        const colorString = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+                        festivalColorCache[fileName] = colorString;
+                        resolve(colorString);
+                    } catch (e) {
+                        resolve('rgb(127, 140, 141)');
+                    }
+                };
+                img.onerror = () => resolve('rgb(127, 140, 141)');
+            });
         }
 
         function updateFestivalInfo(filePath) {
@@ -496,10 +455,8 @@
                 document.getElementById('info-price').innerText = info.price || 'k.A.';
                 document.getElementById('info-link').href = info.website || '#';
                 document.getElementById('info-desc').innerText = info.description || '';
-
                 const posterImg = document.getElementById('info-poster');
                 const thumbSrc = info.poster_thumb || info.poster;
-
                 if (thumbSrc) {
                     posterImg.src = thumbSrc;
                     posterImg.style.display = 'block';
@@ -527,7 +484,6 @@
                 const res = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${DATA_FOLDER}`);
                 const files = await res.json();
                 allFestivalFiles = files.filter(f => f.name.endsWith('.json'));
-
                 primarySelect.innerHTML = '';
                 allFestivalFiles.forEach(file => {
                     const opt = document.createElement('option');
@@ -535,11 +491,7 @@
                     opt.textContent = prettyName(file.name);
                     primarySelect.appendChild(opt);
                 });
-
-                if (primarySelect.options.length > 0) {
-                    primarySelect.selectedIndex = primarySelect.options.length - 1;
-                }
-
+                if (primarySelect.options.length > 0) primarySelect.selectedIndex = primarySelect.options.length - 1;
                 updateCompareCheckboxes();
                 loadPrimaryData();
             } catch (e) {
@@ -580,11 +532,15 @@
                     const data = await res.json();
                     cachedComparisons[path] = new Set(data.map(b => b.name.toLowerCase().trim()));
                 }
+
+                // Farbe für dieses Vergleichs-Festival holen (Auto-Detection)
+                const festColor = await getFestivalColor(path);
+
                 cachedComparisons[path].forEach(name => {
                     if (!matchMap[name]) matchMap[name] = [];
                     matchMap[name].push({
                         name: prettyName(path.split('/').pop()),
-                        color: getFestivalColor(path)
+                        color: festColor
                     });
                 });
             }
@@ -593,7 +549,6 @@
                 const lowName = (band.name || "").toLowerCase().trim();
                 const matches = matchMap[lowName] || [];
                 const isShared = matches.length > 0;
-
                 if (filterMode === 'exclusive' && isShared) return false;
                 if (filterMode === 'shared' && !isShared) return false;
                 if (!band.name.toLowerCase().includes(searchTerm) && !band.genre.toLowerCase().includes(searchTerm)) return false;
@@ -603,110 +558,59 @@
             filteredBands.sort((a, b) => {
                 let valA = a[currentSort.column].toLowerCase();
                 let valB = b[currentSort.column].toLowerCase();
-                if (currentSort.direction === 'asc') {
-                    return valA < valB ? -1 : (valA > valB ? 1 : 0);
-                } else {
-                    return valA > valB ? -1 : (valA < valB ? 1 : 0);
-                }
+                return currentSort.direction === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
             });
-
-            document.getElementById('sort-name').innerText = currentSort.column === 'name' ? (currentSort.direction === 'asc' ? '▲' : '▼') : '';
-            document.getElementById('sort-genre').innerText = currentSort.column === 'genre' ? (currentSort.direction === 'asc' ? '▲' : '▼') : '';
 
             tableBody.innerHTML = '';
             let overlapCount = 0;
-            let festivalOverlapCounts = {}; // NEU: Counter pro Festival
+            let festCounts = {};
 
             filteredBands.forEach(band => {
                 const lowName = (band.name || "").toLowerCase().trim();
                 const matches = matchMap[lowName] || [];
-                const isShared = matches.length > 0;
-
-                if (isShared) {
+                if (matches.length > 0) {
                     overlapCount++;
-                    // Jedes Festival in den Matches hochzählen
-                    matches.forEach(m => {
-                        festivalOverlapCounts[m.name] = (festivalOverlapCounts[m.name] || 0) + 1;
-                    });
+                    matches.forEach(m => festCounts[m.name] = (festCounts[m.name] || 0) + 1);
                 }
 
                 const row = document.createElement('tr');
                 let badgesHtml = '';
                 matches.forEach(m => {
-                    badgesHtml += `<span class="badge ${m.color}">${m.name}</span>`;
+                    badgesHtml += `<span class="badge" style="background-color: ${m.color}">${m.name}</span>`;
                 });
 
-                row.innerHTML = `
-                    <td>${getFlagImg(band.country)}</td>
-                    <td><strong>${band.name}</strong>${badgesHtml}</td>
-                    <td style="color:#666; font-size:12px">${band.genre}</td>
-                `;
+                row.innerHTML = `<td>${getFlagImg(band.country)}</td><td><strong>${band.name}</strong>${badgesHtml}</td><td style="color:#666; font-size:12px">${band.genre}</td>`;
                 tableBody.appendChild(row);
             });
 
-            // --- NEU: Detaillierte Stats-Anzeige ---
-            let statsHTML = `<strong>${filteredBands.length} BANDS</strong> GEFUNDEN (${overlapCount} ÜBERSCHNEIDUNGEN)`;
-
-            if (Object.keys(festivalOverlapCounts).length > 0) {
-                let breakdown = Object.entries(festivalOverlapCounts)
-                    .map(([name, count]) => `${name}: ${count}`)
-                    .join(' | ');
-                statsHTML += ` <span style="color:#666; font-size:11px; margin-left:15px; letter-spacing:0.5px;">[ ${breakdown} ]</span>`;
+            let statsText = `<strong>${filteredBands.length} BANDS</strong> (${overlapCount} ÜBERSCHNEIDUNGEN)`;
+            if (Object.keys(festCounts).length > 0) {
+                statsText += ` <span style="font-size:11px; color:#666; margin-left:10px;">[ ${Object.entries(festCounts).map(([n,c])=>`${n}: ${c}`).join(' | ')} ]</span>`;
             }
-
-            stats.innerHTML = statsHTML;
+            stats.innerHTML = statsText;
             updateGenreStats(filteredBands);
         }
 
         function updateGenreStats(displayedBands) {
             const statsGrid = document.getElementById('stats-grid');
-            if (!displayedBands || displayedBands.length === 0) {
-                statsGrid.innerHTML = 'Keine Daten.';
-                return;
-            }
+            if (!displayedBands.length) { statsGrid.innerHTML = 'Keine Daten.'; return; }
             const counts = {};
-            displayedBands.forEach(band => {
-                const genre = band.genre || "Unknown";
-                counts[genre] = (counts[genre] || 0) + 1;
-            });
-            const total = displayedBands.length;
-            const sortedGenres = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10);
-
-            statsGrid.innerHTML = '';
-            sortedGenres.forEach(([genre, count]) => {
-                const percentage = Math.round((count / total) * 100);
-                statsGrid.innerHTML += `
-                    <div class="stat-item">
-                        <div class="stat-info"><span>${genre}</span><span>${percentage} %</span></div>
-                        <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: ${percentage}%"></div></div>
-                    </div>`;
-            });
+            displayedBands.forEach(band => counts[band.genre] = (counts[band.genre] || 0) + 1);
+            const sorted = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,10);
+            statsGrid.innerHTML = sorted.map(([g,c]) => {
+                const p = Math.round((c/displayedBands.length)*100);
+                return `<div class="stat-item"><div class="stat-info"><span>${g}</span><span>${p}%</span></div><div class="stat-bar-bg"><div class="stat-bar-fill" style="width:${p}%"></div></div></div>`;
+            }).join('');
         }
 
-        primarySelect.addEventListener('change', () => {
-            updateCompareCheckboxes();
-            loadPrimaryData();
-        });
+        primarySelect.addEventListener('change', () => { updateCompareCheckboxes(); loadPrimaryData(); });
         searchInput.addEventListener('input', renderTable);
         displayFilter.addEventListener('change', renderTable);
-
-        window.onclick = function(e) {
-            const modal = document.getElementById('poster-modal');
-            if (e.target == modal) modal.style.display = "none";
-        }
-
+        window.onclick = (e) => { if (e.target.id === 'poster-modal') e.target.style.display = "none"; }
         document.getElementById('info-poster').onclick = function() {
-            const modal = document.getElementById('poster-modal');
-            const modalImg = document.getElementById('modal-img');
-            const filePath = primarySelect.value;
-            const fileName = decodeURIComponent(filePath.split('/').pop());
-            const info = (typeof festivalMetadata !== 'undefined') ? festivalMetadata[fileName] : null;
-
-            if (info && (info.poster_full || info.poster)) {
-                modal.style.display = "block";
-                modalImg.src = info.poster_full || info.poster;
-            }
-        }
+            const info = festivalMetadata[decodeURIComponent(primarySelect.value.split('/').pop())];
+            if (info) { document.getElementById('modal-img').src = info.poster_full || info.poster; document.getElementById('poster-modal').style.display = "block"; }
+        };
 
         init();
     </script>
