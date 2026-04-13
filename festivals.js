@@ -1,6 +1,6 @@
 const festivalMetadata = {
     "wacken_open_air_2026.json": {
-        "color": "metal-red",
+
         "date": "29.07. – 01.08.2026",
         "location": "Wacken, Deutschland",
         "website": "https://www.wacken.com",
@@ -10,7 +10,7 @@ const festivalMetadata = {
         "description": ""
     },
     "hellfest_2026.json": {
-        "color": "metal-green",
+
         "date": "18.06. – 21.06.2026",
         "location": "Clisson, Frankreich",
         "website": "https://www.hellfest.fr",
@@ -20,7 +20,7 @@ const festivalMetadata = {
         "description": ""
     },
     "graspop_metal_meeting_2026.json": {
-        "color": "metal-yellow",
+
         "date": "18.06. – 21.06.2026",
         "location": "Dessel, Belgien",
         "website": "https://www.hellfest.fr",
@@ -30,7 +30,7 @@ const festivalMetadata = {
         "description": ""
     },
     "rock_am_ring_2026.json": {
-        "color": "metal-orange",
+
         "date": "05.06. – 07.06.2026",
         "location": "Nürburgring, Deutschland",
         "website": "https://www.rock-am-ring.com/",
@@ -39,8 +39,17 @@ const festivalMetadata = {
         "poster_full": "posters/rock_am_ring_2026.webp",
         "description": ""
     },
+    "summer_breeze_2026.json": {
+        "date": "12.08. – 15.08.2026",
+        "location": "Dinkelsbühl, Deutschland",
+        "website": "https://www.summer-breeze.de/",
+        "price": "249€",
+        "poster_thumb": "posters/thumbs/summer_breeze_small.webp",
+        "poster_full": "posters/summer_breeze_2026.webp",
+        "description": ""
+    },
     "metal_im_dorf_2026.json": {
-        "color": "metal-white",
+
         "date": "18.06. – 21.06.2026",
         "location": "Vogtei, Deutschland",
         "website": "https://www.fb.com/metalimdorf",
