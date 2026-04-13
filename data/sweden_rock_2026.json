@@ -1,0 +1,387 @@
+[
+    {
+        "name": "Adept",
+        "country": "Sweden",
+        "genre": "Post-Hardcore"
+    },
+    {
+        "name": "Alestorm",
+        "country": "United Kingdom",
+        "genre": "Folk Metal"
+    },
+    {
+        "name": "AMH",
+        "country": "United States",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Ashes Of Billy",
+        "country": "Denmark",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "BABYMETAL",
+        "country": "Japan",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Black Label Society",
+        "country": "United States",
+        "genre": "Southern Metal"
+    },
+    {
+        "name": "Blood Incantation",
+        "country": "United States",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "Blue Benders",
+        "country": "Sweden",
+        "genre": "Blues Rock"
+    },
+    {
+        "name": "Bring Me The Horizon",
+        "country": "United Kingdom",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Candlemass",
+        "country": "Sweden",
+        "genre": "Epic Doom Metal"
+    },
+    {
+        "name": "Clawfinger",
+        "country": "Sweden",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Coroner",
+        "country": "Switzerland",
+        "genre": "Technical Thrash Metal"
+    },
+    {
+        "name": "Crashdïet",
+        "country": "Sweden",
+        "genre": "Glam Metal"
+    },
+    {
+        "name": "Dirkschneider",
+        "country": "Germany",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Down",
+        "country": "United States",
+        "genre": "Southern Metal"
+    },
+    {
+        "name": "Dundertåget",
+        "country": "Sweden",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Ego Kill Talent",
+        "country": "Brazil",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "Elvenking",
+        "country": "Italy",
+        "genre": "Power Metal"
+    },
+    {
+        "name": "Evergrey",
+        "country": "Sweden",
+        "genre": "Progressive Metal"
+    },
+    {
+        "name": "Floor Jansen",
+        "country": "Netherlands",
+        "genre": "Symphonic Rock"
+    },
+    {
+        "name": "Forbidden",
+        "country": "United States",
+        "genre": "Thrash Metal"
+    },
+    {
+        "name": "Foreigner",
+        "country": "United States",
+        "genre": "AOR"
+    },
+    {
+        "name": "Gatecreeper",
+        "country": "United States",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "Gehennah",
+        "country": "Sweden",
+        "genre": "Thrash Metal"
+    },
+    {
+        "name": "Grave",
+        "country": "Sweden",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "Hard-Ons",
+        "country": "Australia",
+        "genre": "Punk Rock"
+    },
+    {
+        "name": "Hellbutcher",
+        "country": "Sweden",
+        "genre": "Black Metal"
+    },
+    {
+        "name": "Helloween",
+        "country": "Germany",
+        "genre": "Power Metal"
+    },
+    {
+        "name": "Hostilia",
+        "country": "Sweden",
+        "genre": "Thrash Metal"
+    },
+    {
+        "name": "Hällas",
+        "country": "Sweden",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Iron Maiden",
+        "country": "United Kingdom",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Jared James Nichols",
+        "country": "United States",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Jayler",
+        "country": "United Kingdom",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Jelusick",
+        "country": "Croatia",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Joan Jett & The Blackhearts",
+        "country": "United States",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "John 5",
+        "country": "United States",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Korslagda",
+        "country": "Sweden",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Lakeview",
+        "country": "United States",
+        "genre": "Pop Punk"
+    },
+    {
+        "name": "Lion's Share",
+        "country": "Sweden",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Magnus Uggla",
+        "country": "Sweden",
+        "genre": "Glam Rock"
+    },
+    {
+        "name": "Majestica",
+        "country": "Sweden",
+        "genre": "Power Metal"
+    },
+    {
+        "name": "Michael Monroe",
+        "country": "Finland",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Nikki Hill",
+        "country": "United States",
+        "genre": "Rock & Roll"
+    },
+    {
+        "name": "Only Human",
+        "country": "Denmark",
+        "genre": "Progressive Metal"
+    },
+    {
+        "name": "Overkill",
+        "country": "United States",
+        "genre": "Thrash Metal"
+    },
+    {
+        "name": "Palaye Royale",
+        "country": "Canada",
+        "genre": "Glam Rock"
+    },
+    {
+        "name": "Robin Mcauley",
+        "country": "Ireland",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Roy Khan",
+        "country": "Norway",
+        "genre": "Power Metal"
+    },
+    {
+        "name": "Savatage",
+        "country": "United States",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Saxon",
+        "country": "United Kingdom",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Self Deception",
+        "country": "Sweden",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Seven Spires",
+        "country": "United States",
+        "genre": "Symphonic Metal"
+    },
+    {
+        "name": "Sister",
+        "country": "Sweden",
+        "genre": "Sleaze Rock"
+    },
+    {
+        "name": "Skyclad",
+        "country": "United Kingdom",
+        "genre": "Folk Metal"
+    },
+    {
+        "name": "Social Distortion",
+        "country": "United States",
+        "genre": "Punk Rock"
+    },
+    {
+        "name": "Static-X",
+        "country": "United States",
+        "genre": "Industrial Metal"
+    },
+    {
+        "name": "Strevellna",
+        "country": "Sweden",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Ström",
+        "country": "Sweden",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "SYRACUSÆ",
+        "country": "Colombia",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Tailgunner",
+        "country": "United Kingdom",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "The Gathering",
+        "country": "Netherlands",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "The Halo Effect",
+        "country": "Sweden",
+        "genre": "Melodic Death Metal"
+    },
+    {
+        "name": "The Hellacopters",
+        "country": "Sweden",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "The Offspring",
+        "country": "United States",
+        "genre": "Pop Punk"
+    },
+    {
+        "name": "The Poodles",
+        "country": "Sweden",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Three Days Grace",
+        "country": "Canada",
+        "genre": "Post-grunge"
+    },
+    {
+        "name": "Thrown",
+        "country": "Sweden",
+        "genre": "Rap Metal / Hardcore"
+    },
+    {
+        "name": "Tom Morello",
+        "country": "United States",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "Treat",
+        "country": "Sweden",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Trivium",
+        "country": "United States",
+        "genre": "Melodic Metalcore"
+    },
+    {
+        "name": "Uncle Acid & The Deadbeats",
+        "country": "United Kingdom",
+        "genre": "Heavy Psych"
+    },
+    {
+        "name": "Unpeople",
+        "country": "United Kingdom",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "Volbeat",
+        "country": "Denmark",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Vreid",
+        "country": "Norway",
+        "genre": "Melodic Black Metal"
+    },
+    {
+        "name": "Wilmer X",
+        "country": "Sweden",
+        "genre": "Rock & Roll"
+    },
+    {
+        "name": "Yngwie Malmsteen",
+        "country": "Sweden",
+        "genre": "Neoclassical Metal"
+    },
+    {
+        "name": "Zan/Cody",
+        "country": "Sweden",
+        "genre": "Hard Rock"
+    }
+]

@@ -49,6 +49,16 @@ const festivalMetadata = {
         "poster_full": "posters/copenhell_2026.webp",
         "description": ""
     },
+    "sweden_rock_2026.json": {
+
+        "date": "03.06. – 06.06.2026",
+        "location": "Sölvesborg, Schweden",
+        "website": "https://www.swedenrock.com/",
+        "price": "378€",
+        "poster_thumb": "posters/thumbs/sweden_rock_small.webp",
+        "poster_full": "posters/sweden_rock_2026.webp",
+        "description": ""
+    },
     "summer_breeze_2026.json": {
         "date": "12.08. – 15.08.2026",
         "location": "Dinkelsbühl, Deutschland",
