@@ -32,6 +32,7 @@ const countryCodes = {
     "lithuania": "lt",
     "poland": "pl",
     "czech republic": "cz",
+    "czechia": "cz",
     "slovakia": "sk",
     "hungary": "hu",
     "romania": "ro",
