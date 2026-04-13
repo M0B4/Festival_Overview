@@ -39,6 +39,16 @@ const festivalMetadata = {
         "poster_full": "posters/rock_am_ring_2026.webp",
         "description": ""
     },
+    "copenhell_2026.json": {
+
+        "date": "24.06. – 27.06.2026",
+        "location": "Kopenhagen, Dänemark",
+        "website": "https://copenhell.dk/",
+        "price": "375€",
+        "poster_thumb": "posters/thumbs/copenhell_small.webp",
+        "poster_full": "posters/copenhell_2026.webp",
+        "description": ""
+    },
     "summer_breeze_2026.json": {
         "date": "12.08. – 15.08.2026",
         "location": "Dinkelsbühl, Deutschland",

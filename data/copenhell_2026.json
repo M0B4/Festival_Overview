@@ -1,0 +1,372 @@
+[
+    {
+        "name": "(0)",
+        "country": "Denmark",
+        "genre": "Experimental Metal"
+    },
+    {
+        "name": "A Perfect Circle",
+        "country": "United States",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "Alestorm",
+        "country": "United Kingdom",
+        "genre": "Folk Metal"
+    },
+    {
+        "name": "Alice Cooper",
+        "country": "United States",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "All Them Witches",
+        "country": "United States",
+        "genre": "Psychedelic Rock"
+    },
+    {
+        "name": "Anthrax",
+        "country": "United States",
+        "genre": "Thrash Metal"
+    },
+    {
+        "name": "BABYMETAL",
+        "country": "Japan",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Black Label Society",
+        "country": "United States",
+        "genre": "Southern Metal"
+    },
+    {
+        "name": "Black Oak County",
+        "country": "Denmark",
+        "genre": "Rock"
+    },
+    {
+        "name": "Blood Fire Death",
+        "country": "Germany",
+        "genre": "Tribute To Bathory"
+    },
+    {
+        "name": "Bring Me The Horizon",
+        "country": "United Kingdom",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Bury Tomorrow",
+        "country": "United Kingdom",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Calva Louise",
+        "country": "United Kingdom",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Chopper",
+        "country": "Denmark",
+        "genre": "Post-Punk"
+    },
+    {
+        "name": "Defecto",
+        "country": "Denmark",
+        "genre": "Progressive Metal"
+    },
+    {
+        "name": "Die Spitz",
+        "country": "United States",
+        "genre": "Punk Rock"
+    },
+    {
+        "name": "Djerv",
+        "country": "Norway",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Dogma",
+        "country": "Mexico",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "End It",
+        "country": "United States",
+        "genre": "Hardcore Punk"
+    },
+    {
+        "name": "Eyehategod",
+        "country": "United States",
+        "genre": "Sludge Metal"
+    },
+    {
+        "name": "Faetooth",
+        "country": "United States",
+        "genre": "Doomgaze"
+    },
+    {
+        "name": "Gaerea",
+        "country": "Portugal",
+        "genre": "Black Metal"
+    },
+    {
+        "name": "Gridiron",
+        "country": "United States",
+        "genre": "Rap Metal"
+    },
+    {
+        "name": "Henret",
+        "country": "Denmark",
+        "genre": "Hardcore"
+    },
+    {
+        "name": "Håndgemeng",
+        "country": "Norway",
+        "genre": "Stoner Metal"
+    },
+    {
+        "name": "Ice Nine Kills",
+        "country": "United States",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Imminence",
+        "country": "Sweden",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Inhuman Nature",
+        "country": "United Kingdom",
+        "genre": "Thrash Metal/crossover"
+    },
+    {
+        "name": "Iotunn",
+        "country": "Denmark",
+        "genre": "Progressive Death Metal"
+    },
+    {
+        "name": "Iron Maiden",
+        "country": "United Kingdom",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Jakob Stegelmann",
+        "country": "Denmark",
+        "genre": "Orchestral"
+    },
+    {
+        "name": "Katla",
+        "country": "Denmark",
+        "genre": "Sludge Metal"
+    },
+    {
+        "name": "Konvent",
+        "country": "Denmark",
+        "genre": "Death Doom Metal"
+    },
+    {
+        "name": "Kublai Khan TX",
+        "country": "United States",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Lightchapter",
+        "country": "Denmark",
+        "genre": "Melodic Death Metal"
+    },
+    {
+        "name": "Loathe",
+        "country": "United Kingdom",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Maceration",
+        "country": "Denmark",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "Malevolence",
+        "country": "United Kingdom",
+        "genre": "Metalcore"
+    },
+    {
+        "name": "Mammoth",
+        "country": "United States",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Mastodon",
+        "country": "United States",
+        "genre": "Progressive Sludge Metal"
+    },
+    {
+        "name": "Morild",
+        "country": "Denmark",
+        "genre": "Atmospheric Black Metal / Post Metal"
+    },
+    {
+        "name": "Neckbreakker",
+        "country": "Denmark",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "Omsorg",
+        "country": "Denmark",
+        "genre": "Post-Hardcore"
+    },
+    {
+        "name": "P.O.D.",
+        "country": "United States",
+        "genre": "Rap Rock"
+    },
+    {
+        "name": "Paleface Swiss",
+        "country": "Switzerland",
+        "genre": "Deathcore"
+    },
+    {
+        "name": "Papa Roach",
+        "country": "United States",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Powerplant",
+        "country": "United Kingdom",
+        "genre": "Synth Punk"
+    },
+    {
+        "name": "President",
+        "country": "United Kingdom",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Psycho Mosher",
+        "country": "Colombia",
+        "genre": "Crossover Thrash"
+    },
+    {
+        "name": "Pustulant Flesh",
+        "country": "Denmark",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "Queensrÿche",
+        "country": "United States",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Rap Martin Rap",
+        "country": "Denmark",
+        "genre": "Groove Metal"
+    },
+    {
+        "name": "Rival Sons",
+        "country": "United States",
+        "genre": "Hard Rock"
+    },
+    {
+        "name": "Scimitar",
+        "country": "United Kingdom",
+        "genre": "Thrash Metal"
+    },
+    {
+        "name": "Sepultura",
+        "country": "Brazil",
+        "genre": "Groove Metal"
+    },
+    {
+        "name": "Six Feet Under",
+        "country": "United States",
+        "genre": "Death Metal"
+    },
+    {
+        "name": "Slay Squad",
+        "country": "United States",
+        "genre": "Rap Metal"
+    },
+    {
+        "name": "Social Distortion",
+        "country": "United States",
+        "genre": "Punk Rock"
+    },
+    {
+        "name": "Soilwork",
+        "country": "Sweden",
+        "genre": "Melodic Death Metal"
+    },
+    {
+        "name": "Split",
+        "country": "Denmark",
+        "genre": "Hardcore"
+    },
+    {
+        "name": "Static-X",
+        "country": "United States",
+        "genre": "Industrial Metal"
+    },
+    {
+        "name": "Suicidal Tendencies",
+        "country": "United States",
+        "genre": "Crossover Thrash"
+    },
+    {
+        "name": "The Browning",
+        "country": "United States",
+        "genre": "Electronicore"
+    },
+    {
+        "name": "Thrown",
+        "country": "Sweden",
+        "genre": "Rap Metal / Hardcore"
+    },
+    {
+        "name": "Tom Morello",
+        "country": "United States",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "Trivium",
+        "country": "United States",
+        "genre": "Melodic Metalcore"
+    },
+    {
+        "name": "Trollfest",
+        "country": "Norway",
+        "genre": "Folk Metal"
+    },
+    {
+        "name": "Twenty One Children",
+        "country": "South Africa",
+        "genre": "Thrashcore"
+    },
+    {
+        "name": "Unpeople",
+        "country": "United Kingdom",
+        "genre": "Alternative Rock"
+    },
+    {
+        "name": "Vexed",
+        "country": "United Kingdom",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Violent Magic Orchestra",
+        "country": "Japan",
+        "genre": "Avant-Garde Metal"
+    },
+    {
+        "name": "Voice Of Baceprot",
+        "country": "Indonesia",
+        "genre": "Alternative Metal"
+    },
+    {
+        "name": "Volbeat",
+        "country": "Denmark",
+        "genre": "Heavy Metal"
+    },
+    {
+        "name": "Warkings",
+        "country": "Europe",
+        "genre": "Power Metal"
+    }
+]
