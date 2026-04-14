@@ -549,6 +549,11 @@
         "genre": "Heavy Metal"
     },
     {
+        "name": "Sabaton",
+        "country": "Sweden",
+        "genre": "Power Metal"
+    },
+    {
         "name": "Sacred Steel",
         "country": "Germany",
         "genre": "Heavy Metal"
@@ -568,11 +573,7 @@
         "country": "Germany",
         "genre": "Metalcore"
     },
-    {
-        "name": "Sabaton",
-        "country": "Sweden",
-        "genre": "Power Metal"
-    },
+
     {
         "name": "Saxon",
         "country": "United Kingdom",
