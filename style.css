@@ -1,0 +1,344 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --wacken-red: #e30613;
+    --bg-black: #0a0a0a;
+    --card-bg: #151515;
+    --stone-texture: url('https://www.transparenttextures.com/patterns/dark-matter.png');
+    --halftone: radial-gradient(circle, #333 1px, transparent 1px);
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: var(--bg-black);
+    background-image: var(--stone-texture);
+    color: #efefef;
+    margin: 0;
+    padding: 20px;
+}
+
+header {
+    background-color: var(--bg-black);
+    border-bottom: 2px solid var(--wacken-red);
+    padding: 30px 0;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: var(--halftone);
+    background-size: 10px 10px;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+#header-logo {
+    display: block;
+    width: 280px;
+    height: auto;
+    max-height: 120px;
+    max-width: 90%;
+    filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.8));
+    transition: filter 0.3s ease-in-out;
+    position: relative;
+    z-index: 10;
+}
+
+#header-logo:hover {
+    filter: drop-shadow(0 0 15px var(--wacken-red));
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+/* Modal */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    cursor: zoom-out;
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 2px solid var(--wacken-red);
+}
+
+
+/* Cards */
+
+.collapsible-card {
+    background: var(--card-bg);
+    border: 1px solid #333;
+    border-top: 4px solid var(--wacken-red);
+    margin-bottom: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.section-header {
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.02);
+    user-select: none;
+}
+
+.section-header label {
+    margin: 0;
+    cursor: pointer;
+    color: var(--wacken-red);
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.toggle-icon::before {
+    content: "[ - ]";
+    font-family: monospace;
+    color: #666;
+}
+
+.collapsed .toggle-icon::before {
+    content: "[ + ]";
+}
+
+.collapsed .section-content {
+    display: none;
+}
+
+.section-content {
+    padding: 20px;
+    border-top: 1px solid #222;
+}
+
+
+/* Info Card Details */
+
+.info-content-wrapper {
+    display: flex;
+    gap: 30px;
+}
+
+#info-poster {
+    max-width: 200px;
+    border: 1px solid #444;
+    cursor: zoom-in;
+}
+
+.highlight {
+    color: var(--wacken-red);
+}
+
+#info-link {
+    color: #fff;
+    text-decoration: underline;
+}
+
+#info-desc {
+    margin-top: 15px;
+    color: #aaa;
+    font-style: italic;
+    font-size: 13px;
+}
+
+.info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 14px;
+}
+
+
+/* Filter */
+
+.controls-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    background: #111;
+    padding: 20px;
+    border: 1px solid #222;
+    margin-bottom: 30px;
+    background-image: linear-gradient(45deg, #111 25%, #151515 25%, #151515 50%, #111 50%, #111 75%, #151515 75%, #151515 100%);
+    background-size: 4px 4px;
+}
+
+label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 8px;
+    display: block;
+    font-weight: bold;
+}
+
+input[type="text"],
+select {
+    background: #000;
+    color: #fff;
+    border: 1px solid #444;
+    padding: 12px;
+    font-size: 14px;
+    width: 100%;
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--wacken-red);
+}
+
+.compare-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px;
+    background: #000;
+    border: 1px solid #333;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.compare-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #222;
+    border: 1px solid #444;
+    padding: 5px 10px;
+    font-size: 11px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+
+/* Stats & Table */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.stat-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.stat-bar-bg {
+    background: #222;
+    height: 8px;
+    overflow: hidden;
+}
+
+.stat-bar-fill {
+    background: var(--wacken-red);
+    height: 100%;
+    transition: width 0.6s ease;
+}
+
+#stats {
+    margin-bottom: 15px;
+    font-size: 13px;
+    color: #888;
+    border-left: 3px solid var(--wacken-red);
+    padding-left: 10px;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    color: var(--wacken-red);
+    text-transform: uppercase;
+    font-size: 12px;
+    border-bottom: 2px solid var(--wacken-red);
+    text-align: left;
+    padding: 12px;
+}
+
+th.sortable {
+    cursor: pointer;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #222;
+}
+
+.badge {
+    color: #fff;
+    padding: 2px 6px;
+    font-size: 10px;
+    font-weight: bold;
+    margin-left: 8px;
+    text-transform: uppercase;
+    border-radius: 2px;
+}
+
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-black);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--wacken-red);
+}
+
+@media (max-width: 768px) {
+    .controls-grid {
+        grid-template-columns: 1fr;
+    }
+    .info-content-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+    #info-poster {
+        max-width: 100%;
+    }
+}
